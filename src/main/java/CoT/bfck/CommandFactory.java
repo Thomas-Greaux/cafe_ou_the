@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 public class CommandFactory {
 	ArrayList<String> properties = new ArrayList<String>();
-	Command[] commandTable;
 	Increment i = new Increment();
 	Decrement d = new Decrement();
 	Left l = new Left();
