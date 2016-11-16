@@ -25,31 +25,37 @@ public class Controleur {
 		mem.display();
 	}
 
-	public void execute(ArrayList<Command> command) throws Exception {
-		Object[] list = command.toArray();
+    /**
+     * Execute les commandes, gere les [ ]
+     * TODO La liste est elle correcte pour les fichiers de plusieurs lignes?
+     * @param commands
+     * @throws Exception
+     */
+	public void execute(ArrayList<Command> commands) throws Exception {
 		int compteur = 0;
 		int k = 0;
-		for(int j = 0 ; j < list.length ; j++)
+        int n = commands.size();
+		for(int j = 0 ; j < n ; j++)
 		{
-			if(mem.getCell() == 0 && ((Command) list[j]).getNameShort().equals("[")){
+			if(mem.getCell() == 0 && commands.get(j).getNameShort().equals("[")){
 				compteur ++;
 				for(k = j+1 ; compteur != 0 ; k++) {
-					if( ((Command) list[k]).getNameShort().equals("[")) compteur ++;
-					if( ((Command) list[k]).getNameShort().equals("]")) compteur --;
+					if( commands.get(k).getNameShort().equals("[")) compteur ++;
+					if( commands.get(k).getNameShort().equals("]")) compteur --;
 				}
 				j = k;
 			}
 			
-			if(mem.getCell() != 0 && ((Command) list[j]).getNameShort().equals("]")){
+			if(mem.getCell() != 0 && commands.get(j).getNameShort().equals("]")){
 				compteur ++;
 				for(k = j-1 ; compteur != 0 ; k--) {
 					System.out.println(compteur);
-					if( ((Command) list[k]).getNameShort().equals("[")) compteur --;
-					if( ((Command) list[k]).getNameShort().equals("]")) compteur ++;
+					if( commands.get(k).getNameShort().equals("[")) compteur --;
+					if( commands.get(k).getNameShort().equals("]")) compteur ++;
 				}
 				j = k+1;
 			}
-			((Command) list[j]).execute(mem);
+            commands.get(j).execute(mem);
 		}
 	}
 
