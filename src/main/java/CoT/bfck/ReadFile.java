@@ -1,4 +1,4 @@
-package v2;
+package CoT.bfck;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -94,7 +94,7 @@ public class ReadFile extends Reader {
 			
 			while ((line = br.readLine()) != null) {
 				for(int i=0;i<shortened(line).length();i++){
-					// à ranger dans une exception !
+					// ï¿½ ranger dans une exception !
 					if(c<0){
 						System.out.println("Bad pharentesis");
 						System.exit(3);

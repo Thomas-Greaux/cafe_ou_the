@@ -1,4 +1,4 @@
-package v2;
+package CoT.bfck;
 
 /**
  * The class Memory contain every implemented operations (INCR, DECR, RIGHT,

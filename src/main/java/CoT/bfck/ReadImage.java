@@ -1,4 +1,4 @@
-package v2;
+package CoT.bfck;
 
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
