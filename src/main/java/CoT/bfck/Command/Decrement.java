@@ -1,4 +1,6 @@
-package CoT.bfck;
+package CoT.bfck.Command;
+
+import CoT.bfck.Memory;
 
 import java.awt.Color;
 import java.util.ArrayList;

@@ -1,18 +1,19 @@
-package CoT.bfck;
+package CoT.bfck.Command;
+
+import CoT.bfck.Memory;
 
 import java.awt.Color;
 import java.util.ArrayList;
 
-public class Left implements Command {
+public class Back implements Command {
 
-
-	public Color colorRGB = new Color(148, 0, 211);
-	public String colorHexa = new String("9400d3");
-	public String name = new String("LEFT");
-	public String nameShort = new String("<");
+	public Color colorRGB = new Color(255, 0, 0);
+	public String colorHexa = new String("ff0000");
+	public String name = new String("BACK");
+  	public String nameShort = new String("]");
 
 	public void execute(Memory m) throws Exception {
-		m.left();
+		m.back();
 	}
 	
 	public ArrayList<String> getProperties(){

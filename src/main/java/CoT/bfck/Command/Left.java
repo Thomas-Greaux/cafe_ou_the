@@ -1,17 +1,20 @@
-package CoT.bfck;
+package CoT.bfck.Command;
+
+import CoT.bfck.Memory;
 
 import java.awt.Color;
 import java.util.ArrayList;
 
-public class Increment implements Command {
+public class Left implements Command {
 
-	protected Color colorRGB = new Color(255, 255, 255);
-	protected String colorHexa = new String("ffffff");
-	protected String name = new String("INCR");
-	protected String nameShort = new String("+");
+
+	public Color colorRGB = new Color(148, 0, 211);
+	public String colorHexa = new String("9400d3");
+	public String name = new String("LEFT");
+	public String nameShort = new String("<");
 
 	public void execute(Memory m) throws Exception {
-		m.incr();
+		m.left();
 	}
 	
 	public ArrayList<String> getProperties(){

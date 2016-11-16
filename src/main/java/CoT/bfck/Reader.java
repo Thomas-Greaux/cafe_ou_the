@@ -1,5 +1,7 @@
 package CoT.bfck;
 
+import CoT.bfck.Command.Command;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
