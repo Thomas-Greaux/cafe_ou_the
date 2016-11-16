@@ -1,4 +1,4 @@
-package CoT.bfck;
+package CoT.bfck.Reader;
 
 import CoT.bfck.Command.Command;
 

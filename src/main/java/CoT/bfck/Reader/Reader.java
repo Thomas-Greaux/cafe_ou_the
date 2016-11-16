@@ -1,6 +1,7 @@
-package CoT.bfck;
+package CoT.bfck.Reader;
 
 import CoT.bfck.Command.Command;
+import CoT.bfck.CommandFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;

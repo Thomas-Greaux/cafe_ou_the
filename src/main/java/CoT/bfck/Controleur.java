@@ -1,6 +1,7 @@
 package CoT.bfck;
 
 import CoT.bfck.Command.Command;
+import CoT.bfck.Reader.ReadFile;
 
 import java.util.ArrayList;
 import java.util.List;
