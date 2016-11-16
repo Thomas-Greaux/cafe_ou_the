@@ -16,16 +16,20 @@ public class Controleur {
 		file = args[args.length - 1];
 	}
 
+	/**
+	 * Run the program then display the memory
+	 * @throws Exception
+	 */
 	public void run() throws Exception {
-		execute(new ReadFile(file).readFile(), 0);
+		execute(new ReadFile(file).readFile());
 		mem.display();
 	}
 
-	public void execute(ArrayList<Command> command, int i ) throws Exception {
+	public void execute(ArrayList<Command> command) throws Exception {
 		Object[] list = command.toArray();
 		int compteur = 0;
 		int k = 0;
-		for(int j = i ; j < list.length ; j++)
+		for(int j = 0 ; j < list.length ; j++)
 		{
 			if(mem.getCell() == 0 && ((Command) list[j]).getNameShort().equals("[")){
 				compteur ++;
@@ -48,8 +52,11 @@ public class Controleur {
 			((Command) list[j]).execute(mem);
 		}
 	}
-	
 
+	/**
+	 * @param filename
+	 * @return the extension of the file to read
+	 */
 	public static String getFileExt(String filename) {
 		int pos = filename.lastIndexOf(".");
 		if (pos > -1) {

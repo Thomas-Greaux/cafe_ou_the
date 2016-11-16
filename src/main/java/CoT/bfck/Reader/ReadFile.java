@@ -23,8 +23,8 @@ public class ReadFile extends Reader {
 	
 	private String file;
 	
-	public ReadFile(String args){
-		file = args;
+	public ReadFile(String path){
+		file = path;
 	}
 
 	/**
@@ -33,14 +33,14 @@ public class ReadFile extends Reader {
 	 */
 
 	public ArrayList<Command> readFile() throws Exception{
-		ArrayList<Command> list = new ArrayList<Command>();
+		ArrayList<Command> commands = new ArrayList<Command>();
 		try {
 			InputStream ips = new FileInputStream(new File(file));
 			InputStreamReader ipsr = new InputStreamReader(ips);
 			BufferedReader br = new BufferedReader(ipsr);
 			String line;
 			while ((line = br.readLine()) != null) {
-				list.addAll(read(line));
+				commands.addAll(read(line));
 			}
 			br.close();
 		}	
@@ -48,7 +48,7 @@ public class ReadFile extends Reader {
 			System.out.println("File doesn't exist");
 			System.exit(1);
 		}
-		return list;
+		return commands;
 	}
 	
 	/**

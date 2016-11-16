@@ -85,13 +85,9 @@ public class Memory {
 	}
 	
 	public void back(){
-		if((memory[index] != (byte) (-128))){
-		}
 	}
 	
 	public void jump(){
-		if((memory[index] == (byte) (-128))){
-		}
 	}
 	
 	public int getCell(){
