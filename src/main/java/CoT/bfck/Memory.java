@@ -28,9 +28,6 @@ public class Memory {
 
 	/**
 	 * Increment the value of the byte at the current position.
-	 * 
-	 * @param byte at the current position.
-	 * @return the value of the modified byte.
 	 */
 
 	public void incr() throws Exception {
@@ -43,9 +40,6 @@ public class Memory {
 
 	/**
 	 * Decrement the value of the byte at the current position.
-	 * 
-	 * @param byte at the current position.
-	 * @return the value of the modified byte.
 	 */
 
 	public void decr() throws Exception {
@@ -82,12 +76,6 @@ public class Memory {
 			System.exit(2);
 		}
 			
-	}
-	
-	public void back(){
-	}
-	
-	public void jump(){
 	}
 	
 	public int getCell(){
