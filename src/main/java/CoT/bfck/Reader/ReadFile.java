@@ -29,15 +29,18 @@ public class ReadFile extends Reader {
 
 	/**
 	 * Open the file and sent every line to the function operation.
+     * @return all the commands stored on the file
 	 * @throws Exception 
 	 */
 
 	public ArrayList<Command> readFile() throws Exception{
 		ArrayList<Command> commands = new ArrayList<Command>();
 		try {
+
 			InputStream ips = new FileInputStream(new File(file));
 			InputStreamReader ipsr = new InputStreamReader(ips);
 			BufferedReader br = new BufferedReader(ipsr);
+
 			String line;
 			while ((line = br.readLine()) != null) {
 				commands.addAll(read(line));
@@ -54,8 +57,7 @@ public class ReadFile extends Reader {
 	/**
 	 * Display the shortened version of the file.
 	 * If this is already shortened, doesn't change.
-	 * 
-	 * @param file
+	 *
 	 * @throws Exception
 	 */
 	
@@ -107,7 +109,7 @@ public class ReadFile extends Reader {
 						c--;
 				}
 			}
-			if(c>0){
+			if(c != 0){
 				System.out.println("Bad pharentesis");
 				System.exit(3);
 			}
