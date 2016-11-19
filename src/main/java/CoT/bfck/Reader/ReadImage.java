@@ -21,7 +21,8 @@ public class ReadImage extends Reader {
 	 * Read the instruction in the picture in parameter. To do this, read the
 	 * color (RGB) of every first pixel of every zone.
 	 * 
-	 * @param filename
+	 * @param file
+	 * @return all the commands stored in the file
 	 * 
 	 */
 
