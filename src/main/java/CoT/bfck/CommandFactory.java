@@ -16,7 +16,9 @@ public class CommandFactory {
 
 	/**
 	 * Used to make connection between the string given in parameter and
-	 * the corresponding instruction. 
+	 * the corresponding instruction.
+	 *
+	 * TODO Implementer des enums
 	 * 
 	 * @param command
 	 * @return the corresponding Command

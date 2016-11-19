@@ -35,9 +35,10 @@ public class Controleur {
 		int compteur = 0;
 		int k = 0;
         int n = commands.size();
-		for(int j = 0 ; j < n ; j++)
+		for(int j = 0 ; j < n ; j++) //Boucle d'execution des commandes, on joue sur j pour gerer les boucles
+			                         // TODO transformer les deux if en methodes
 		{
-			if(mem.getCell() == 0 && commands.get(j).getNameShort().equals("[")){
+			if(mem.out() == 0 && commands.get(j).getNameShort().equals("[")){
 				compteur ++;
 				for(k = j+1 ; compteur != 0 ; k++) {
 					if( commands.get(k).getNameShort().equals("[")) compteur ++;
@@ -46,7 +47,7 @@ public class Controleur {
 				j = k;
 			}
 			
-			if(mem.getCell() != 0 && commands.get(j).getNameShort().equals("]")){
+			if(mem.out() != 0 && commands.get(j).getNameShort().equals("]")){
 				compteur ++;
 				for(k = j-1 ; compteur != 0 ; k--) {
 					System.out.println(compteur);
@@ -60,6 +61,8 @@ public class Controleur {
 	}
 
 	/**
+	 *
+	 * TODO ce n'est pas au controlleur de determiner l'extension mais au reader
 	 * @param filename
 	 * @return the extension of the file to read
 	 */
