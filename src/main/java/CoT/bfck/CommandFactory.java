@@ -18,8 +18,8 @@ public class CommandFactory {
 	 * Used to make connection between the string given in parameter and
 	 * the corresponding instruction. 
 	 * 
-	 * @param shapeType
-	 * @return
+	 * @param command
+	 * @return the corresponding Command
 	 * @throws Exception 
 	 */
 	public Command getCommand(String command) throws Exception {
