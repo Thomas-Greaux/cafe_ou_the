@@ -2,7 +2,6 @@ package CoT.bfck.Reader;
 
 import CoT.bfck.Colors;
 import CoT.bfck.Command.Command;
-import CoT.bfck.CreateImage;
 
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;

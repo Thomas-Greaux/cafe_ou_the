@@ -1,4 +1,6 @@
-package CoT.bfck;
+package CoT.bfck.Reader;
+
+import CoT.bfck.Colors;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
