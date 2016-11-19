@@ -78,7 +78,7 @@ public class Memory {
 			
 	}
 	
-	public int getCell(){
+	public int out(){
 		return memory[index] + 128;
 	}
 
