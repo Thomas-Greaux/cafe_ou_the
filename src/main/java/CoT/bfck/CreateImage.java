@@ -10,11 +10,9 @@ import javax.imageio.ImageIO;
 public class CreateImage {
 	
 	public void create_Image(String shortened) throws Exception{
-		int i = 1, j = 1;
-		while(i < shortened.length()){
-			i = j * j;
-			j++;
-		}
+		int i = 1;
+		int j;
+		for(j = 1; i < shortened.length(); j++){ i = j * j; }
 		String[] tableInstru = shortened.split("");
 		BufferedImage img  = new BufferedImage((j-1)*3, (j-1)*3,BufferedImage.TYPE_INT_RGB);
 		int p = 0;
@@ -36,7 +34,7 @@ public class CreateImage {
 				}
 			}
 			//Si problème, remplacer avec translation.bmp (Linux) ou bien le bon chemin (IDE Windows)
-			ImageIO.write(img, "bmp", new File("C://Users/Admin123/Desktop/Polytech/SI3/cafe_ou_the_dev/Brainfuck/src/bfck/translation.bmp"));
+			ImageIO.write(img, "bmp", new File("../../../../files/translation.bmp"));
 		}
 		catch(IOException e){
 			System.out.println(e);
