@@ -9,7 +9,7 @@ import java.util.List;
 public class Controleur {
 
 	private Memory mem = new Memory();
-	private List<Command> commands = new ArrayList<Command>();
+	private ArrayList<Command> commands = new ArrayList<Command>();
 	private String file;
 	
 	public Controleur(String[] args){
@@ -21,7 +21,9 @@ public class Controleur {
 	 * @throws Exception
 	 */
 	public void run() throws Exception {
-		execute(new ReadFile(file).readFile());
+		commands = new ReadFile(file).readFile();
+		commands.add(null); //ajout d'un element null pour gerer le cas ou le program fini par un ]
+		execute(commands);
 		mem.display();
 	}
 
@@ -33,30 +35,38 @@ public class Controleur {
      */
 	public void execute(ArrayList<Command> commands) throws Exception {
 		int compteur = 0;
-		int k = 0;
+		int k;
         int n = commands.size();
 		for(int j = 0 ; j < n ; j++) //Boucle d'execution des commandes, on joue sur j pour gerer les boucles
 			                         // TODO transformer les deux if en methodes
 		{
-			if(mem.out() == 0 && commands.get(j).getNameShort().equals("[")){
-				compteur ++;
-				for(k = j+1 ; compteur != 0 ; k++) {
-					if( commands.get(k).getNameShort().equals("[")) compteur ++;
-					if( commands.get(k).getNameShort().equals("]")) compteur --;
-				}
-				j = k;
-			}
-			
-			if(mem.out() != 0 && commands.get(j).getNameShort().equals("]")){
-				compteur ++;
-				for(k = j-1 ; compteur != 0 ; k--) {
-					System.out.println(compteur);
-					if( commands.get(k).getNameShort().equals("[")) compteur --;
-					if( commands.get(k).getNameShort().equals("]")) compteur ++;
-				}
-				j = k+1;
-			}
-            commands.get(j).execute(mem);
+
+            if (commands.get(j) != null) {
+
+
+                if (mem.out() == 0 && commands.get(j).getNameShort().equals("[")) {
+                    compteur++;
+                    for (k = j + 1; compteur > 0; k++) {
+                        if (commands.get(k).getNameShort().equals("[")) compteur++;
+                        if (commands.get(k).getNameShort().equals("]")) compteur--;
+                    }
+                    j = k + 1;
+                }
+
+                if (mem.out() != 0 && commands.get(j).getNameShort().equals("]")) {
+                    compteur++;
+                    for (k = j - 1; compteur > 0; k--) {
+                        if (commands.get(k).getNameShort().equals("[")) compteur--;
+                        if (commands.get(k).getNameShort().equals("]")) compteur++;
+                    }
+                    j = k + 1;
+                }
+
+                else {
+                    System.out.println(commands.get(j).getNameShort());
+                    commands.get(j).execute(mem);
+                }
+            }
 		}
 	}
 
