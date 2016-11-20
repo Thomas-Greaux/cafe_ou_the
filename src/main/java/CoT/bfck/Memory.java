@@ -88,4 +88,18 @@ public class Memory {
 				System.out.println("C" + i + ": " + (memory[i]+128));
 		}
 	}
+
+	/**
+	 * Do nothing, the controleur handle jump & back
+	 */
+	public void back() {
+
+	}
+
+	/**
+	 * Do nothing, the controleur handle jump & back
+	 */
+	public void jump() {
+
+	}
 }
