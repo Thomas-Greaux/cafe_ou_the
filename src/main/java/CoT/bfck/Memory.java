@@ -149,12 +149,10 @@ public class Memory {
 	}
 
 	public void setIn(String filename){
-		System.out.println("On set le in");
 		in_file = filename;
 	}
 
 	public void setOut(String filename){
-		System.out.println("On set le out");
 		out_file = filename;
 	}
 

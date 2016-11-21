@@ -28,6 +28,7 @@ public class CommandFactory {
 		if (command == null) {
 			return null;
 		}
+
 		properties = i.getProperties();
 		for(String p : properties)
 			if(p.equals(command)){return i;}
@@ -59,7 +60,10 @@ public class CommandFactory {
 		properties = out.getProperties();
 		for(String p : properties)
 			if(p.equals(command)){return out;}
-		
+
+		if(command.equals("000000"))
+			return null;
+
 		throw new IOException();
 	}
 }

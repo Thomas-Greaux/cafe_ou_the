@@ -116,7 +116,7 @@ public class Controleur {
                 }
 
                 else {
-                    System.out.println(commands.get(j).getNameShort());
+                    //System.out.println(commands.get(j).getNameShort());
                     commands.get(j).execute(mem);
                 }
             }

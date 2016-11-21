@@ -38,7 +38,7 @@ public class Reader {
 	public ArrayList<Command> read(String line) throws Exception {
 		ArrayList<Command> list = new ArrayList<Command>();
 		for(int i=0;i<line.length();i++){
-			if(isChar(line, i) || isCharMin(line, i)){
+			if(isChar(line) || isHexaColor(line)){
 					list.add((cf.getCommand(line)));
 					break;
 			}else{
@@ -48,10 +48,26 @@ public class Reader {
 		return list;
 	}
 	
-	public boolean isChar(String l, int i){
-		return l.codePointAt(i)>=65 && l.codePointAt(i)<=90;
+	public boolean isChar(String l){
+		for(int i=0;i<l.length();i++){
+			if(!(l.codePointAt(i)>=65 && l.codePointAt(i)<=90)){
+				return false;
+			}
+		}
+		return true;
 	}
-	public boolean isCharMin(String l, int i){
-		return l.codePointAt(i)>=97 && l.codePointAt(i)<=127;
+
+	public boolean isHexaColor(String l){
+		int letters = 0;
+		int numbers = 0;
+		for(int i=0;i<l.length();i++){
+			if(l.codePointAt(i)>=97 && l.codePointAt(i)<=127) letters++;
+			else if(l.codePointAt(i)>=65 && l.codePointAt(i)<=90) letters++;
+			else if(l.codePointAt(i)>=48 && l.codePointAt(i)<=57) numbers++;
+		}
+		if(numbers+letters == 6)
+			return true;
+		else
+			return false;
 	}
 }
