@@ -16,12 +16,16 @@ public class Controleur {
 	private String file;
     private String file_ext;
     private String rewrite;
+    private String in;
+    private String out;
 
     // OPTIONS
     private int option_p;
     private int option_rewrite = -1;
     private int option_translate = -1;
     private int option_check = -1;
+    private int option_in = -1;
+    private int option_out = -1;
 	
 	public Controleur(String[] args){
 		for(int i = 0; i < args.length; i++) { //Boucle d'initialisation des options
@@ -29,6 +33,8 @@ public class Controleur {
             else if (args[i].equals("--rewrite")) option_rewrite = i;
             else if (args[i].equals("--translate")) option_translate = i;
             else if (args[i].equals("--check")) option_check = i;
+            else if (args[i].equals("-i")){ option_in = i; in = args[option_in+1]; }
+            else if (args[i].equals("-o")){ option_out = i; out = args[option_out+1]; }
         }
 		file = args[option_p + 1];
         file_ext = getFileExt(file);
@@ -55,6 +61,15 @@ public class Controleur {
             else if (option_check != -1) {
                 check(commands);
             }
+
+            if (option_in != -1) {
+                mem.setIn(in);
+            }
+
+            if (option_out != -1) {
+                mem.setOut(out);
+            }
+
         }
         else if(file_ext.equals(".bmp")) {
             commands = new ReadImage().readImage(file);
@@ -82,7 +97,7 @@ public class Controleur {
             if (commands.get(j) != null) {
 
 
-                if (mem.out() == 0 && commands.get(j).getNameShort().equals("[")) {
+                if (mem.getValue() == 0 && commands.get(j).getNameShort().equals("[")) {
                     compteur++;
                     for (k = j + 1; compteur > 0; k++) {
                         if (commands.get(k).getNameShort().equals("[")) compteur++;
@@ -91,7 +106,7 @@ public class Controleur {
                     j = k + 1;
                 }
 
-                if (mem.out() != 0 && commands.get(j).getNameShort().equals("]")) {
+                if (mem.getValue() != 0 && commands.get(j).getNameShort().equals("]")) {
                     compteur++;
                     for (k = j - 1; compteur > 0; k--) {
                         if (commands.get(k).getNameShort().equals("[")) compteur--;
