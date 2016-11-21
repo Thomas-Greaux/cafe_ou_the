@@ -21,12 +21,14 @@ public class Controleur {
     private int option_p;
     private int option_rewrite = -1;
     private int option_translate = -1;
+    private int option_check = -1;
 	
 	public Controleur(String[] args){
 		for(int i = 0; i < args.length; i++) { //Boucle d'initialisation des options
             if(args[i].equals("-p")) option_p = i;
             else if (args[i].equals("--rewrite")) option_rewrite = i;
             else if (args[i].equals("--translate")) option_translate = i;
+            else if (args[i].equals("--check")) option_check = i;
         }
 		file = args[option_p + 1];
         file_ext = getFileExt(file);
@@ -49,14 +51,20 @@ public class Controleur {
             else if (option_rewrite != -1) {
                 print(commands);
             }
+
+            else if (option_check != -1) {
+                check(commands);
+            }
         }
         else if(file_ext.equals(".bmp")) {
             commands = new ReadImage().readImage(file);
         }
 
-        commands.add(null); //ajout d'un element null pour gerer le cas ou le program fini par un ]
-        execute(commands);
-        mem.display();
+        if(option_check == -1 && option_translate == -1 && option_rewrite == -1){
+            commands.add(null); //ajout d'un element null pour gerer le cas ou le program fini par un ]
+            execute(commands);
+            mem.display();
+        }
 	}
 
     /**
@@ -117,6 +125,19 @@ public class Controleur {
             if(commands.get(i) != null) System.out.print(commands.get(i).getNameShort());
         }
         System.out.print("\n");
+    }
+
+    public void check(ArrayList<Command> commands) {
+        int n = commands.size();
+        int compteur = 0;
+        for(int i = 0; i < n; i++) {
+            if (commands.get(i).getNameShort().equals("[")) compteur++;
+            else if (commands.get(i).getNameShort().equals("]")) compteur--;
+
+            if(compteur < 0) System.exit(4);
+        }
+
+        if(compteur > 0) System.exit(4);
     }
 
 	/**
