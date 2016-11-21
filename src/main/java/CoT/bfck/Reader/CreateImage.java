@@ -43,7 +43,6 @@ public class CreateImage {
 			}
 			System.out.println("Boucle fini");
 			//Si problème, remplacer avec translation.bmp (Linux) ou bien le bon chemin (IDE Windows)
-			//TODO Creer un nouveau fichier et ecrire dedans
 			ImageIO.write(img, "bmp", new File("D:/translation.bmp"));
 		}
 		catch(IOException e){

@@ -69,7 +69,6 @@ public class Controleur {
 
     /**
      * Execute les commandes, gere les [ ]
-     * TODO La liste est elle correcte pour les fichiers de plusieurs lignes?
      * @param commands
      * @throws Exception
      */
@@ -78,7 +77,6 @@ public class Controleur {
 		int k;
         int n = commands.size();
 		for(int j = 0 ; j < n ; j++) //Boucle d'execution des commandes, on joue sur j pour gerer les boucles
-			                         // TODO transformer les deux if en methodes
 		{
 
             if (commands.get(j) != null) {
@@ -142,7 +140,6 @@ public class Controleur {
 
 	/**
 	 *
-	 * TODO ce n'est pas au controlleur de determiner l'extension mais au reader
 	 * @param filename
 	 * @return the extension of the file to read
 	 */

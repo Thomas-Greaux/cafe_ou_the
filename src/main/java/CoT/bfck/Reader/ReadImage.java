@@ -62,8 +62,7 @@ public class ReadImage extends Reader {
 			BufferedReader br = new BufferedReader(ipsr);
 			String ligne;
 			String res = "";
-			
-			//Todo : exceptions sur les instructions non valides
+
 			while ((ligne = br.readLine()) != null) {
 				if(shortened(ligne) == null){
 					res = "  ";

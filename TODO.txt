@@ -1,0 +1,4 @@
+TODO list:
+	creer une nouvelle commande null qui implemente commande
+	mettre les methodes d'options dans une classe a part entiere
+	Creer une image peu importe l'OS
