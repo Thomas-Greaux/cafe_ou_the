@@ -82,6 +82,8 @@ public class Memory {
 		return memory[index] + 128;
 	}
 
+	public void in(){}
+
 	public void display() {
 		for (int i = 0; i < 30000; i++) {
 			if (memory[i] != -128)
