@@ -36,7 +36,8 @@ public class CreateImage {
 				}
 			}
 			//Si problème, remplacer avec translation.bmp (Linux) ou bien le bon chemin (IDE Windows)
-			ImageIO.write(img, "bmp", new File("../../../../files/translation.bmp"));
+			//TODO Creer un nouveau fichier et ecrire dedans
+			ImageIO.write(img, "bmp", new File("D:/translation.bmp"));
 		}
 		catch(IOException e){
 			System.out.println(e);

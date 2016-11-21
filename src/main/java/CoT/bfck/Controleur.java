@@ -2,6 +2,8 @@ package CoT.bfck;
 
 import CoT.bfck.Command.Command;
 import CoT.bfck.Reader.ReadFile;
+import CoT.bfck.Reader.ReadImage;
+import com.sun.org.apache.xpath.internal.SourceTree;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,17 +13,21 @@ public class Controleur {
 	private Memory mem = new Memory();
 	private ArrayList<Command> commands = new ArrayList<Command>();
 	private String file;
+    private String file_ext;
 
     // OPTIONS
     private int option_p;
     private int option_rewrite = -1;
+    private int option_translate = -1;
 	
 	public Controleur(String[] args){
-		for(int i = 0; i < args.length; i++) {
+		for(int i = 0; i < args.length; i++) { //Boucle d'initialisation des options
             if(args[i].equals("-p")) option_p = i;
             else if (args[i].equals("--rewrite")) option_rewrite = i;
+            else if (args[i].equals("--translate")) option_translate = i;
         }
 		file = args[option_p + 1];
+        file_ext = getFileExt(file);
 	}
 
 	/**
@@ -30,14 +36,18 @@ public class Controleur {
 	 */
 	public void run() throws Exception {
 
-        commands = new ReadFile(file).readFile();
-        commands.add(null); //ajout d'un element null pour gerer le cas ou le program fini par un ]
-
-        if (option_rewrite != -1) print(commands);
-        else {
-            execute(commands);
-            mem.display();
+        if(file_ext.equals(".bf")) {
+            if(option_translate != -1) new ReadImage().translateImage(file);
+            else commands = new ReadFile().readFile(file);
         }
+        else if(file_ext.equals(".bmp")) {
+            if(option_translate != -1) new ReadFile().rewriteFile(file);
+            else commands = new ReadImage().readImage(file);
+        }
+
+        commands.add(null); //ajout d'un element null pour gerer le cas ou le program fini par un ]
+        execute(commands);
+        mem.display();
 	}
 
     /**

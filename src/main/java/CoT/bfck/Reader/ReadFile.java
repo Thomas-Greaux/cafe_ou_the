@@ -20,12 +20,6 @@ import java.util.ArrayList;
  */
 
 public class ReadFile extends Reader {
-	
-	private String file;
-	
-	public ReadFile(String path){
-		file = path;
-	}
 
 	/**
 	 * Open the file and sent every line to the function operation.
@@ -33,7 +27,7 @@ public class ReadFile extends Reader {
 	 * @throws Exception 
 	 */
 
-	public ArrayList<Command> readFile() throws Exception{
+	public ArrayList<Command> readFile(String file) throws Exception{
 		ArrayList<Command> commands = new ArrayList<Command>();
 		try {
 
@@ -61,7 +55,7 @@ public class ReadFile extends Reader {
 	 * @throws Exception
 	 */
 	
-	public String rewriteFile() throws Exception {
+	public String rewriteFile(String file) throws Exception {
 		try {
 			InputStream ips = new FileInputStream(new File(file));
 			InputStreamReader ipsr = new InputStreamReader(ips);
@@ -88,7 +82,7 @@ public class ReadFile extends Reader {
 		return null;
 	}
 	
-	public void checkFile() throws Exception{
+	public void checkFile(String file) throws Exception{
 		try {
 			InputStream ips = new FileInputStream(new File(file));
 			InputStreamReader ipsr = new InputStreamReader(ips);
