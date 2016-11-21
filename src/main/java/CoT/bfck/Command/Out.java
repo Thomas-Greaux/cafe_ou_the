@@ -9,8 +9,8 @@ import java.util.ArrayList;
  * Created by Thoma on 11/21/2016.
  */
 public class Out {
-    protected Color colorRGB = new Color(255, 255, 255);
-    protected String colorHexa = new String("ooffoo");
+    protected Color colorRGB = new Color(0, 255, 0);
+    protected String colorHexa = new String("00ff00");
     protected String name = new String("OUT");
     protected String nameShort = new String(".");
 
