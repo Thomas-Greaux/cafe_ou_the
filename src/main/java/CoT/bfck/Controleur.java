@@ -14,10 +14,12 @@ public class Controleur {
 
     // OPTIONS
     private int option_p;
+    private int option_rewrite = -1;
 	
 	public Controleur(String[] args){
 		for(int i = 0; i < args.length; i++) {
             if(args[i].equals("-p")) option_p = i;
+            else if (args[i].equals("--rewrite")) option_rewrite = i;
         }
 		file = args[option_p + 1];
 	}
@@ -27,10 +29,15 @@ public class Controleur {
 	 * @throws Exception
 	 */
 	public void run() throws Exception {
-		commands = new ReadFile(file).readFile();
-		commands.add(null); //ajout d'un element null pour gerer le cas ou le program fini par un ]
-		execute(commands);
-		mem.display();
+
+        commands = new ReadFile(file).readFile();
+        commands.add(null); //ajout d'un element null pour gerer le cas ou le program fini par un ]
+
+        if (option_rewrite != -1) print(commands);
+        else {
+            execute(commands);
+            mem.display();
+        }
 	}
 
     /**
@@ -75,6 +82,14 @@ public class Controleur {
             }
 		}
 	}
+
+	public void print(ArrayList<Command> commands) {
+        int n = commands.size();
+        for (int i = 0; i < n; i++) {
+            if(commands.get(i) != null) System.out.print(commands.get(i).getNameShort());
+        }
+        System.out.print("\n");
+    }
 
 	/**
 	 *
