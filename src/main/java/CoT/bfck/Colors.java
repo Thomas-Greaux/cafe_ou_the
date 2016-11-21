@@ -8,10 +8,12 @@ public class Colors {
 	private CommandFactory cf = new CommandFactory();
 
 	public Color returnColor(String c) throws Exception{
+        if (cf.getCommand(c) == null)  return new Color(0, 0, 0);
 		if(cf.getCommand(c).getRGBColor().equals(null))
 			return new Color(0, 0, 0);
-		else
+		else {
 			return cf.getCommand(c).getRGBColor();
+		}
 	}
 
 	public String getHexa(BufferedImage img, int x, int y){

@@ -48,40 +48,6 @@ public class ReadFile extends Reader {
 		return commands;
 	}
 	
-	/**
-	 * Display the shortened version of the file.
-	 * If this is already shortened, doesn't change.
-	 *
-	 * @throws Exception
-	 */
-	
-	public String rewriteFile(String file) throws Exception {
-		try {
-			InputStream ips = new FileInputStream(new File(file));
-			InputStreamReader ipsr = new InputStreamReader(ips);
-			BufferedReader br = new BufferedReader(ipsr);
-			String ligne;
-			String res = null;
-			
-			//Todo : exceptions sur les instructions non valides
-
-			while ((ligne = br.readLine()) != null) {
-				if(shortened(ligne) == null){
-					res = "Au moins une instruction est fausse";
-					break;
-				}
-				res += shortened(ligne);
-			}
-			br.close();
-			return res;
-		}
-		catch (FileNotFoundException e){
-			System.out.println("File doesn't exist");
-			System.exit(1);
-		}
-		return null;
-	}
-	
 	public void checkFile(String file) throws Exception{
 		try {
 			InputStream ips = new FileInputStream(new File(file));

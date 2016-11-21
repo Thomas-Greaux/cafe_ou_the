@@ -1,6 +1,7 @@
 package CoT.bfck;
 
 import CoT.bfck.Command.Command;
+import CoT.bfck.Reader.CreateImage;
 import CoT.bfck.Reader.ReadFile;
 import CoT.bfck.Reader.ReadImage;
 import com.sun.org.apache.xpath.internal.SourceTree;
@@ -14,6 +15,7 @@ public class Controleur {
 	private ArrayList<Command> commands = new ArrayList<Command>();
 	private String file;
     private String file_ext;
+    private String rewrite;
 
     // OPTIONS
     private int option_p;
@@ -37,12 +39,19 @@ public class Controleur {
 	public void run() throws Exception {
 
         if(file_ext.equals(".bf")) {
-            if(option_translate != -1) new ReadImage().translateImage(file);
-            else commands = new ReadFile().readFile(file);
+
+            commands = new ReadFile().readFile(file);
+
+            if(option_translate != -1) {
+                rewrite = rewrite(commands);
+                new CreateImage().create_Image(rewrite);
+            }
+            else if (option_rewrite != -1) {
+                print(commands);
+            }
         }
         else if(file_ext.equals(".bmp")) {
-            if(option_translate != -1) new ReadFile().rewriteFile(file);
-            else commands = new ReadImage().readImage(file);
+            commands = new ReadImage().readImage(file);
         }
 
         commands.add(null); //ajout d'un element null pour gerer le cas ou le program fini par un ]
@@ -92,6 +101,15 @@ public class Controleur {
             }
 		}
 	}
+
+    public String rewrite(ArrayList<Command> commands) {
+        StringBuilder res = new StringBuilder();
+        int n = commands.size();
+        for (int i = 0; i < n; i++) {
+            if(commands.get(i) != null)  res.append(commands.get(i).getNameShort());
+        }
+        return res.toString();
+    }
 
 	public void print(ArrayList<Command> commands) {
         int n = commands.size();
