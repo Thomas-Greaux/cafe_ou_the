@@ -11,9 +11,15 @@ public class Controleur {
 	private Memory mem = new Memory();
 	private ArrayList<Command> commands = new ArrayList<Command>();
 	private String file;
+
+    // OPTIONS
+    private int option_p;
 	
 	public Controleur(String[] args){
-		file = args[args.length - 1];
+		for(int i = 0; i < args.length; i++) {
+            if(args[i].equals("-p")) option_p = i;
+        }
+		file = args[option_p + 1];
 	}
 
 	/**
