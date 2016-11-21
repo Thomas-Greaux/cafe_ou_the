@@ -47,37 +47,4 @@ public class ReadFile extends Reader {
 		}
 		return commands;
 	}
-	
-	public void checkFile(String file) throws Exception{
-		try {
-			InputStream ips = new FileInputStream(new File(file));
-			InputStreamReader ipsr = new InputStreamReader(ips);
-			BufferedReader br = new BufferedReader(ipsr);
-			String line;
-			int c = 0;
-			
-			while ((line = br.readLine()) != null) {
-				for(int i=0;i<shortened(line).length();i++){
-					// � ranger dans une exception !
-					if(c<0){
-						System.out.println("Bad pharentesis");
-						System.exit(3);
-					}
-					if(shortened(line).charAt(i)=='[')
-						c++;
-					else if(shortened(line).charAt(i)==']')
-						c--;
-				}
-			}
-			if(c != 0){
-				System.out.println("Bad pharentesis");
-				System.exit(3);
-			}
-			br.close();
-		}
-		catch (FileNotFoundException e){
-			System.out.println("File doesn't exist");
-			System.exit(1);
-		}
-	}
 }
