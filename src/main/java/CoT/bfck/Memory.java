@@ -92,14 +92,14 @@ public class Memory {
 		if(!out_file.equals("")){
 			try{
 				PrintWriter writer = new PrintWriter(out_file, "UTF-8");
-				writer.println((char)( memory[index]+128));
+				writer.print((char)( memory[index]+128));
 				writer.close();
 			} catch (Exception e) {
 				System.out.println("Le chemin choisi n'existe pas.");
 				System.exit(3);
 			}
 		}else{
-			System.out.println((char)( memory[index]+128));
+			System.out.print((char)( memory[index]+128));
 		}
 	}
 
@@ -122,7 +122,6 @@ public class Memory {
 		}else{
 			Scanner sc = new Scanner(System.in);
 			int i = sc.nextInt();
-			sc.close();
 			memory[index]= (byte) (i-128);
 		}
 	}
