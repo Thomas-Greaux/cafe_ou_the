@@ -122,7 +122,6 @@ public class Memory {
 		}else{
 			Scanner sc = new Scanner(System.in);
 			int i = sc.nextInt();
-			sc.close();
 			memory[index]= (byte) (i-128);
 		}
 	}
