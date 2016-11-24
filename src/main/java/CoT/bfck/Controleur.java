@@ -178,7 +178,7 @@ public class Controleur {
 		if (pos > -1) {
 			return filename.substring(pos);
 		} else {
-			return filename;
+			return "";
 		}
 	}
 }

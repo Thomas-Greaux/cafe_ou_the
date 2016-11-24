@@ -7,16 +7,16 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Created by fabien on 24/11/16.
+ * Created by cafe_ou_the on 24/11/16.
  */
 
 public class MemoryTestT {
     Memory mem;
     @Before
     public void setUp() throws Exception {
-
         mem = new Memory();
     }
+
     @Test
     public void test30Incr20Decr () throws Exception {
         for(int i = 0 ; i < 30 ; i++)
