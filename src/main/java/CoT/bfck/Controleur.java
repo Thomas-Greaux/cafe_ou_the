@@ -6,6 +6,8 @@ import CoT.bfck.Reader.ReadFile;
 import CoT.bfck.Reader.ReadImage;
 import com.sun.org.apache.xpath.internal.SourceTree;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +20,8 @@ public class Controleur {
     private String rewrite;
     private String in;
     private String out;
+    private FileWriter fw;
+    private int c = 0;
 
     // OPTIONS
     private int option_p;
@@ -26,6 +30,7 @@ public class Controleur {
     private int option_check = -1;
     private int option_in = -1;
     private int option_out = -1;
+    private int option_trace = -1;
 	
 	public Controleur(String[] args){
 		for(int i = 0; i < args.length; i++) { //Boucle d'initialisation des options
@@ -35,6 +40,7 @@ public class Controleur {
             else if (args[i].equals("--check")) option_check = i;
             else if (args[i].equals("-i")){ option_in = i; in = args[option_in+1]; }
             else if (args[i].equals("-o")){ option_out = i; out = args[option_out+1]; }
+            else if (args[i].equals("--trace")) option_trace = i;
         }
 		file = args[option_p + 1];
         file_ext = getFileExt(file);
@@ -59,6 +65,10 @@ public class Controleur {
 
             else if (option_check != -1) {
                 check(commands);
+            }
+
+            else if(option_trace != -1){
+                fw = new FileWriter(new File("files/Output/p.log"));
             }
 
             if (option_in != -1) {
@@ -92,7 +102,6 @@ public class Controleur {
         int n = commands.size();
 		for(int j = 0 ; j < n ; j++) //Boucle d'execution des commandes, on joue sur j pour gerer les boucles
 		{
-
             if (commands.get(j) != null) {
 
 
@@ -115,11 +124,19 @@ public class Controleur {
                 }
 
                 else {
-                    //System.out.println(commands.get(j).getNameShort());
+                    if(option_trace!=-1){
+                        c++;
+                        fw.write("Step n°" + c + "\n");
+                        fw.write("Next command : " + commands.get(j).getName() + "\n");
+                        fw.write("Data pointer value : " + mem.getValue() + "\n");
+                        fw.write("Memory SNAPSHOT :\n" + mem.display_String());
+                        fw.write("\n---------------------------\n");
+                    }
                     commands.get(j).execute(mem);
                 }
             }
 		}
+		fw.close();
 	}
 
     public String rewrite(ArrayList<Command> commands) {

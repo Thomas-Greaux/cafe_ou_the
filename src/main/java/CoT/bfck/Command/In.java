@@ -19,6 +19,10 @@ public class In implements Command {
         m.in();
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     public ArrayList<String> getProperties(){
         ArrayList<String> l = new ArrayList<String>();
         l.add(colorHexa);

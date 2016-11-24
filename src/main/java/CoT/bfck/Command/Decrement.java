@@ -15,7 +15,11 @@ public class Decrement implements Command {
 	public void execute(Memory m) throws Exception {
 		m.decr();
 	}
-	
+
+	public String getName() {
+		return this.name;
+	}
+
 	public ArrayList<String> getProperties(){
 		ArrayList<String> l = new ArrayList<String>();
 		l.add(colorHexa);

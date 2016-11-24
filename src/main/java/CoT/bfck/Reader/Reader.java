@@ -2,6 +2,7 @@ package CoT.bfck.Reader;
 
 import CoT.bfck.Command.Command;
 import CoT.bfck.CommandFactory;
+import CoT.bfck.Exception.NotACommandException;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,7 +31,8 @@ public class Reader {
 	public String shortened(String s) throws Exception{
 		try{
 			return cf.getCommand(s).getNameShort();
-		}catch(IOException e){
+		}catch(NotACommandException e){
+			//e.printStackTrace();
 			return null;
 		}
 	}

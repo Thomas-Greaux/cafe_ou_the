@@ -15,6 +15,10 @@ public class Back implements Command {
 	public void execute(Memory m) throws Exception {
 		m.back();
 	}
+
+	public String getName() {
+		return this.name;
+	}
 	
 	public ArrayList<String> getProperties(){
 		ArrayList<String> l = new ArrayList<String>();

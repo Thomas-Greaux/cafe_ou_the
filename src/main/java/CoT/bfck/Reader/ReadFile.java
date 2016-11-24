@@ -42,8 +42,7 @@ public class ReadFile extends Reader {
 			br.close();
 		}	
 		catch (FileNotFoundException e){
-			System.out.println("File doesn't exist");
-			System.exit(1);
+			throw new FileNotFoundException(e.toString());
 		}
 		return commands;
 	}

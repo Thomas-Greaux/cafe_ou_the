@@ -28,6 +28,10 @@ public class Out implements Command {
             return l;
         }
 
+        public String getName() {
+            return this.name;
+        }
+    
         public String getNameShort() {
             return this.nameShort;
         }

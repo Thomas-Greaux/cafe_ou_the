@@ -23,6 +23,10 @@ public class Increment implements Command {
 		l.add(nameShort);
 		return l;
 	}
+	public String getName() {
+		return this.name;
+	}
+
 	
 	public String getNameShort(){
 		return this.nameShort;

@@ -23,31 +23,15 @@ public class Right implements Command {
 		l.add(nameShort);
 		return l;
 	}
-	
+
 	public String getNameShort(){
 		return this.nameShort;
 	}
-/*
-	@Override
-	public Color getColorRGB(){
-		return this.colorRGB;
-	}
-	
-	@Override
-	public String getColorHexa(){
-		return this.colorHexa;
-	}
-	
-	@Override
-	public String getName(){
+
+	public String getName() {
 		return this.name;
 	}
-	
-	@Override
-	public String getNameShort(){
-		return this.nameShort;
-	}
-	*/
+
 	public Color getRGBColor(){
 		return this.colorRGB;
 	}

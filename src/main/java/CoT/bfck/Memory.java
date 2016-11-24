@@ -134,6 +134,15 @@ public class Memory {
 		}
 	}
 
+    public String display_String() {
+        String result = "";
+        for (int i = 0; i < 30000; i++) {
+            if (memory[i] != -128)
+                result += "C" + i + ": " + (memory[i]+128);
+        }
+        return result;
+    }
+
 	/**
 	 * Do nothing, the controleur handle jump & back
 	 */

@@ -1,6 +1,7 @@
 package CoT.bfck;
 
 import CoT.bfck.Command.*;
+import CoT.bfck.Exception.NotACommandException;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class CommandFactory {
 	 * @return the corresponding Command
 	 * @throws Exception 
 	 */
-	public Command getCommand(String command) throws Exception {
+	public Command getCommand(String command) throws NotACommandException{
 		if (command == null) {
 			return null;
 		}
@@ -64,6 +65,6 @@ public class CommandFactory {
 		if(command.equals("000000"))
 			return null;
 
-		throw new IOException();
+		throw new NotACommandException("Une des commandes choisies n'existe pas.");
 	}
 }

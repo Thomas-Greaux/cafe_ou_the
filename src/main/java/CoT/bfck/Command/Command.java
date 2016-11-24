@@ -13,6 +13,7 @@ public interface Command {
 	ArrayList<String> getProperties();
 	String getNameShort();
 	Color getRGBColor();
+	String getName();
 	/*
 	Color getColorRGB();
 	String getColorHexa();
