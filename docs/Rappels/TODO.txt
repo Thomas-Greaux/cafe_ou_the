@@ -5,3 +5,4 @@ TODO list:
 	Implementer des enums ???
 	gerer les couleurs non valide de translate
 	Simplifier la methode Controleur.execute
+

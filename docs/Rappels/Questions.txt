@@ -1,0 +1,4 @@
+écrire ici les différentes questions à poser à la séance suivante :
+
+	- Slice 14 (commentaires & indentation) : faut il aussi ignorer les espaces ?
+	- Slice 13 : Explication des données attendues (vérification si l'on a les bonnes).

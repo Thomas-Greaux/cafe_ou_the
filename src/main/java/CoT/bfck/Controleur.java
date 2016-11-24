@@ -97,14 +97,12 @@ public class Controleur {
      * @throws Exception
      */
 	public void execute(ArrayList<Command> commands) throws Exception {
-		int compteur = 0;
+        int compteur = 0;
 		int k;
         int n = commands.size();
-		for(int j = 0 ; j < n ; j++) //Boucle d'execution des commandes, on joue sur j pour gerer les boucles
+        for(int j = 0 ; j < n ; j++) //Boucle d'execution des commandes, on joue sur j pour gerer les boucles
 		{
             if (commands.get(j) != null) {
-
-
                 if (mem.getValue() == 0 && commands.get(j).getNameShort().equals("[")) {
                     compteur++;
                     for (k = j + 1; compteur > 0; k++) {
@@ -136,7 +134,8 @@ public class Controleur {
                 }
             }
 		}
-		fw.close();
+		if(option_trace!=-1)
+		    fw.close();
 	}
 
     public String rewrite(ArrayList<Command> commands) {

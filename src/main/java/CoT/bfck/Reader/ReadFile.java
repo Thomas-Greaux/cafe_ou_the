@@ -30,7 +30,6 @@ public class ReadFile extends Reader {
 	public ArrayList<Command> readFile(String file) throws Exception{
 		ArrayList<Command> commands = new ArrayList<Command>();
 		try {
-
 			InputStream ips = new FileInputStream(new File(file));
 			InputStreamReader ipsr = new InputStreamReader(ips);
 			BufferedReader br = new BufferedReader(ipsr);

@@ -26,11 +26,9 @@ public class CommandFactory {
 	 * @throws Exception 
 	 */
 	public Command getCommand(String command) throws NotACommandException{
-		if (command == null) {
-			return null;
-		}
+        System.out.println(command);
 
-		properties = i.getProperties();
+        properties = i.getProperties();
 		for(String p : properties)
 			if(p.equals(command)){return i;}
 		
@@ -62,7 +60,7 @@ public class CommandFactory {
 		for(String p : properties)
 			if(p.equals(command)){return out;}
 
-		if(command.equals("000000"))
+		if(command.equals("000000")) //Plus de problèmes au niveau de l'indentation et pixels noirs
 			return null;
 
 		throw new NotACommandException("Une des commandes choisies n'existe pas.");
