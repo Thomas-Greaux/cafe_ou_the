@@ -45,7 +45,7 @@ public class Reader {
 			}else if(isChar(line) || isHexaColor(line)){
 				list.add((cf.getCommand(line)));
 				break;
-			}else if(/*line.charAt(i) == ' ' || */line.charAt(i) == '\t'){
+			}else if(line.charAt(i) == ' ' || line.charAt(i) == '\t'){
 
 			}else{
 				list.add((cf.getCommand(Character.toString(line.charAt(i)))));

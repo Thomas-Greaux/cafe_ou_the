@@ -26,7 +26,7 @@ public class CommandFactory {
 	 * @throws Exception 
 	 */
 	public Command getCommand(String command) throws NotACommandException{
-        System.out.println(command);
+        //System.out.println(command);
 
         properties = i.getProperties();
 		for(String p : properties)
