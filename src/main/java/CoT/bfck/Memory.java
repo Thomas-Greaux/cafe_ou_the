@@ -92,7 +92,7 @@ public class Memory {
 		if(!out_file.equals("")){
 			try{
 				PrintWriter writer = new PrintWriter(out_file, "UTF-8");
-				writer.println((char)( memory[index]+128));
+				writer.print((char)( memory[index]+128));
 				writer.close();
             } catch (Exception e) {
 				System.out.println("Le chemin choisi n'existe pas.");
