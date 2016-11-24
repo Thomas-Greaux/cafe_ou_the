@@ -47,7 +47,6 @@ public class Controleur {
 	public void run() throws Exception {
 
         if(file_ext.equals(".bf")) {
-
             commands = new ReadFile().readFile(file);
 
             if(option_translate != -1) {
@@ -159,7 +158,7 @@ public class Controleur {
 	 * @return the extension of the file to read
 	 */
 	public static String getFileExt(String filename) {
-		int pos = filename.lastIndexOf(".");
+        int pos = filename.lastIndexOf(".");
 		if (pos > -1) {
 			return filename.substring(pos);
 		} else {
