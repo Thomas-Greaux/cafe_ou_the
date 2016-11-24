@@ -16,14 +16,14 @@ public class Reader {
 	}
 	
 	/**
-     * Return the string corresponding to the string in param :
-		 * 	- if the string is in long representation, give the shortened representation
-		 * 	- if string in short representation, return the same string
+     * Return the string corresponding to the string in.bf param :
+		 * 	- if the string is in.bf long representation, give the shortened representation
+		 * 	- if string in.bf short representation, return the same string
 		 * 	- else return nothing, with System.exit(23);
      * @param s
 		 * 		The line of bf code we want to make short
      * @return String result
-		 * 		The bf code in shorten representation.
+		 * 		The bf code in.bf shorten representation.
 	 * @throws Exception 
      */
 

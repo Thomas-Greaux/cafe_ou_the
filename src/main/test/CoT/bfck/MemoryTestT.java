@@ -1,20 +1,20 @@
 package CoT.bfck;
 
-/**
- * Created by user on 23/11/2016.
- */
-
-import jdk.nashorn.internal.runtime.ECMAException;
-import junit.framework.TestCase;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class MemoryTest {
+import static org.junit.Assert.*;
 
-    Memory mem ;
+/**
+ * Created by fabien on 24/11/16.
+ */
 
+public class MemoryTestT {
+    Memory mem;
     @Before
-    public void setUp(){
+    public void setUp() throws Exception {
+
         mem = new Memory();
     }
     @Test
@@ -38,5 +38,5 @@ public class MemoryTest {
             mem.right();
         }
         mem.display();
-    }           
+    }
 }

@@ -17,11 +17,11 @@ import javax.imageio.ImageIO;
 public class ReadImage extends Reader {
 
 	/**
-	 * Read the instruction in the picture in parameter. To do this, read the
+	 * Read the instruction in.bf the picture in.bf parameter. To do this, read the
 	 * color (RGB) of every first pixel of every zone.
 	 * 
 	 * @param file
-	 * @return all the commands stored in the file
+	 * @return all the commands stored in.bf the file
 	 * 
 	 */
 
@@ -49,7 +49,7 @@ public class ReadImage extends Reader {
 
 	/**
 	 * 
-	 * Create the image with the instructions given in the file.
+	 * Create the image with the instructions given in.bf the file.
 	 * 
 	 * @param file
 	 * @throws Exception 

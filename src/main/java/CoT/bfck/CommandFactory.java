@@ -17,7 +17,7 @@ public class CommandFactory {
 	Out out = new Out();
 
 	/**
-	 * Used to make connection between the string given in parameter and
+	 * Used to make connection between the string given in.bf parameter and
 	 * the corresponding instruction.
 	 * 
 	 * @param command

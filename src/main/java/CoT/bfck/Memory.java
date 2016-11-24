@@ -13,7 +13,7 @@ public class Memory {
 
 	// the table of cells
 	private byte[] memory;
-	// the current index (= position in the table)
+	// the current index (= position in.bf the table)
 	private int index;
 	private String in_file;
 	private String out_file;
@@ -85,7 +85,7 @@ public class Memory {
 	}
 
 	/**
-	 * If a file is given in argument, print the actual value in it. If not, print it in the terminal.
+	 * If a file is given in.bf argument, print the actual value in.bf it. If not, print it in.bf the terminal.
 	 */
 
 	public void out(){
@@ -104,7 +104,7 @@ public class Memory {
 	}
 
 	/**
-	 * If a file is given in argument, read the actual value in it and put it in the actual memory[index]. If not, read it in the terminal.
+	 * If a file is given in argument, read the actual value in.bf it and put it in.bf the actual memory[index]. If not, read it in.bf the terminal.
 	 */
 	public void in(){
 		if(!in_file.equals("")){
