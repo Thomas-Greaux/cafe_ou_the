@@ -18,6 +18,8 @@ public class Memory {
 	private String in_file;
 	private String out_file;
 
+	private IOStream io_stream = new IOStream();
+
 	/**
 	 * Create the memory : initializing the table and index
 	 */
@@ -89,41 +91,14 @@ public class Memory {
 	 */
 
 	public void out(){
-		if(!out_file.equals("")){
-			try{
-				PrintWriter writer = new PrintWriter(out_file, "UTF-8");
-				writer.print((char)( memory[index]+128));
-				writer.close();
-            } catch (Exception e) {
-				System.out.println("Le chemin choisi n'existe pas.");
-				System.exit(3);
-			}
-		}else{
-			System.out.print((char)( memory[index]+128));
-		}
+		io_stream.out( (byte) (memory[index]-128));
 	}
 
 	/**
 	 * If a file is given in argument, read the actual value in.bf it and put it in.bf the actual memory[index]. If not, read it in.bf the terminal.
 	 */
 	public void in(){
-		if(!in_file.equals("")){
-			try{
-				InputStream flux=new FileInputStream(in_file);
-				InputStreamReader lecture=new InputStreamReader(flux);
-				BufferedReader buff=new BufferedReader(lecture);
-				int data=Integer.parseInt(buff.readLine());
-				memory[index]= (byte) (data-128);
-				buff.close();
-			}catch (FileNotFoundException e) {
-				System.out.println("Le fichier n'existe pas.");
-				System.exit(3);
-			}catch (IOException e){}
-		}else{
-			Scanner sc = new Scanner(System.in);
-			int i = sc.nextInt();
-			memory[index]= (byte) (i-128);
-		}
+        memory[index] = io_stream.in();
 	}
 
 	public void display() {
@@ -158,11 +133,11 @@ public class Memory {
 	}
 
 	public void setIn(String filename){
-		in_file = filename;
+		io_stream.setIn(filename);
 	}
 
 	public void setOut(String filename){
-		out_file = filename;
+		io_stream.setOut(filename);
 	}
 
 	public int getValue(){
