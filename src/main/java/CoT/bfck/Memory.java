@@ -143,4 +143,8 @@ public class Memory {
 	public int getValue(){
 		return memory[index]+128;
 	}
+
+	public void close_stream(){
+        io_stream.close();
+    }
 }

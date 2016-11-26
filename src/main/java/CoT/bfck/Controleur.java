@@ -134,6 +134,7 @@ public class Controleur {
                 }
             }
 		}
+		mem.close_stream();
 		if(option_trace!=-1)
 		    fw.close();
 	}
