@@ -61,8 +61,15 @@ public class IOStream {
     public byte in(){
         if(default_in){
             Scanner sc = new Scanner(System.in);
-            byte i = sc.nextByte();
-            return (byte) (i-128);
+            String i = sc.next();
+            byte value;
+
+            if(i.length()>1)
+                value = (byte) Integer.parseInt(i);
+            else
+                value = (byte) i.charAt(0);
+            
+            return (byte) (value-128);
         }
         else{
             try {

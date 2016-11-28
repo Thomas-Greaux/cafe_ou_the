@@ -1,4 +1,7 @@
 écrire ici les différentes questions à poser à la séance suivante :
 
 	- Slice 14 (commentaires & indentation) : faut il aussi ignorer les espaces ?
-	- Slice 13 : Explication des données attendues (vérification si l'on a les bonnes).
+	- Slice 13 : Vérification des données attendues.
+	- Présentation finale : Niveau 4 seulement ou 3 && 4 ?
+	- Notes rapport ? (en cours rapport 3)
+
