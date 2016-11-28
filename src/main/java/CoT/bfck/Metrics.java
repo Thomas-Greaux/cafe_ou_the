@@ -12,12 +12,12 @@ public class Metrics {
     public static int DATA_READ = 0;
 
     public static void display() {
-        System.out.println("Metrics:");
-        System.out.println("\t PROG_SIZE: " + PROG_SIZE);
-        System.out.println("\t EXEC_TIME: " + EXEC_TIME);
-        System.out.println("\t EXEC_MOVE: " + EXEC_MOVE);
-        System.out.println("\t DATA_MOVE: " + DATA_MOVE);
-        System.out.println("\t DATA_WRITE: " + DATA_WRITE);
-        System.out.println("\t DATA_READ: " + DATA_READ);
+        System.out.println("\nMetrics:");
+        System.out.println("\t PROG_SIZE: \t" + PROG_SIZE);
+        System.out.println("\t EXEC_TIME: \t" + EXEC_TIME);
+        System.out.println("\t EXEC_MOVE: \t" + EXEC_MOVE);
+        System.out.println("\t DATA_MOVE: \t" + DATA_MOVE);
+        System.out.println("\t DATA_WRITE: \t" + DATA_WRITE);
+        System.out.println("\t DATA_READ: \t" + DATA_READ);
     }
 }

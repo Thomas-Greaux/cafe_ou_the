@@ -88,6 +88,7 @@ public class Controleur {
             commands.add(null); //ajout d'un element null pour gerer le cas ou le program fini par un ]
             execute(commands);
             mem.display();
+            Metrics.display();
         }
 	}
 
@@ -97,15 +98,16 @@ public class Controleur {
      * @throws Exception
      */
 	public void execute(ArrayList<Command> commands) throws Exception {
+        Metrics.PROG_SIZE = commands.size()-1; // -1 pour le null
         int compteur = 0;
 		int k;
         int n = commands.size();
-        for(int j = 0 ; j < n ; j++) //Boucle d'execution des commandes, on joue sur j pour gerer les boucles
+        for(int j = 0 ; j < n ; j++, Metrics.EXEC_MOVE++) //Boucle d'execution des commandes, on joue sur j pour gerer les boucles
 		{
             if (commands.get(j) != null) {
                 if (mem.getValue() == 0 && commands.get(j).getNameShort().equals("[")) {
                     compteur++;
-                    for (k = j + 1; compteur > 0; k++) {
+                    for (k = j + 1; compteur > 0; k++, Metrics.EXEC_MOVE++) {
                         if (commands.get(k).getNameShort().equals("[")) compteur++;
                         if (commands.get(k).getNameShort().equals("]")) compteur--;
                     }
@@ -114,7 +116,7 @@ public class Controleur {
 
                 if (mem.getValue() != 0 && commands.get(j).getNameShort().equals("]")) {
                     compteur++;
-                    for (k = j - 1; compteur > 0; k--) {
+                    for (k = j - 1; compteur > 0; k--, Metrics.EXEC_MOVE++) {
                         if (commands.get(k).getNameShort().equals("[")) compteur--;
                         if (commands.get(k).getNameShort().equals("]")) compteur++;
                     }

@@ -1,6 +1,7 @@
 package CoT.bfck.Command;
 
 import CoT.bfck.Memory;
+import CoT.bfck.Metrics;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ public class Out implements Command {
         public String nameShort = new String(".");
 
         public void execute(Memory m) throws Exception {
+            Metrics.DATA_READ++;
             m.out();
         }
 
