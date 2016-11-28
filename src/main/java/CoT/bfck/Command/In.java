@@ -17,7 +17,6 @@ public class In implements Command {
     public String nameShort = new String(",");
 
     public void execute(Memory m) throws Exception {
-        Metrics.DATA_WRITE++;
         m.in();
     }
 

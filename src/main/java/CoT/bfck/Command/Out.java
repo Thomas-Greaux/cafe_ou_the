@@ -18,7 +18,6 @@ public class Out implements Command {
         public String nameShort = new String(".");
 
         public void execute(Memory m) throws Exception {
-            Metrics.DATA_READ++;
             m.out();
         }
 

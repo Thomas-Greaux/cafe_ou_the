@@ -141,6 +141,7 @@ public class Memory {
 	}
 
 	public int getValue(){
+        Metrics.DATA_READ++;
 		return memory[index]+128;
 	}
 
