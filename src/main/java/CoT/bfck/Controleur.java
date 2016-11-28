@@ -107,20 +107,20 @@ public class Controleur {
             if (commands.get(j) != null) {
                 if (mem.getValue() == 0 && commands.get(j).getNameShort().equals("[")) {
                     compteur++;
-                    for (k = j + 1; compteur > 0; k++, Metrics.EXEC_MOVE++) {
-                        if (commands.get(k).getNameShort().equals("[")) compteur++;
-                        if (commands.get(k).getNameShort().equals("]")) compteur--;
+                    for (j++; compteur > 0; j++, Metrics.EXEC_MOVE++) {
+                        if (commands.get(j).getNameShort().equals("[")) compteur++;
+                        if (commands.get(j).getNameShort().equals("]")) compteur--;
                     }
-                    j = k + 1;
+                    j++;
                 }
 
                 if (mem.getValue() != 0 && commands.get(j).getNameShort().equals("]")) {
                     compteur++;
-                    for (k = j - 1; compteur > 0; k--, Metrics.EXEC_MOVE++) {
-                        if (commands.get(k).getNameShort().equals("[")) compteur--;
-                        if (commands.get(k).getNameShort().equals("]")) compteur++;
+                    for (j--; compteur > 0; j--, Metrics.EXEC_MOVE++) {
+                        if (commands.get(j).getNameShort().equals("[")) compteur--;
+                        if (commands.get(j).getNameShort().equals("]")) compteur++;
                     }
-                    j = k + 1;
+                    j++;
                 }
 
                 else {
