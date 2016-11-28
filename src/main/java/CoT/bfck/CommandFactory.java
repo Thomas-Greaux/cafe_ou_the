@@ -2,6 +2,7 @@ package CoT.bfck;
 
 import CoT.bfck.Command.*;
 import CoT.bfck.Exception.NotACommandException;
+import CoT.bfck.Macro.Macro;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ public class CommandFactory {
 	Back b = new Back();
 	In in = new In();
 	Out out = new Out();
+	ArrayList<Macro> m = new ArrayList<Macro>();
 
 	/**
 	 * Used to make connection between the string given in.bf parameter and
@@ -60,9 +62,20 @@ public class CommandFactory {
 		for(String p : properties)
 			if(p.equals(command)){return out;}
 
+		for(Macro macro : m){
+			if(macro.getName().equals(command)){
+				return macro;
+			}
+		}
+
+
 		if(command.equals("000000")) //Plus de problèmes au niveau de l'indentation et pixels noirs
 			return null;
 
 		throw new NotACommandException("Une des commandes choisies n'existe pas.");
+	}
+
+	public void addMacro(Macro macro) {
+		m.add(macro);
 	}
 }

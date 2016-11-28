@@ -3,6 +3,7 @@ package CoT.bfck.Reader;
 import CoT.bfck.Command.Command;
 import CoT.bfck.CommandFactory;
 import CoT.bfck.Exception.NotACommandException;
+import CoT.bfck.Macro.Macro;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -40,6 +41,10 @@ public class Reader {
 	public ArrayList<Command> read(String line) throws Exception {
 		ArrayList<Command> list = new ArrayList<Command>();
 		for(int i=0;i<line.length();i++){
+			if(line.charAt(i) == '/'){
+				cf.addMacro(createMacro(line, i+1));
+				break;
+			}
 			if(line.charAt(i)=='#' || line.charAt(i)=='\n'){
 				break;
 			}else if(isChar(line) || isHexaColor(line)){
@@ -56,7 +61,7 @@ public class Reader {
 	
 	public boolean isChar(String l){
 		for(int i=0;i<l.length();i++){
-			if(!(l.codePointAt(i)>=65 && l.codePointAt(i)<=90)){
+			if(!(l.codePointAt(i)>=65 && l.codePointAt(i)<=95)){
 				return false;
 			}
 		}
@@ -75,5 +80,14 @@ public class Reader {
 			return true;
 		else
 			return false;
+	}
+
+	public Macro createMacro(String line , int i) throws Exception {
+		String name = "";
+		while(line.charAt(i) != 32){
+			name += line.charAt(i);
+			i++;
+		}
+		return new Macro(name, read(line.substring(i)));
 	}
 }
