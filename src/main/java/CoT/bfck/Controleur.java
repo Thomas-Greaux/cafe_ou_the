@@ -85,8 +85,15 @@ public class Controleur {
         }
 
         if(option_check == -1 && option_translate == -1 && option_rewrite == -1){
+            Metrics.PROG_SIZE = commands.size();
             commands.add(null); //ajout d'un element null pour gerer le cas ou le program fini par un ]
+
+            long start = System.currentTimeMillis();
             execute(commands);
+            long finish = System.currentTimeMillis();
+
+            Metrics.EXEC_TIME = finish - start;
+
             mem.display();
             Metrics.display();
         }
@@ -98,7 +105,6 @@ public class Controleur {
      * @throws Exception
      */
 	public void execute(ArrayList<Command> commands) throws Exception {
-        Metrics.PROG_SIZE = commands.size()-1; // -1 pour le null
         int compteur = 0;
 		int k;
         int n = commands.size();
