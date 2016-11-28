@@ -111,7 +111,7 @@ public class Controleur {
         for(int j = 0 ; j < n ; j++, Metrics.EXEC_MOVE++) //Boucle d'execution des commandes, on joue sur j pour gerer les boucles
 		{
             if (commands.get(j) != null) {
-                if (mem.getValue() == 0 && commands.get(j).getNameShort().equals("[")) {
+                if (commands.get(j).getNameShort().equals("[") && mem.getValue() == 0) {
                     compteur++;
                     for (j++; compteur > 0; j++, Metrics.EXEC_MOVE++) {
                         if (commands.get(j).getNameShort().equals("[")) compteur++;
@@ -120,7 +120,7 @@ public class Controleur {
                     j++;
                 }
 
-                if (mem.getValue() != 0 && commands.get(j).getNameShort().equals("]")) {
+                if (commands.get(j).getNameShort().equals("]") && mem.getValue() != 0) {
                     compteur++;
                     for (j--; compteur > 0; j--, Metrics.EXEC_MOVE++) {
                         if (commands.get(j).getNameShort().equals("[")) compteur--;
