@@ -68,7 +68,7 @@ public class IOStream {
                 value = (byte) Integer.parseInt(i);
             else
                 value = (byte) i.charAt(0);
-            
+
             return (byte) (value-128);
         }
         else{
