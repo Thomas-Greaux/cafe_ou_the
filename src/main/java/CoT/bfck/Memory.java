@@ -105,7 +105,7 @@ public class Memory {
 		System.out.println();
 		for (int i = 0; i < 30000; i++) {
 			if (memory[i] != -128)
-				System.out.println("C" + i + ": " + (memory[i]+128));
+				System.out.println("C" + i + ": " + (memory[i]+128) + " ");
 		}
 	}
 
@@ -113,7 +113,7 @@ public class Memory {
         String result = "";
         for (int i = 0; i < 30000; i++) {
             if (memory[i] != -128)
-                result += "C" + i + ": " + (memory[i]+128);
+                result += "C" + i + ": " + (memory[i]+128) + " ";
         }
         return result;
     }

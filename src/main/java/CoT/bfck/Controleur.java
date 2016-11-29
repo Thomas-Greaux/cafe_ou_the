@@ -68,7 +68,10 @@ public class Controleur {
             }
 
             else if(option_trace != -1){
-                fw = new FileWriter(new File("files/Output/p.log"));
+                String[] f = file.split("/");
+                String myFile = f[f.length-1];
+                myFile = myFile.split("\\.")[0];
+                fw = new FileWriter(new File("files/Output/" + myFile + ".log"));
             }
 
             if (option_in != -1) {
