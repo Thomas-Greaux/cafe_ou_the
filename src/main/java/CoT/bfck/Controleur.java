@@ -88,7 +88,6 @@ public class Controleur {
         if(option_interpret == 0){
             OpOption.check(commands); //On check toujours le programme
 
-
             Metrics.PROG_SIZE = commands.size();
 
             jumpTable = new JumpTable(commands); //Table contenant les liaison entre jump et back
