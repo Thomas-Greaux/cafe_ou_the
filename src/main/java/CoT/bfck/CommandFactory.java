@@ -76,6 +76,22 @@ public class CommandFactory {
 	}
 
 	public void createMacro(String n, ArrayList<Command> cmd) {
-		m.add(new Macro(n,cmd));
+		Macro A = new Macro(n,cmd);
+		if(!isMacro(n))
+			m.add(A);
+	}
+
+	public boolean isMacro(String n ){
+		for(Macro s : m){
+			if(s.getName().equals(n)) return true;
+		}
+		return false;
+	}
+
+	public Macro getMacro(String n){
+		for(Macro s : m){
+			if(s.getName().equals(n)) return s;
+		}
+		return null;
 	}
 }
