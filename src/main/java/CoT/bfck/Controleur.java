@@ -1,16 +1,13 @@
 package CoT.bfck;
 
 import CoT.bfck.Command.Command;
-import CoT.bfck.Command.Jump;
 import CoT.bfck.Reader.CreateImage;
 import CoT.bfck.Reader.ReadFile;
 import CoT.bfck.Reader.ReadImage;
-import com.sun.org.apache.xpath.internal.SourceTree;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The controleur read the file given in the command line.
@@ -23,7 +20,6 @@ public class Controleur {
     private ArrayList<Command> commands = new ArrayList<Command>();
     private String file;
     private String file_ext;
-    private String rewrite;
     private String in;
     private String out;
     private FileWriter fw;
@@ -38,15 +34,14 @@ public class Controleur {
     private int option_in = -1;
     private int option_out = -1;
     private int option_trace = -1;
+    private int option_metrics = -1;
+    private int option_interpret = 0;
 
     /**
      * Normal constructor for the Controleur
      *
      * @param args commandes written by the user
      */
-
-    private int option_metrics = -1;
-    private int option_interpret = 0;
 
     public Controleur(String[] args) {
         for (int i = 0; i < args.length; i++) { //Boucle d'initialisation des options
@@ -90,7 +85,7 @@ public class Controleur {
         }                                                //
 
         if (option_translate != -1) {
-            rewrite = OpOption.rewrite(commands);
+            String rewrite = OpOption.rewrite(commands);
             new CreateImage().create_Image(rewrite);
         }
         if (option_rewrite != -1) OpOption.print(commands);
@@ -136,7 +131,6 @@ public class Controleur {
      */
     public void execute(ArrayList<Command> commands) throws Exception {
         int compteur = 0;
-        int k;
         int n = commands.size();
         for (int j = 0; j < n; j++, Metrics.EXEC_MOVE++) //Boucle d'execution des commandes, on joue sur j pour gerer les boucles
         {

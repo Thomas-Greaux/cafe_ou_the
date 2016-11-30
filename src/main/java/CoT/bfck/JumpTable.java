@@ -7,12 +7,9 @@ import java.util.ArrayList;
 /**
  * Created by Thoma on 11/30/2016.
  */
+
 public class JumpTable {
     private ArrayList<Integer[]> table;
-
-    public JumpTable() {
-        table = new ArrayList<Integer[]>();
-    }
 
     public JumpTable(ArrayList<Command> commands){
         table = new ArrayList<Integer[]>();
@@ -43,11 +40,9 @@ public class JumpTable {
 
     public int getComp(int x){
         int n = table.size();
-        Integer couple[] = new Integer[2];
-        for(int i = 0; i < n; i++){
-            couple = table.get(i);
-            if(couple[0] == x) return couple[1];
-            else if(couple[1] == x) return couple[0];
+        for (Integer[] couple : table) {
+            if (couple[0] == x) return couple[1];
+            else if (couple[1] == x) return couple[0];
         }
         return -1;
     }

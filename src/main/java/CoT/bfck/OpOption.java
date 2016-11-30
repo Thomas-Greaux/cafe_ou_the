@@ -17,9 +17,8 @@ public class OpOption {
      */
     public static String rewrite(ArrayList<Command> commands) {
         StringBuilder res = new StringBuilder();
-        int n = commands.size();
-        for (int i = 0; i < n; i++) {
-            if(commands.get(i) != null)  res.append(commands.get(i).getNameShort());
+        for (Command command : commands) {
+            if (command != null) res.append(command.getNameShort());
         }
         return res.toString();
     }
@@ -29,9 +28,8 @@ public class OpOption {
      * @param commands ArrayList of comamnds to print
      */
     public static void print(ArrayList<Command> commands) {
-        int n = commands.size();
-        for (int i = 0; i < n; i++) {
-            if(commands.get(i) != null) System.out.print(commands.get(i).getNameShort());
+        for (Command command : commands) {
+            if (command != null) System.out.print(command.getNameShort());
         }
         System.out.print("\n");
     }
@@ -41,13 +39,12 @@ public class OpOption {
      * @param commands ArrayList of commands to print
      */
     public static void check(ArrayList<Command> commands) {
-        int n = commands.size();
         int compteur = 0;
-        for(int i = 0; i < n; i++) {
-            if (commands.get(i).getNameShort().equals("[")) compteur++;
-            else if (commands.get(i).getNameShort().equals("]")) compteur--;
+        for (Command command : commands) {
+            if (command.getNameShort().equals("[")) compteur++;
+            else if (command.getNameShort().equals("]")) compteur--;
 
-            if(compteur < 0) System.exit(4);
+            if (compteur < 0) System.exit(4);
         }
 
         if(compteur > 0) System.exit(4);

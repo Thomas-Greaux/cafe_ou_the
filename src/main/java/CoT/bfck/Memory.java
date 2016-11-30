@@ -14,8 +14,6 @@ public class Memory {
 	private byte[] memory;
 	// the current index (= position in.bf the table)
 	private int index;
-	private String in_file;
-	private String out_file;
 
 	private IOStream io_stream = new IOStream();
 
@@ -28,8 +26,6 @@ public class Memory {
 			memory[i] = -128;
 		}
 		index = 0;
-		in_file = "";
-		out_file = "";
 	}
 
 	/**

@@ -16,8 +16,8 @@ public class IOStream {
     private boolean default_out = true;
 
     //On evitede creer 36,000 reader et writer
-    PrintWriter writer = null;
-    BufferedReader reader = null;
+    private PrintWriter writer = null;
+    private BufferedReader reader = null;
 
     public void setIn(String filename){
         in_file = filename;
