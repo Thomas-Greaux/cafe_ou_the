@@ -15,6 +15,7 @@ import static org.junit.Assert.*;
 public class ControleurTest {
     Controleur c;
     CommandFactory cf;
+    OpOption op;
 
     @Before
     public void setUp(){
@@ -34,14 +35,14 @@ public class ControleurTest {
         commands.add(cf.getCommand("BACK"));
         commands.add(cf.getCommand("IN"));
         commands.add(cf.getCommand("OUT"));
-        assertEquals(c.rewrite(commands), "+-><[],.");
+        assertEquals(op.rewrite(commands), "+-><[],.");
     }
 
     @Test
     public void getFileExtTest() {
-        assertEquals(c.getFileExt("toto.java"), ".java");
-        assertEquals(c.getFileExt("toto.bmp"), ".bmp");
-        assertEquals(c.getFileExt("toto"), "");
-        assertNotEquals(c.getFileExt("toto.java"), "java");
+        assertEquals(op.getFileExt("toto.java"), ".java");
+        assertEquals(op.getFileExt("toto.bmp"), ".bmp");
+        assertEquals(op.getFileExt("toto"), "");
+        assertNotEquals(op.getFileExt("toto.java"), "java");
     }
 }
