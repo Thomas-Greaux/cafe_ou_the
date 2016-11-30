@@ -44,5 +44,9 @@ public class ControleurTest {
         assertEquals(op.getFileExt("toto.bmp"), ".bmp");
         assertEquals(op.getFileExt("toto"), "");
         assertNotEquals(op.getFileExt("toto.java"), "java");
+        assertEquals(OpOption.getFileExt("toto.java"), ".java");
+        assertEquals(OpOption.getFileExt("toto.bmp"), ".bmp");
+        assertEquals(OpOption.getFileExt("toto"), "");
+        assertNotEquals(OpOption.getFileExt("toto.java"), "java");
     }
 }
