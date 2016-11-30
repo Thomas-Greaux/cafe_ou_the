@@ -1,6 +1,7 @@
 package CoT.bfck;
 
 import CoT.bfck.Command.Command;
+import CoT.bfck.Command.Jump;
 import CoT.bfck.Reader.CreateImage;
 import CoT.bfck.Reader.ReadFile;
 import CoT.bfck.Reader.ReadImage;
@@ -43,7 +44,7 @@ public class Controleur {
             else if (args[i].equals("--trace")) option_trace = i;
         }
 		file = args[option_p + 1];
-        file_ext = getFileExt(file);
+        file_ext = OpOption.getFileExt(file);
 	}
 
 	/**
@@ -56,15 +57,15 @@ public class Controleur {
             commands = new ReadFile().readFile(file);
 
             if(option_translate != -1) {
-                rewrite = rewrite(commands);
+                rewrite = OpOption.rewrite(commands);
                 new CreateImage().create_Image(rewrite);
             }
             else if (option_rewrite != -1) {
-                print(commands);
+                OpOption.print(commands);
             }
 
             else if (option_check != -1) {
-                check(commands);
+                OpOption.check(commands);
             }
 
             else if(option_trace != -1){
@@ -89,6 +90,8 @@ public class Controleur {
 
         if(option_check == -1 && option_translate == -1 && option_rewrite == -1){
             Metrics.PROG_SIZE = commands.size();
+            JumpTable jumpTable = new JumpTable(commands);
+            jumpTable.print();
             commands.add(null); //ajout d'un element null pour gerer le cas ou le program fini par un ]
 
             long start = System.currentTimeMillis();
@@ -148,49 +151,5 @@ public class Controleur {
 		mem.close_stream();
 		if(option_trace!=-1)
 		    fw.close();
-	}
-
-    public String rewrite(ArrayList<Command> commands) {
-        StringBuilder res = new StringBuilder();
-        int n = commands.size();
-        for (int i = 0; i < n; i++) {
-            if(commands.get(i) != null)  res.append(commands.get(i).getNameShort());
-        }
-        return res.toString();
-    }
-
-	public void print(ArrayList<Command> commands) {
-        int n = commands.size();
-        for (int i = 0; i < n; i++) {
-            if(commands.get(i) != null) System.out.print(commands.get(i).getNameShort());
-        }
-        System.out.print("\n");
-    }
-
-    public void check(ArrayList<Command> commands) {
-        int n = commands.size();
-        int compteur = 0;
-        for(int i = 0; i < n; i++) {
-            if (commands.get(i).getNameShort().equals("[")) compteur++;
-            else if (commands.get(i).getNameShort().equals("]")) compteur--;
-
-            if(compteur < 0) System.exit(4);
-        }
-
-        if(compteur > 0) System.exit(4);
-    }
-
-	/**
-	 *
-	 * @param filename
-	 * @return the extension of the file to read
-	 */
-	public static String getFileExt(String filename) {
-        int pos = filename.lastIndexOf(".");
-		if (pos > -1) {
-			return filename.substring(pos);
-		} else {
-			return "";
-		}
 	}
 }
