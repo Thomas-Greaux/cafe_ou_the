@@ -65,7 +65,7 @@ public class IOStream {
             byte value;
 
             if(i.length()>1)
-                value = (byte) Integer.parseInt(i);
+                value = (byte) Integer.parseInt(i);//SYSOUT ????
             else
                 value = (byte) i.charAt(0);
 

@@ -23,7 +23,6 @@ public class Memory {
 	/**
 	 * Create the memory : initializing the table and index
 	 */
-
 	public Memory() {
 		memory = new byte[30000];
 		for (int i = 0; i < 30000; i++) {
@@ -37,7 +36,6 @@ public class Memory {
 	/**
 	 * Increment the value of the byte at the current position.
 	 */
-
 	public void incr() throws Exception {
 		if (memory[index] + 129 > 255 ) {
 			System.out.println("Out of capacity");
@@ -49,7 +47,6 @@ public class Memory {
 	/**
 	 * Decrement the value of the byte at the current position.
 	 */
-
 	public void decr() throws Exception {
 		if (memory[index] + 127 < 0) {
 			System.out.println("Out of capacity");
@@ -62,7 +59,6 @@ public class Memory {
 	/**
 	 * Move the position to the right : increment the index.
 	 */
-
 	public void right() throws Exception {
 		if (this.index < 30000)
 			this.index++;
@@ -75,7 +71,6 @@ public class Memory {
 	/**
 	 * Move the position to the left : decrement the index.
 	 */
-
 	public void left() throws Exception {
 		if (this.index > 0 )
 			this.index--;
@@ -89,7 +84,6 @@ public class Memory {
 	/**
 	 * If a file is given in.bf argument, print the actual value in.bf it. If not, print it in.bf the terminal.
 	 */
-
 	public void out(){
 		io_stream.out( (byte) (memory[index]-128));
 	}
@@ -132,20 +126,35 @@ public class Memory {
 
 	}
 
+	/**
+	 * Modify the value of the String inFile to correspond with the name of the file we want to read in
+	 * @param filename name of the file
+	 */
 	public void setIn(String filename){
 		io_stream.setIn(filename);
 	}
 
+	/**
+	 * Modify the value of the String outFile to correspond with the name of the file we want to write in
+	 * @param filename name of the file
+	 */
 	public void setOut(String filename){
 		io_stream.setOut(filename);
 	}
 
+	/**
+	 * Retorn the value of the memory at the pointer value
+	 * @return
+	 */
 	public int getValue(){
         Metrics.DATA_READ++;
 		return memory[index]+128;
 	}
 
+	/**
+	 * Close the io_stream
+	 */
 	public void close_stream(){
-        io_stream.close();
+		io_stream.close();
     }
 }

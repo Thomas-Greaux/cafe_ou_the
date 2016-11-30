@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import static org.junit.Assert.*;
 
 /**
- * Created by fabien on 24/11/16.
+ * Created by cafe_ou_the on 24/11/16.
  */
 public class ControleurTest {
     Controleur c;

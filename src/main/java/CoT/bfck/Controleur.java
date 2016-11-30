@@ -11,6 +11,9 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Controleur :
+ */
 public class Controleur {
 
 	private Memory mem = new Memory();
@@ -31,7 +34,11 @@ public class Controleur {
     private int option_in = -1;
     private int option_out = -1;
     private int option_trace = -1;
-	
+
+    /**
+     * Normal constructor for the Controleur
+     * @param args commandes written by the user
+     */
 	public Controleur(String[] args){
 		for(int i = 0; i < args.length; i++) { //Boucle d'initialisation des options
             if(args[i].equals("-p")) option_p = i;
@@ -103,8 +110,8 @@ public class Controleur {
 	}
 
     /**
-     * Execute les commandes, gere les [ ]
-     * @param commands
+     * Execute the commands
+     * @param commands ArrayList of the commands we want to execute
      * @throws Exception
      */
 	public void execute(ArrayList<Command> commands) throws Exception {
@@ -150,6 +157,11 @@ public class Controleur {
 		    fw.close();
 	}
 
+    /**
+     * This method is used to print in a String
+     * @param commands ArrayList of commmands to print
+     * @return String containing the commands in the shortened syntax
+     */
     public String rewrite(ArrayList<Command> commands) {
         StringBuilder res = new StringBuilder();
         int n = commands.size();
@@ -159,6 +171,10 @@ public class Controleur {
         return res.toString();
     }
 
+    /**
+     * This method is used to print in the stdout the instruction in the shortened syntax
+     * @param commands ArrayList of comamnds to print
+     */
 	public void print(ArrayList<Command> commands) {
         int n = commands.size();
         for (int i = 0; i < n; i++) {
@@ -167,6 +183,10 @@ public class Controleur {
         System.out.print("\n");
     }
 
+    /**
+     * This method verify if the file is well parenthesized
+     * @param commands ArrayList of commands to print
+     */
     public void check(ArrayList<Command> commands) {
         int n = commands.size();
         int compteur = 0;
@@ -181,9 +201,9 @@ public class Controleur {
     }
 
 	/**
-	 *
-	 * @param filename
-	 * @return the extension of the file to read
+     * Return the extension of a file
+	 * @param filename name of the file
+	 * @return the extension of the file
 	 */
 	public static String getFileExt(String filename) {
         int pos = filename.lastIndexOf(".");
