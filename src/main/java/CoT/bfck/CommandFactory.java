@@ -1,10 +1,9 @@
-﻿package CoT.bfck;
+package CoT.bfck;
 
 import CoT.bfck.Command.*;
 import CoT.bfck.Exception.NotACommandException;
 import CoT.bfck.Macro.Macro;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**

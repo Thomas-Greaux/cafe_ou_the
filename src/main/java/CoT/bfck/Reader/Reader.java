@@ -123,7 +123,7 @@ public class Reader {
 	 * @param i
 	 * @throws NotACommandException
 	 */
-	public void createMacro(String line) throws Exception{
+	public void createMacro(String line) throws NotACommandException{
 		String []s = line.split(" ");
 			if(cf.isMacro(s[1])) {
 				cf.createMacro(s[0],s[1]);

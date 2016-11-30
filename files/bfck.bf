@@ -1,1 +1,17 @@
-++-[[[-]][-]]>><>>
+/WESH1 ++
+/WESH2 3 ++
+/WESH3 3 4 +++++
+/WESH4 WESH1
+/WESH5 WESH2
+/WESH6 WESH3
+WESH1 3
+>
+WESH2 4
+>
+WESH3 5
+>
+WESH4 6
+>
+WESH5 7
+>
+WESH6 8

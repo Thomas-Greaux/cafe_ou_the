@@ -7,6 +7,7 @@ import CoT.bfck.Exception.OutOfCapacityException;
 import CoT.bfck.Memory;
 
 import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -37,7 +38,7 @@ public class Macro implements Command {
             }
         }
         if(param[1] > c.size()) {
-            System.out.println("Argument numéro 2 invalide");
+            System.out.println("Argument numï¿½ro 2 invalide");
             System.exit(1);
         }
     }
@@ -56,7 +57,7 @@ public class Macro implements Command {
         return cmd;
     }
 
-     public void execute(Memory m) throws Exception {
+     public void execute(Memory m) throws ImpossibleIndexException, OutOfCapacityException {
         int compteur = 0;
         for(int j = 0 ; j < nbExeTemp ; j ++) {
             for (int i = 0; i < param[0]; i++) {
@@ -88,5 +89,13 @@ public class Macro implements Command {
     }
 
     public String toString(){return "Macro";}
+
+    public int getNbExeTemp(){
+        return nbExeTemp;
+    }
+
+    public int getParam(int i){
+        return param[i];
+    }
 
 }
