@@ -70,13 +70,9 @@ public class Controleur {
             rewrite = OpOption.rewrite(commands);
             new CreateImage().create_Image(rewrite);
         }
-        if (option_rewrite != -1) {
-            OpOption.print(commands);
-        }
+        if (option_rewrite != -1) OpOption.print(commands);
 
-        if (option_check != -1) {
-            OpOption.check(commands);
-        }
+        if (option_check != -1) OpOption.check(commands);
 
         if(option_trace != -1){
             String[] f = file.split("/");
@@ -85,13 +81,9 @@ public class Controleur {
             fw = new FileWriter(new File("files/Output/" + myFile + ".log"));
         }
 
-        if (option_in != -1) {
-            mem.setIn(in);
-        }
+        if (option_in != -1) mem.setIn(in);
 
-        if (option_out != -1) {
-            mem.setOut(out);
-        }
+        if (option_out != -1) mem.setOut(out);
 
         if(option_interpret == 0){
             OpOption.check(commands); //On check toujours le programme
