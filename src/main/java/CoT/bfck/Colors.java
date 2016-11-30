@@ -4,16 +4,17 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 
 /**
- * Classe permettant de faire le lien entre des couleurs en hexadécimal et des couleurs RGB
+ * Class used to make a link between colors (RGB) and the hexa code of the same color.
+ * @author cafe_ou_the
  */
 public class Colors {
 
 	private CommandFactory cf = new CommandFactory();
 
 	/**
-	 * Renvoie la couleur correspondant à un String (contenant le code hexadécimal d'une couleur).
-	 * @param hexa valeur hexadécimale d'une couleur
-	 * @return Couleur crée en fonction du code RGB
+	 * Return the color corresponding to a String containing the hexadecimal code of a color.
+	 * @param hexa hexadecimal value of a color
+	 * @return Color created in function of the RGB of the color
 	 * @throws Exception
 	 */
 	public Color returnColor(String hexa) throws Exception{
@@ -26,7 +27,7 @@ public class Colors {
 	}
 
     /**
-     * Renvoie le code hexa d'un pixel d'une image.
+     * Return the hexa code of a pixel of a picture
      * @param img BufferedImage
      * @param x Pixel visé sur l'axe x
      * @param y Pixel visé sur l'axe y

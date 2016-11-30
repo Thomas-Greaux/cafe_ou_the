@@ -8,7 +8,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 /**
- * Created by user on 28/11/2016.
+ * @author cafe_ou_the
  */
 public class Macro implements Command {
 

@@ -13,7 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Controleur :
+ * The controleur read the file given in the command line.
+ * Send the differents lines of this file to the Reader.
+ * @author cafe_ou_the
  */
 public class Controleur {
 
@@ -119,10 +121,10 @@ public class Controleur {
      */
 	public void execute(ArrayList<Command> commands) throws Exception {
         int compteur = 0;
-		int k;
+        int k;
         int n = commands.size();
-        for(int j = 0 ; j < n ; j++, Metrics.EXEC_MOVE++) //Boucle d'execution des commandes, on joue sur j pour gerer les boucles
-		{
+        for (int j = 0; j < n; j++, Metrics.EXEC_MOVE++) //Boucle d'execution des commandes, on joue sur j pour gerer les boucles
+        {
             if (commands.get(j) != null) {
                 if (commands.get(j).getNameShort().equals("[") && mem.getValue() == 0) {
                     compteur++;
@@ -140,10 +142,8 @@ public class Controleur {
                         if (commands.get(j).getNameShort().equals("]")) compteur++;
                     }
                     j++;
-                }
-
-                else {
-                    if(option_trace!=-1){
+                } else {
+                    if (option_trace != -1) {
                         c++;
                         fw.write("Step n°" + c + "\n");
                         fw.write("Next command : " + commands.get(j).getName() + "\n");
@@ -154,66 +154,10 @@ public class Controleur {
                     commands.get(j).execute(mem);
                 }
             }
-		}
-		mem.close_stream();
-		if(option_trace!=-1)
-		    fw.close();
-	}
-
-    /**
-     * This method is used to print in a String
-     * @param commands ArrayList of commmands to print
-     * @return String containing the commands in the shortened syntax
-     */
-    public String rewrite(ArrayList<Command> commands) {
-        StringBuilder res = new StringBuilder();
-        int n = commands.size();
-        for (int i = 0; i < n; i++) {
-            if(commands.get(i) != null)  res.append(commands.get(i).getNameShort());
         }
-        return res.toString();
+        mem.close_stream();
+        if (option_trace != -1)
+            fw.close();
     }
 
-    /**
-     * This method is used to print in the stdout the instruction in the shortened syntax
-     * @param commands ArrayList of comamnds to print
-     */
-	public void print(ArrayList<Command> commands) {
-        int n = commands.size();
-        for (int i = 0; i < n; i++) {
-            if(commands.get(i) != null) System.out.print(commands.get(i).getNameShort());
-        }
-        System.out.print("\n");
-    }
-
-    /**
-     * This method verify if the file is well parenthesized
-     * @param commands ArrayList of commands to print
-     */
-    public void check(ArrayList<Command> commands) {
-        int n = commands.size();
-        int compteur = 0;
-        for(int i = 0; i < n; i++) {
-            if (commands.get(i).getNameShort().equals("[")) compteur++;
-            else if (commands.get(i).getNameShort().equals("]")) compteur--;
-
-            if(compteur < 0) System.exit(4);
-        }
-
-        if(compteur > 0) System.exit(4);
-    }
-
-	/**
-     * Return the extension of a file
-	 * @param filename name of the file
-	 * @return the extension of the file
-	 */
-	public static String getFileExt(String filename) {
-        int pos = filename.lastIndexOf(".");
-		if (pos > -1) {
-			return filename.substring(pos);
-		} else {
-			return "";
-		}
-	}
 }

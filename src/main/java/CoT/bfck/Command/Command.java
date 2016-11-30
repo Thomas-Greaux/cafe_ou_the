@@ -5,8 +5,10 @@ import CoT.bfck.Memory;
 import java.awt.Color;
 import java.util.ArrayList;
 
-/** The Command interface */
-
+/**
+ * The command interface
+ * @author cafe_ou_the
+ */
 public interface Command {
 
 	void execute(Memory m) throws Exception;
@@ -14,10 +16,4 @@ public interface Command {
 	String getNameShort();
 	Color getRGBColor();
 	String getName();
-	/*
-	Color getColorRGB();
-	String getColorHexa();
-	String getName();
-	String getNameShort();
-	*/
 }

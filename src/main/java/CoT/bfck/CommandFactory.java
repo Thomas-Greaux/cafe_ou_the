@@ -7,6 +7,10 @@ import CoT.bfck.Macro.Macro;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Command factory is used to make a relation between the commands and the readers.
+ * @author cafe_ou_the
+ */
 public class CommandFactory {
 	ArrayList<String> properties = new ArrayList<String>();
 	Increment i = new Increment();

@@ -1,7 +1,8 @@
 package CoT.bfck.Exception;
 
 /**
- * Created by fabien on 24/11/16.
+ * Exception raised if an instruction isn't a command
+ * @author cafe_ou_the
  */
 public class NotACommandException extends Exception {
     public NotACommandException(String message) {

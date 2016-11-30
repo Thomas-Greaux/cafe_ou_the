@@ -8,7 +8,10 @@ import CoT.bfck.Macro.Macro;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
+/**
+ * This class read the instructions given by the ReadFile and ReadImage.
+ * @author cafe_ou_the
+ */
 public class Reader {
 	
 	private CommandFactory cf;
@@ -28,7 +31,6 @@ public class Reader {
 		 * 		The bf code in.bf shorten representation.
 	 * @throws Exception 
      */
-
 	public String shortened(String s) throws Exception{
 		try{
 			return cf.getCommand(s).getNameShort();
@@ -37,7 +39,14 @@ public class Reader {
 			return null;
 		}
 	}
-	
+
+    /**
+     * Read is used to read the instructions given in a String.
+     * The instructions are given by both the ReadFile and the ReadImage
+      * @param line containing the instructions
+     * @return ArayList of Command (in the right syntax to be executed)
+     * @throws Exception
+     */
 	public ArrayList<Command> read(String line) throws Exception {
 		ArrayList<Command> list = new ArrayList<Command>();
 		for(int i=0;i<line.length();i++){
@@ -69,34 +78,50 @@ public class Reader {
 		return list;
 	}
 
+    /**
+     * Verify if a line is a macro
+     * @param line The curent line
+     * @return true if the line is a Macro, false otherwise
+     */
 	public boolean isMacro(String line){
 		return cf.isMacro(line);
 	}
-	
-	public boolean isChar(String l){
-		for(int i=0;i<l.length();i++){
-			if(!(l.codePointAt(i)>=65 && l.codePointAt(i)<=95)){
+
+    /**
+     * Verify if the line is full of character.
+     * @param line the current line
+     * @return true if every character is letter (a-z), false if it's a macro or it isn't full of minuscule letters
+     */
+	public boolean isChar(String line){
+		for(int i=0;i<line.length();i++){
+			if(!(line.codePointAt(i)>=65 && line.codePointAt(i)<=95)){
 				return false;
 			}
 		}
-		if(cf.isMacro(l)) return false;
+		if(cf.isMacro(line)) return false;
 		return true;
 	}
 
-	public boolean isHexaColor(String l) {
+    /**
+     * Verify if the line is a code of an hexadecimal color
+     * @param line the current line
+     * @return true if it is an hexadecimal color (6 letters min or maj and numbers), false otherwise
+     */
+	public boolean isHexaColor(String line) {
 		int letters = 0;
 		int numbers = 0;
-		for (int i = 0; i < l.length(); i++) {
-			if (l.codePointAt(i) >= 97 && l.codePointAt(i) <= 127) letters++;
-			else if (l.codePointAt(i) >= 65 && l.codePointAt(i) <= 90) letters++;
-			else if (l.codePointAt(i) >= 48 && l.codePointAt(i) <= 57) numbers++;
-			if(l.codePointAt(i) == 32) return false;
+		for (int i = 0; i < line.length(); i++) {
+			if (line.codePointAt(i) >= 97 && line.codePointAt(i) <= 127) letters++;
+			else if (line.codePointAt(i) >= 65 && line.codePointAt(i) <= 90) letters++;
+			else if (line.codePointAt(i) >= 48 && line.codePointAt(i) <= 57) numbers++;
+			if(line.codePointAt(i) == 32) return false;
 		}
 		if (numbers + letters == 6)
 			return true;
 		else
 			return false;
 	}
+
 
 	public void createMacro(String line , int i) throws Exception {
 		String name = "";

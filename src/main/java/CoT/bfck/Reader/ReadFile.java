@@ -18,7 +18,6 @@ import java.util.ArrayList;
  * 
  * @author cafe_ou_the
  */
-
 public class ReadFile extends Reader {
 
 	/**
@@ -26,7 +25,6 @@ public class ReadFile extends Reader {
      * @return all the commands stored on the file
 	 * @throws Exception 
 	 */
-
 	public ArrayList<Command> readFile(String file) throws Exception{
 		ArrayList<Command> commands = new ArrayList<Command>();
 		try {

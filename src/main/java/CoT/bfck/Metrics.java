@@ -1,7 +1,8 @@
 package CoT.bfck;
 
 /**
- * Created by Thoma on 11/28/2016.
+ * Class used to print the different metrics.
+ * @author cafe_ou_the
  */
 public class Metrics {
     public static int PROG_SIZE = 0;

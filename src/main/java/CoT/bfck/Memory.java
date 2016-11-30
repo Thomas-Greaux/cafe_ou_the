@@ -8,7 +8,6 @@ import java.util.Scanner;
  * 
  * @author cafe_ou_the
  */
-
 public class Memory {
 
 	// the table of cells
