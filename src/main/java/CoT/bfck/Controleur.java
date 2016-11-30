@@ -33,20 +33,24 @@ public class Controleur {
     private int option_in = -1;
     private int option_out = -1;
     private int option_trace = -1;
+    private int option_metrics = -1;
+    private int option_interpret = 0;
 	
 	public Controleur(String[] args){
 		for(int i = 0; i < args.length; i++) { //Boucle d'initialisation des options
             if(args[i].equals("-p")) option_p = i;
-            else if (args[i].equals("--rewrite")) option_rewrite = i;
-            else if (args[i].equals("--translate")) option_translate = i;
-            else if (args[i].equals("--check")) option_check = i;
+            else if (args[i].equals("--rewrite")) {option_rewrite = i; option_interpret = 1;}
+            else if (args[i].equals("--translate")) {option_translate = i; option_interpret = 1;}
+            else if (args[i].equals("--check")) {option_check = i; option_interpret = 1;}
             else if (args[i].equals("-i")){ option_in = i; in = args[option_in+1]; }
             else if (args[i].equals("-o")){ option_out = i; out = args[option_out+1]; }
             else if (args[i].equals("--trace")) option_trace = i;
+            else if (args[i].equals("--moff")) option_metrics = i;
         }
 		file = args[option_p + 1];
         file_ext = OpOption.getFileExt(file);
 	}
+
 
 	/**
 	 * Run the program then display the memory
@@ -54,45 +58,50 @@ public class Controleur {
 	 */
 	public void run() throws Exception {
 
+        //On remplie notre liste de commandes
+
         if(file_ext.equals(".bf")) {
             commands = new ReadFile().readFile(file);
-
-            if(option_translate != -1) {
-                rewrite = OpOption.rewrite(commands);
-                new CreateImage().create_Image(rewrite);
-            }
-            else if (option_rewrite != -1) {
-                OpOption.print(commands);
-            }
-
-            else if (option_check != -1) {
-                OpOption.check(commands);
-            }
-
-            else if(option_trace != -1){
-                String[] f = file.split("/");
-                String myFile = f[f.length-1];
-                myFile = myFile.split("\\.")[0];
-                fw = new FileWriter(new File("files/Output/" + myFile + ".log"));
-            }
-
-            if (option_in != -1) {
-                mem.setIn(in);
-            }
-
-            if (option_out != -1) {
-                mem.setOut(out);
-            }
-
         }
         else if(file_ext.equals(".bmp")) {
             commands = new ReadImage().readImage(file);
         }
 
-        if(option_check == -1 && option_translate == -1 && option_rewrite == -1){
+        if(option_translate != -1) {
+            rewrite = OpOption.rewrite(commands);
+            new CreateImage().create_Image(rewrite);
+        }
+        if (option_rewrite != -1) {
+            OpOption.print(commands);
+        }
+
+        if (option_check != -1) {
+            OpOption.check(commands);
+        }
+
+        if(option_trace != -1){
+            String[] f = file.split("/");
+            String myFile = f[f.length-1];
+            myFile = myFile.split("\\.")[0];
+            fw = new FileWriter(new File("files/Output/" + myFile + ".log"));
+        }
+
+        if (option_in != -1) {
+            mem.setIn(in);
+        }
+
+        if (option_out != -1) {
+            mem.setOut(out);
+        }
+
+        if(option_interpret == 0){
+            OpOption.check(commands); //On check toujours le programme
+
+
             Metrics.PROG_SIZE = commands.size();
-            jumpTable = new JumpTable(commands);
-            jumpTable.print();
+
+            jumpTable = new JumpTable(commands); //Table contenant les liaison entre jump et back
+
             commands.add(null); //ajout d'un element null pour gerer le cas ou le program fini par un ]
 
             long start = System.currentTimeMillis();
@@ -102,7 +111,7 @@ public class Controleur {
             Metrics.EXEC_TIME = finish - start;
 
             mem.display();
-            Metrics.display();
+            if(option_metrics == -1) Metrics.display(); //On n'affiche pas les metrics seulement si l'option est entree
         }
 	}
 
