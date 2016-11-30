@@ -6,7 +6,6 @@ import CoT.bfck.Exception.ImpossibleIndexException;
 import CoT.bfck.Exception.OutOfCapacityException;
 import CoT.bfck.Memory;
 
-import javax.crypto.Mac;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -18,10 +17,6 @@ public class Macro implements Command {
     private String name;
     private ArrayList<Command> cmd = new ArrayList<Command>();
     private int nbExeTemp = 1;
-
-    public Macro(String n){
-        name = n;
-    }
 
     public Macro(String n, ArrayList<Command> c){
         name = n;

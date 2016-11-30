@@ -12,16 +12,16 @@ import java.util.ArrayList;
  * @author cafe_ou_the
  */
 public class CommandFactory {
-	ArrayList<String> properties = new ArrayList<String>();
-	Increment i = new Increment();
-	Decrement d = new Decrement();
-	Left l = new Left();
-	Right r = new Right();
-	Jump j = new Jump();
-	Back b = new Back();
-	In in = new In();
-	Out out = new Out();
-	ArrayList<Macro> m = new ArrayList<Macro>();
+	private ArrayList<String> properties = new ArrayList<String>();
+	private Increment i = new Increment();
+	private Decrement d = new Decrement();
+	private Left l = new Left();
+	private Right r = new Right();
+	private Jump j = new Jump();
+	private Back b = new Back();
+	private In in = new In();
+	private Out out = new Out();
+	private ArrayList<Macro> m = new ArrayList<Macro>();
 
 	/**
 	 * Used to make connection between the string given in.bf parameter and

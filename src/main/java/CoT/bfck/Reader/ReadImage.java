@@ -47,34 +47,4 @@ public class ReadImage extends Reader {
 		return list;
 	}
 
-	/**
-	 * 
-	 * Create the image with the instructions given in.bf the file.
-	 * 
-	 * @param file
-	 * @throws Exception 
-	 */
-	public void translateImage(String file) throws Exception {
-		try {
-			InputStream ips = new FileInputStream(new File(file));
-			InputStreamReader ipsr = new InputStreamReader(ips);
-			BufferedReader br = new BufferedReader(ipsr);
-			String ligne;
-			String res = "";
-
-			while ((ligne = br.readLine()) != null) {
-				if(shortened(ligne) == null){
-					res = "  ";
-					break;
-				}
-				res += shortened(ligne);
-			}
-			new CreateImage().create_Image(res);
-			br.close();
-		} catch (FileNotFoundException e) {
-			System.out.println("File doesn't exist");
-			System.exit(1);
-		}
-	}
-
 }
