@@ -1,7 +1,8 @@
 package CoT.bfck.Exception;
 
 /**
- * Created by fabien on 24/11/16.
+ * Exception raised if a file is not found.
+ * @author cafe_ou_the
  */
 public class FileNotFoundException extends Exception {
     public FileNotFoundException(String message) {

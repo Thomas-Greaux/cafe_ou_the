@@ -10,11 +10,12 @@ import java.util.ArrayList;
 import static org.junit.Assert.*;
 
 /**
- * Created by fabien on 24/11/16.
+ * Created by cafe_ou_the on 24/11/16.
  */
 public class ControleurTest {
     Controleur c;
     CommandFactory cf;
+    OpOption op;
 
     @Before
     public void setUp(){
@@ -34,11 +35,15 @@ public class ControleurTest {
         commands.add(cf.getCommand("BACK"));
         commands.add(cf.getCommand("IN"));
         commands.add(cf.getCommand("OUT"));
-        assertEquals(OpOption.rewrite(commands), "+-><[],.");
+        assertEquals(op.rewrite(commands), "+-><[],.");
     }
 
     @Test
     public void getFileExtTest() {
+        assertEquals(op.getFileExt("toto.java"), ".java");
+        assertEquals(op.getFileExt("toto.bmp"), ".bmp");
+        assertEquals(op.getFileExt("toto"), "");
+        assertNotEquals(op.getFileExt("toto.java"), "java");
         assertEquals(OpOption.getFileExt("toto.java"), ".java");
         assertEquals(OpOption.getFileExt("toto.bmp"), ".bmp");
         assertEquals(OpOption.getFileExt("toto"), "");

@@ -14,6 +14,11 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
+/**
+ * Reader used when the controller find out a .BMP file.
+ * Call the reader with the hexa code of each picture zone.
+ * @author cafe_ou_the
+ */
 public class ReadImage extends Reader {
 
 	/**
@@ -24,7 +29,6 @@ public class ReadImage extends Reader {
 	 * @return all the commands stored in.bf the file
 	 * 
 	 */
-
 	public ArrayList<Command> readImage(String file) throws Exception {
 		ArrayList<Command> list = new ArrayList<Command>();
 		try {
@@ -54,7 +58,6 @@ public class ReadImage extends Reader {
 	 * @param file
 	 * @throws Exception 
 	 */
-
 	public void translateImage(String file) throws Exception {
 		try {
 			InputStream ips = new FileInputStream(new File(file));

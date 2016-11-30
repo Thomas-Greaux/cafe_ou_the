@@ -9,8 +9,17 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+/**
+ * Class used to create an image
+ * @author cafe_ou_the
+ */
 public class CreateImage {
-	
+
+    /**
+     * Method used to create an image, with a String containing all the commands in the shortened syntax
+     * @param shortened the shortened version of the commands
+     * @throws Exception
+     */
 	public void create_Image(String shortened) throws Exception{
 		int i = 1;
 		int j;
