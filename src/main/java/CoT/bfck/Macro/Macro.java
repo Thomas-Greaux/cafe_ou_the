@@ -14,7 +14,7 @@ public class Macro implements Command {
 
     private String name;
     private ArrayList<Command> cmd = new ArrayList<Command>();
-    private int nbExe;
+    private int nbExeTemp = 1;
 
     public Macro(String n){
         name = n;
@@ -33,18 +33,19 @@ public class Macro implements Command {
         cmd.add(c);
     }
 
-    public void setNbExe(int n){nbExe = n;}
+    public void setNbExe(int n){nbExeTemp = n;}
 
     public ArrayList<Command> getCommand(){
         return cmd;
     }
 
     public void execute(Memory m) throws Exception {
-        for(int i = 0 ; i < nbExe ; i++) {
+        for(int i = 0 ; i < nbExeTemp ; i++) {
             for (Command c : cmd) {
                 c.execute(m);
             }
         }
+        nbExeTemp = 1;
     }
 
     public ArrayList<String> getProperties() {

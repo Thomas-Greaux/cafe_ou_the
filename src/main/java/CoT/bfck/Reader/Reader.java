@@ -55,7 +55,9 @@ public class Reader {
 			}else{
 				String []s = line.split(" ");
 				if(isMacro(s[0])){
-					cf.getMacro(s[0]).setNbExe(Integer.parseInt(s[1]));
+					if(s.length == 2) {
+						cf.getMacro(s[0]).setNbExe(Integer.parseInt(s[1]));
+					}
 					list.add(cf.getCommand(s[0]));
 					break;
 				}
@@ -102,6 +104,7 @@ public class Reader {
 			name += line.charAt(i);
 			i++;
 		}
-		cf.createMacro(name,read(line.substring(i)));
+		System.out.println(line.substring(i+1));
+		cf.createMacro(name,read(line.substring(i+1)));
 	}
 }
