@@ -58,14 +58,13 @@ public class Controleur {
 	 */
 	public void run() throws Exception {
 
-        //On remplie notre liste de commandes
-
-        if(file_ext.equals(".bf")) {
-            commands = new ReadFile().readFile(file);
-        }
-        else if(file_ext.equals(".bmp")) {
-            commands = new ReadImage().readImage(file);
-        }
+                                                         //On remplie notre liste de commandes
+        if(file_ext.equals(".bf")) {                     //En fonction du type de fichier
+            commands = new ReadFile().readFile(file);    //
+        }                                                //
+        else if(file_ext.equals(".bmp")) {               //
+            commands = new ReadImage().readImage(file);  //
+        }                                                //
 
         if(option_translate != -1) {
             rewrite = OpOption.rewrite(commands);
