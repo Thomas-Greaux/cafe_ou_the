@@ -1,4 +1,4 @@
-package CoT.bfck;
+﻿package CoT.bfck;
 
 import CoT.bfck.Command.*;
 import CoT.bfck.Exception.NotACommandException;
@@ -79,9 +79,15 @@ public class CommandFactory {
 		throw new NotACommandException();
 	}
 
-	public void createMacro(String n, ArrayList<Command> cmd) {
-		Macro A = new Macro(n,cmd);
-		if(!isMacro(n))
+	public void createMacro(String[] s, ArrayList<Command> cmd) {
+		Macro A = new Macro(s,cmd);
+		if(!isMacro(s[0]))
+			m.add(A);
+	}
+
+	public void createMacro(String s, String macro){
+		Macro A = new Macro(s,getMacro(macro));
+		if(!isMacro(s))
 			m.add(A);
 	}
 

@@ -17,10 +17,29 @@ public class Macro implements Command {
     private String name;
     private ArrayList<Command> cmd = new ArrayList<Command>();
     private int nbExeTemp = 1;
+    private int[] param = {1,0};
 
-    public Macro(String n, ArrayList<Command> c){
-        name = n;
+    public Macro(String s, Macro m){
+        name = s;
+        cmd = m.getCommand();
+        nbExeTemp = m.getNbExeTemp();
+        for(int i = 0 ; i < 2 ; i++) {
+            param[i] = m.getParam(i);
+        }
+    }
+
+    public Macro(String s[],ArrayList<Command> c){
+        name = s[0];
         cmd = c;
+        if(s.length > 2){
+            for(int i = 1 ; i < s.length -1 ; i ++){
+                param[i-1] = Integer.parseInt(s[i]);
+            }
+        }
+        if(param[1] > c.size()) {
+            System.out.println("Argument numéro 2 invalide");
+            System.exit(1);
+        }
     }
 
     public void setName(String n){
@@ -37,10 +56,16 @@ public class Macro implements Command {
         return cmd;
     }
 
-    public void execute(Memory m) throws ImpossibleIndexException, OutOfCapacityException {
-        for(int i = 0 ; i < nbExeTemp ; i++) {
-            for (Command c : cmd) {
-                c.execute(m);
+     public void execute(Memory m) throws Exception {
+        int compteur = 0;
+        for(int j = 0 ; j < nbExeTemp ; j ++) {
+            for (int i = 0; i < param[0]; i++) {
+                for (Command c : cmd) {
+                    if(compteur == param[1])
+                        c.execute(m);
+                    else compteur ++;
+                }
+                compteur = 0;
             }
         }
         nbExeTemp = 1;

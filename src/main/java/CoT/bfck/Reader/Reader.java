@@ -44,7 +44,7 @@ public class Reader {
 		ArrayList<Command> list = new ArrayList<Command>();
 		for(int i=0;i<line.length();i++){
 			if(line.charAt(i) == '/'){
-				createMacro(line, i+1);
+				createMacro(line.substring(1));
 				break;
 			}
 			if(line.charAt(i)=='#' || line.charAt(i)=='\n'){
@@ -123,13 +123,13 @@ public class Reader {
 	 * @param i
 	 * @throws NotACommandException
 	 */
-	public void createMacro(String line , int i) throws NotACommandException{
-		String name = "";
-		while(line.charAt(i) != 32){
-			name += line.charAt(i);
-			i++;
+	public void createMacro(String line) throws Exception{
+		String []s = line.split(" ");
+			if(cf.isMacro(s[1])) {
+				cf.createMacro(s[0],s[1]);
+			}
+			else {
+				cf.createMacro(s,read(s[s.length-1]));
+			}
 		}
-		System.out.println(line.substring(i+1));
-		cf.createMacro(name,read(line.substring(i+1)));
-	}
 }
