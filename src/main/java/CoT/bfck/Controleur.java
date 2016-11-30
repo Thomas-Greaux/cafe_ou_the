@@ -1,6 +1,7 @@
 package CoT.bfck;
 
 import CoT.bfck.Command.Command;
+import CoT.bfck.Command.Jump;
 import CoT.bfck.Reader.CreateImage;
 import CoT.bfck.Reader.ReadFile;
 import CoT.bfck.Reader.ReadImage;
@@ -50,7 +51,7 @@ public class Controleur {
             else if (args[i].equals("--trace")) option_trace = i;
         }
 		file = args[option_p + 1];
-        file_ext = getFileExt(file);
+        file_ext = OpOption.getFileExt(file);
 	}
 
 	/**
@@ -63,15 +64,15 @@ public class Controleur {
             commands = new ReadFile().readFile(file);
 
             if(option_translate != -1) {
-                rewrite = rewrite(commands);
+                rewrite = OpOption.rewrite(commands);
                 new CreateImage().create_Image(rewrite);
             }
             else if (option_rewrite != -1) {
-                print(commands);
+                OpOption.print(commands);
             }
 
             else if (option_check != -1) {
-                check(commands);
+                OpOption.check(commands);
             }
 
             else if(option_trace != -1){
@@ -96,6 +97,8 @@ public class Controleur {
 
         if(option_check == -1 && option_translate == -1 && option_rewrite == -1){
             Metrics.PROG_SIZE = commands.size();
+            JumpTable jumpTable = new JumpTable(commands);
+            jumpTable.print();
             commands.add(null); //ajout d'un element null pour gerer le cas ou le program fini par un ]
 
             long start = System.currentTimeMillis();

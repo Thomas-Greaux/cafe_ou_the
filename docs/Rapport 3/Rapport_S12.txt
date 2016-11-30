@@ -1,0 +1,8 @@
+Slice 12: implementation des metrics
+	Il s'agit d'avoir des données après l'execution d'un programme
+	Pour cela nous avons décidé d'utiliser des variables statiques afin de pouvoir y acceder plus facilement.
+		Pour EXEC_TIME, on utilise System.currentTimeMillis()
+		Pour PROG_SIZE, on recuppere simplement la taille de la liste d'instructions
+		Pour le reste, il suffit d'incrementer les variables au bon endroits, c'est a dire dans les methodes des classes implementant Command
+	On affiche les metrics uniquement ces metrics si on execute le programme.
+	

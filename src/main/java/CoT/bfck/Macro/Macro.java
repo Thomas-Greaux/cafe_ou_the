@@ -3,6 +3,7 @@ package CoT.bfck.Macro;
 import CoT.bfck.Command.Command;
 import CoT.bfck.Memory;
 
+import javax.crypto.Mac;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -13,6 +14,7 @@ public class Macro implements Command {
 
     private String name;
     private ArrayList<Command> cmd = new ArrayList<Command>();
+    private int nbExeTemp = 1;
 
     public Macro(String n){
         name = n;
@@ -31,14 +33,19 @@ public class Macro implements Command {
         cmd.add(c);
     }
 
+    public void setNbExe(int n){nbExeTemp = n;}
+
     public ArrayList<Command> getCommand(){
         return cmd;
     }
 
     public void execute(Memory m) throws Exception {
-        for(Command c : cmd){
-            c.execute(m);
+        for(int i = 0 ; i < nbExeTemp ; i++) {
+            for (Command c : cmd) {
+                c.execute(m);
+            }
         }
+        nbExeTemp = 1;
     }
 
     public ArrayList<String> getProperties() {
@@ -56,4 +63,7 @@ public class Macro implements Command {
     public String getName() {
         return name;
     }
+
+    public String toString(){return "Macro";}
+
 }

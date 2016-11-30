@@ -11,7 +11,7 @@ public class Metrics {
     public static int DATA_WRITE = 0;
     public static int DATA_READ = 0;
 
-    
+
     public static void display() {
         System.out.println("\nMetrics:");
         System.out.println("\t PROG_SIZE: \t" + PROG_SIZE);

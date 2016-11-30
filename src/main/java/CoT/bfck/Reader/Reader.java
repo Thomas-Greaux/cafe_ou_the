@@ -42,7 +42,7 @@ public class Reader {
 		ArrayList<Command> list = new ArrayList<Command>();
 		for(int i=0;i<line.length();i++){
 			if(line.charAt(i) == '/'){
-				cf.addMacro(createMacro(line, i+1));
+				createMacro(line, i+1);
 				break;
 			}
 			if(line.charAt(i)=='#' || line.charAt(i)=='\n'){
@@ -53,10 +53,24 @@ public class Reader {
 			}else if(line.charAt(i) == ' ' || line.charAt(i) == '\t'){
 
 			}else{
-				list.add((cf.getCommand(Character.toString(line.charAt(i)))));
+				String []s = line.split(" ");
+				if(isMacro(s[0])){
+					if(s.length == 2) {
+						cf.getMacro(s[0]).setNbExe(Integer.parseInt(s[1]));
+					}
+					list.add(cf.getCommand(s[0]));
+					break;
+				}
+				else {
+					list.add((cf.getCommand(Character.toString(line.charAt(i)))));
+				}
 			}
 		}
 		return list;
+	}
+
+	public boolean isMacro(String line){
+		return cf.isMacro(line);
 	}
 	
 	public boolean isChar(String l){
@@ -65,6 +79,7 @@ public class Reader {
 				return false;
 			}
 		}
+		if(cf.isMacro(l)) return false;
 		return true;
 	}
 
@@ -75,6 +90,7 @@ public class Reader {
 			if (l.codePointAt(i) >= 97 && l.codePointAt(i) <= 127) letters++;
 			else if (l.codePointAt(i) >= 65 && l.codePointAt(i) <= 90) letters++;
 			else if (l.codePointAt(i) >= 48 && l.codePointAt(i) <= 57) numbers++;
+			if(l.codePointAt(i) == 32) return false;
 		}
 		if (numbers + letters == 6)
 			return true;
@@ -82,12 +98,13 @@ public class Reader {
 			return false;
 	}
 
-	public Macro createMacro(String line , int i) throws Exception {
+	public void createMacro(String line , int i) throws Exception {
 		String name = "";
 		while(line.charAt(i) != 32){
 			name += line.charAt(i);
 			i++;
 		}
-		return new Macro(name, read(line.substring(i)));
+		System.out.println(line.substring(i+1));
+		cf.createMacro(name,read(line.substring(i+1)));
 	}
 }
