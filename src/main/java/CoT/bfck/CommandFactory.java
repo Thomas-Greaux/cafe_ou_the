@@ -75,7 +75,7 @@ public class CommandFactory {
 		throw new NotACommandException("Une des commandes choisies n'existe pas.");
 	}
 
-	public void addMacro(Macro macro) {
-		m.add(macro);
+	public void createMacro(String n, ArrayList<Command> cmd) {
+		m.add(new Macro(n,cmd));
 	}
 }
