@@ -1,10 +1,12 @@
 package CoT.bfck.Reader;
 
 import CoT.bfck.Colors;
+import CoT.bfck.Exception.NotACommandException;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -15,12 +17,13 @@ import javax.imageio.ImageIO;
  */
 public class CreateImage {
 
-    /**
-     * Method used to create an image, with a String containing all the commands in the shortened syntax
-     * @param shortened the shortened version of the commands
-     * @throws Exception
-     */
-	public void create_Image(String shortened) throws Exception{
+	/**
+	 * Method used to create an image, with a String containing all the commands in the shortened syntax
+	 * @param shortened the shortened version of the commands
+	 * @throws FileNotFoundException
+	 * @throws NotACommandException
+	 */
+	public void create_Image(String shortened) throws FileNotFoundException, NotACommandException{
 		int i = 1;
 		int j;
         int n = shortened.length();

@@ -12,6 +12,7 @@ import static org.junit.Assert.*;
 
 public class MemoryTestT {
     Memory mem;
+
     @Before
     public void setUp() throws Exception {
         mem = new Memory();

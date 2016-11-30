@@ -1,5 +1,6 @@
 package CoT.bfck.Command;
 
+import CoT.bfck.Exception.ImpossibleIndexException;
 import CoT.bfck.Memory;
 import CoT.bfck.Metrics;
 
@@ -21,9 +22,9 @@ public class Left implements Command {
 	/**
 	 * Exécution of the command
 	 * @param m memory
-	 * @throws Exception
+	 * @throws ImpossibleIndexException
 	 */
-	public void execute(Memory m) throws Exception {
+	public void execute(Memory m) throws ImpossibleIndexException {
 		Metrics.DATA_READ++;
 		m.left();
 	}

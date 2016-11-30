@@ -20,9 +20,8 @@ public class In implements Command {
     /**
      * Exécution of the command
      * @param m memory
-     * @throws Exception
      */
-    public void execute(Memory m) throws Exception {
+    public void execute(Memory m) {
         m.in();
     }
 

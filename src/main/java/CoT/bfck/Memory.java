@@ -1,5 +1,9 @@
 package CoT.bfck;
 
+import CoT.bfck.Exception.FileDoesntExists;
+import CoT.bfck.Exception.ImpossibleIndexException;
+import CoT.bfck.Exception.OutOfCapacityException;
+
 import java.io.*;
 import java.util.Scanner;
 /**
@@ -34,22 +38,22 @@ public class Memory {
 
 	/**
 	 * Increment the value of the byte at the current position.
+	 * @throws OutOfCapacityException
 	 */
-	public void incr() throws Exception {
+	public void incr() throws OutOfCapacityException {
 		if (memory[index] + 129 > 255 ) {
-			System.out.println("Out of capacity");
-			System.exit(1);
+			throw new OutOfCapacityException("incr");
 		}
 			memory[index] = (byte) (memory[index] + 1);
 	}
 
 	/**
 	 * Decrement the value of the byte at the current position.
+	 * @throws OutOfCapacityException
 	 */
-	public void decr() throws Exception {
+	public void decr() throws OutOfCapacityException {
 		if (memory[index] + 127 < 0) {
-			System.out.println("Out of capacity");
-			System.exit(1);
+			throw new OutOfCapacityException("decr");
 		}
 		memory[index] = (byte) (memory[index] - 1);
 
@@ -57,25 +61,25 @@ public class Memory {
 
 	/**
 	 * Move the position to the right : increment the index.
+	 * @throws ImpossibleIndexException
 	 */
-	public void right() throws Exception {
+	public void right() throws ImpossibleIndexException {
 		if (this.index < 30000)
 			this.index++;
 		else {
-			System.out.println("index impossible");
-			System.exit(2);
+			throw new ImpossibleIndexException("right");
 		}
 	}
 
 	/**
 	 * Move the position to the left : decrement the index.
+	 * @throws ImpossibleIndexException
 	 */
-	public void left() throws Exception {
+	public void left() throws ImpossibleIndexException {
 		if (this.index > 0 )
 			this.index--;
 		else {
-			System.out.println("index impossible");
-			System.exit(2);
+			throw new ImpossibleIndexException("left");
 		}
 			
 	}
@@ -94,6 +98,9 @@ public class Memory {
         memory[index] = io_stream.in();
 	}
 
+	/**
+	 * Method used to display the cell who changed in the stdout
+	 */
 	public void display() {
 		System.out.println();
 		for (int i = 0; i < 30000; i++) {
@@ -102,6 +109,9 @@ public class Memory {
 		}
 	}
 
+	/**
+	 * Method used to display the cell, and store it in a String
+	 */
     public String display_String() {
         String result = "";
         for (int i = 0; i < 30000; i++) {
@@ -127,23 +137,25 @@ public class Memory {
 
 	/**
 	 * Modify the value of the String inFile to correspond with the name of the file we want to read in
-	 * @param filename name of the file
+	 * @param filename
+	 * @throws FileDoesntExists
 	 */
-	public void setIn(String filename){
+	public void setIn(String filename) throws FileDoesntExists{
 		io_stream.setIn(filename);
 	}
 
 	/**
 	 * Modify the value of the String outFile to correspond with the name of the file we want to write in
-	 * @param filename name of the file
+	 * @param filename
+	 * @throws IOException
 	 */
-	public void setOut(String filename){
+	public void setOut(String filename)throws IOException{
 		io_stream.setOut(filename);
 	}
 
 	/**
-	 * Retorn the value of the memory at the pointer value
-	 * @return
+	 * Accessor of the current pointed cell of the memory
+	 * @return value of the pointer at the index position
 	 */
 	public int getValue(){
         Metrics.DATA_READ++;

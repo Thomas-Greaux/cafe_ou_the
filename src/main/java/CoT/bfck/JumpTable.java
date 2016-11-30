@@ -5,7 +5,8 @@ import CoT.bfck.Command.Command;
 import java.util.ArrayList;
 
 /**
- * Created by Thoma on 11/30/2016.
+ * Classe ...
+ * @author cafe_ou_the
  */
 public class JumpTable {
     private ArrayList<Integer[]> table;

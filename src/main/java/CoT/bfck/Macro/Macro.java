@@ -1,6 +1,9 @@
 package CoT.bfck.Macro;
 
 import CoT.bfck.Command.Command;
+import CoT.bfck.Command.Out;
+import CoT.bfck.Exception.ImpossibleIndexException;
+import CoT.bfck.Exception.OutOfCapacityException;
 import CoT.bfck.Memory;
 
 import javax.crypto.Mac;
@@ -39,7 +42,7 @@ public class Macro implements Command {
         return cmd;
     }
 
-    public void execute(Memory m) throws Exception {
+    public void execute(Memory m) throws ImpossibleIndexException, OutOfCapacityException {
         for(int i = 0 ; i < nbExeTemp ; i++) {
             for (Command c : cmd) {
                 c.execute(m);

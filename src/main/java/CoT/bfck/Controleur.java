@@ -2,6 +2,10 @@ package CoT.bfck;
 
 import CoT.bfck.Command.Command;
 import CoT.bfck.Command.Jump;
+import CoT.bfck.Exception.FileDoesntExists;
+import CoT.bfck.Exception.ImpossibleIndexException;
+import CoT.bfck.Exception.NotACommandException;
+import CoT.bfck.Exception.OutOfCapacityException;
 import CoT.bfck.Reader.CreateImage;
 import CoT.bfck.Reader.ReadFile;
 import CoT.bfck.Reader.ReadImage;
@@ -9,6 +13,7 @@ import com.sun.org.apache.xpath.internal.SourceTree;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,15 +44,14 @@ public class Controleur {
     private int option_out = -1;
     private int option_trace = -1;
 
-    /**
-     * Normal constructor for the Controleur
-     *
-     * @param args commandes written by the user
-     */
-
     private int option_metrics = -1;
     private int option_interpret = 0;
 
+
+    /**
+     * Normal constructor for the Controleur
+     * @param args commandes written by the user
+     */
     public Controleur(String[] args) {
         for (int i = 0; i < args.length; i++) { //Boucle d'initialisation des options
             if (args[i].equals("-p")) option_p = i;
@@ -76,10 +80,12 @@ public class Controleur {
 
     /**
      * Run the program then display the memory
-     *
-     * @throws Exception
+     * @throws NotACommandException
+     * @throws IOException
+     * @throws OutOfCapacityException
+     * @throws ImpossibleIndexException
      */
-    public void run() throws Exception {
+    public void run() throws NotACommandException, IOException, OutOfCapacityException, ImpossibleIndexException, FileDoesntExists {
 
         //On remplie notre liste de commandes
         if (file_ext.equals(".bf")) {                     //En fonction du type de fichier
@@ -131,11 +137,12 @@ public class Controleur {
 
     /**
      * Execute the commands
-     *
      * @param commands ArrayList of the commands we want to execute
-     * @throws Exception
+     * @throws IOException
+     * @throws ImpossibleIndexException
+     * @throws OutOfCapacityException
      */
-    public void execute(ArrayList<Command> commands) throws Exception {
+    public void execute(ArrayList<Command> commands) throws IOException, ImpossibleIndexException, OutOfCapacityException {
         int compteur = 0;
         int k;
         int n = commands.size();

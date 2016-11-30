@@ -29,15 +29,10 @@ public class Reader {
 		 * 		The line of bf code we want to make short
      * @return String result
 		 * 		The bf code in.bf shorten representation.
-	 * @throws Exception 
+	 * @throws NotACommandException
      */
-	public String shortened(String s) throws Exception{
-		try{
-			return cf.getCommand(s).getNameShort();
-		}catch(NotACommandException e){
-			//e.printStackTrace();
-			return null;
-		}
+	public String shortened(String s) throws NotACommandException{
+		return cf.getCommand(s).getNameShort();
 	}
 
     /**
@@ -45,9 +40,9 @@ public class Reader {
      * The instructions are given by both the ReadFile and the ReadImage
       * @param line containing the instructions
      * @return ArayList of Command (in the right syntax to be executed)
-     * @throws Exception
+     * @throws NotACommandException
      */
-	public ArrayList<Command> read(String line) throws Exception {
+	public ArrayList<Command> read(String line) throws NotACommandException{
 		ArrayList<Command> list = new ArrayList<Command>();
 		for(int i=0;i<line.length();i++){
 			if(line.charAt(i) == '/'){
@@ -122,8 +117,13 @@ public class Reader {
 			return false;
 	}
 
-
-	public void createMacro(String line , int i) throws Exception {
+	/**
+	 *
+	 * @param line
+	 * @param i
+	 * @throws NotACommandException
+	 */
+	public void createMacro(String line , int i) throws NotACommandException{
 		String name = "";
 		while(line.charAt(i) != 32){
 			name += line.charAt(i);

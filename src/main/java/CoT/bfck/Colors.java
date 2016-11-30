@@ -1,5 +1,7 @@
 package CoT.bfck;
 
+import CoT.bfck.Exception.NotACommandException;
+
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 
@@ -15,9 +17,9 @@ public class Colors {
 	 * Return the color corresponding to a String containing the hexadecimal code of a color.
 	 * @param hexa hexadecimal value of a color
 	 * @return Color created in function of the RGB of the color
-	 * @throws Exception
+	 * @throws NotACommandException
 	 */
-	public Color returnColor(String hexa) throws Exception{
+	public Color returnColor(String hexa) throws NotACommandException{
         if (cf.getCommand(hexa) == null)  return new Color(0, 0, 0);
 		if(cf.getCommand(hexa).getRGBColor().equals(null))
 			return new Color(0, 0, 0);

@@ -29,7 +29,7 @@ public class CommandFactory {
 	 * 
 	 * @param command
 	 * @return the corresponding Command
-	 * @throws Exception 
+	 * @throws NotACommandException
 	 */
 	public Command getCommand(String command) throws NotACommandException{
         //System.out.println(command);
@@ -76,7 +76,7 @@ public class CommandFactory {
 		if(command.equals("000000")) //Plus de problèmes au niveau de l'indentation et pixels noirs
 			return null;
 
-		throw new NotACommandException("Une des commandes choisies n'existe pas.");
+		throw new NotACommandException();
 	}
 
 	public void createMacro(String n, ArrayList<Command> cmd) {

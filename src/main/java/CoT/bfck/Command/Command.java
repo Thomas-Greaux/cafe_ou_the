@@ -1,5 +1,7 @@
 package CoT.bfck.Command;
 
+import CoT.bfck.Exception.ImpossibleIndexException;
+import CoT.bfck.Exception.OutOfCapacityException;
 import CoT.bfck.Memory;
 
 import java.awt.Color;
@@ -11,7 +13,7 @@ import java.util.ArrayList;
  */
 public interface Command {
 
-	void execute(Memory m) throws Exception;
+	void execute(Memory m) throws OutOfCapacityException, ImpossibleIndexException;
 	ArrayList<String> getProperties();
 	String getNameShort();
 	Color getRGBColor();

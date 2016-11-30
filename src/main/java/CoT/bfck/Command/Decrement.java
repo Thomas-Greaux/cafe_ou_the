@@ -1,5 +1,6 @@
 package CoT.bfck.Command;
 
+import CoT.bfck.Exception.OutOfCapacityException;
 import CoT.bfck.Memory;
 import CoT.bfck.Metrics;
 
@@ -20,9 +21,9 @@ public class Decrement implements Command {
 	/**
 	 * Exécution of the command
 	 * @param m memory
-	 * @throws Exception
+	 * @throws OutOfCapacityException
 	 */
-	public void execute(Memory m) throws Exception {
+	public void execute(Memory m) throws OutOfCapacityException{
 		Metrics.DATA_READ++;
 		m.decr();
 	}

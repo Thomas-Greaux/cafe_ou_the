@@ -1,5 +1,6 @@
 package CoT.bfck.Command;
 
+import CoT.bfck.Exception.OutOfCapacityException;
 import CoT.bfck.Memory;
 import CoT.bfck.Metrics;
 
@@ -22,7 +23,7 @@ public class Increment implements Command {
 	 * @param m memory
 	 * @throws Exception
 	 */
-	public void execute(Memory m) throws Exception {
+	public void execute(Memory m) throws OutOfCapacityException {
 		Metrics.DATA_READ++;
 		m.incr();
 	}
