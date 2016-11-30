@@ -3,9 +3,7 @@ package CoT.bfck.Reader;
 import CoT.bfck.Command.Command;
 import CoT.bfck.CommandFactory;
 import CoT.bfck.Exception.NotACommandException;
-import CoT.bfck.Macro.Macro;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -59,7 +57,7 @@ public class Reader {
 			}else if(isChar(line) || isHexaColor(line)){
 				list.add((cf.getCommand(line)));
 				break;
-			}else if(line.charAt(i) == ' ' || line.charAt(i) == '\t'){
+			}else if(line.charAt(i) == ' ' || line.charAt(i) == '\t'){ //TODO Empty body ?
 
 			}else{
 				String []s = line.split(" ");
@@ -98,8 +96,8 @@ public class Reader {
 				return false;
 			}
 		}
-		if(cf.isMacro(line)) return false;
-		return true;
+
+		return !cf.isMacro(line);
 	}
 
     /**
@@ -116,10 +114,8 @@ public class Reader {
 			else if (line.codePointAt(i) >= 48 && line.codePointAt(i) <= 57) numbers++;
 			if(line.codePointAt(i) == 32) return false;
 		}
-		if (numbers + letters == 6)
-			return true;
-		else
-			return false;
+
+		return (numbers + letters == 6);
 	}
 
 
