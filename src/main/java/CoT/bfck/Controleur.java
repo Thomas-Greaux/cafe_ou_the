@@ -119,8 +119,6 @@ public class Controleur {
 		{
             if (commands.get(j) != null) {
                 if (commands.get(j).getNameShort().equals("[") && mem.getValue() == 0) {
-                    System.out.println("j: " + j);
-                    System.out.println("comp de j: " + jumpTable.getComp(j));
                     j = jumpTable.getComp(j);
                 }
 
