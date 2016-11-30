@@ -23,6 +23,7 @@ public class Controleur {
     private String out;
     private FileWriter fw;
     private int c = 0;
+    private JumpTable jumpTable;
 
     // OPTIONS
     private int option_p;
@@ -90,7 +91,7 @@ public class Controleur {
 
         if(option_check == -1 && option_translate == -1 && option_rewrite == -1){
             Metrics.PROG_SIZE = commands.size();
-            JumpTable jumpTable = new JumpTable(commands);
+            jumpTable = new JumpTable(commands);
             jumpTable.print();
             commands.add(null); //ajout d'un element null pour gerer le cas ou le program fini par un ]
 
@@ -118,21 +119,13 @@ public class Controleur {
 		{
             if (commands.get(j) != null) {
                 if (commands.get(j).getNameShort().equals("[") && mem.getValue() == 0) {
-                    compteur++;
-                    for (j++; compteur > 0; j++, Metrics.EXEC_MOVE++) {
-                        if (commands.get(j).getNameShort().equals("[")) compteur++;
-                        if (commands.get(j).getNameShort().equals("]")) compteur--;
-                    }
-                    j++;
+                    System.out.println("j: " + j);
+                    System.out.println("comp de j: " + jumpTable.getComp(j));
+                    j = jumpTable.getComp(j);
                 }
 
                 if (commands.get(j).getNameShort().equals("]") && mem.getValue() != 0) {
-                    compteur++;
-                    for (j--; compteur > 0; j--, Metrics.EXEC_MOVE++) {
-                        if (commands.get(j).getNameShort().equals("[")) compteur--;
-                        if (commands.get(j).getNameShort().equals("]")) compteur++;
-                    }
-                    j++;
+                    j = jumpTable.getComp(j);
                 }
 
                 else {
