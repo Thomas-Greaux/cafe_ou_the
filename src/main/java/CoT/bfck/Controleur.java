@@ -145,34 +145,24 @@ public class Controleur {
                 if (commands.get(j).getNameShort().equals("[") && mem.getValue() == 0) {
                     j = jumpTable.getComp(j);
                 }
-
-                if (commands.get(j).getNameShort().equals("]") && mem.getValue() != 0) {
-                    compteur++;
-                    for (j--; compteur > 0; j--, Metrics.EXEC_MOVE++) {
-                        if (commands.get(j).getNameShort().equals("[")) compteur--;
-                        if (commands.get(j).getNameShort().equals("]")) compteur++;
-                    }
-                    j++;
+                else if (commands.get(j).getNameShort().equals("]") && mem.getValue() != 0) {
+                    j = jumpTable.getComp(j);
                 } else {
                     if (option_trace != -1) {
-                        j = jumpTable.getComp(j);
-                    } else {
-                        if (option_trace != -1) {
-                            c++;
-                            fw.write("Step n°" + c + "\n");
-                            fw.write("Next command : " + commands.get(j).getName() + "\n");
-                            fw.write("Data pointer value : " + mem.getValue() + "\n");
-                            fw.write("Memory SNAPSHOT :\n" + mem.display_String());
-                            fw.write("\n---------------------------\n");
-                        }
-                        commands.get(j).execute(mem);
+                        c++;
+                        fw.write("Step n°" + c + "\n");
+                        fw.write("Next command : " + commands.get(j).getName() + "\n");
+                        fw.write("Data pointer value : " + mem.getValue() + "\n");
+                        fw.write("Memory SNAPSHOT :\n" + mem.display_String());
+                        fw.write("\n---------------------------\n");
                     }
+
+                    commands.get(j).execute(mem);
                 }
             }
+        }
             mem.close_stream();
             if (option_trace != -1)
                 fw.close();
-        }
-
     }
 }

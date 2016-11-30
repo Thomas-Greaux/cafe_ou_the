@@ -50,8 +50,12 @@ public class Reader {
 			if(line.charAt(i)=='#' || line.charAt(i)=='\n'){
 				break;
 			}else if(isChar(line) || isHexaColor(line)){
-				list.add((cf.getCommand(line)));
-				break;
+				if(!line.equals("000000")){
+					list.add((cf.getCommand(line)));
+					break;
+				}else{
+					break;
+				}
 			}else if(line.charAt(i) == ' ' || line.charAt(i) == '\t'){ //TODO Empty body ?
 
 			}else{
