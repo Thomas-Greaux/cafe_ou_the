@@ -34,14 +34,14 @@ public class ControleurTest {
         commands.add(cf.getCommand("BACK"));
         commands.add(cf.getCommand("IN"));
         commands.add(cf.getCommand("OUT"));
-        assertEquals(c.rewrite(commands), "+-><[],.");
+        assertEquals(OpOption.rewrite(commands), "+-><[],.");
     }
 
     @Test
     public void getFileExtTest() {
-        assertEquals(c.getFileExt("toto.java"), ".java");
-        assertEquals(c.getFileExt("toto.bmp"), ".bmp");
-        assertEquals(c.getFileExt("toto"), "");
-        assertNotEquals(c.getFileExt("toto.java"), "java");
+        assertEquals(OpOption.getFileExt("toto.java"), ".java");
+        assertEquals(OpOption.getFileExt("toto.bmp"), ".bmp");
+        assertEquals(OpOption.getFileExt("toto"), "");
+        assertNotEquals(OpOption.getFileExt("toto.java"), "java");
     }
 }
