@@ -143,10 +143,10 @@ public class Controleur {
         {
             if (commands.get(j) != null) {
                 if (commands.get(j).getNameShort().equals("[") && mem.getValue() == 0) {
-                    j = jumpTable.getComp(j);
+                    j = jumpTable.getComp(j); Metrics.EXEC_MOVE++;
                 }
                 else if (commands.get(j).getNameShort().equals("]") && mem.getValue() != 0) {
-                    j = jumpTable.getComp(j);
+                    j = jumpTable.getComp(j); Metrics.EXEC_MOVE++;
                 } else {
                     if (option_trace != -1) {
                         c++;
