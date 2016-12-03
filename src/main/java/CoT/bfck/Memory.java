@@ -38,11 +38,9 @@ public class Memory {
 	 * @throws OutOfCapacityException
 	 */
 	public void incr() throws OutOfCapacityException {
-		if (memory[index.getValue()] + 129 > 255 ) {
-			throw new OutOfCapacityException("incr");
-		}
+		if (memory[index.getValue()] + 129 > 255 ) throw new OutOfCapacityException("incr");
 		Metrics.DATA_WRITE++;
-        memory[index.getValue()] = (byte) (memory[index.getValue()] + 1);
+        memory[index.getValue()]++;
 	}
 
 	/**
@@ -50,10 +48,8 @@ public class Memory {
 	 * @throws OutOfCapacityException
 	 */
 	public void decr() throws OutOfCapacityException {
-		if (memory[index.getValue()] + 127 < 0) {
-			throw new OutOfCapacityException("decr");
-		}
-		memory[index.getValue()] = (byte) (memory[index.getValue()] - 1);
+		if (memory[index.getValue()] + 127 < 0) throw new OutOfCapacityException("decr");
+		memory[index.getValue()]--;
         Metrics.DATA_WRITE++;
 	}
 
@@ -63,9 +59,7 @@ public class Memory {
 	 */
 	public void right() throws ImpossibleIndexException {
 		if (index.getValue() < 30000) index.incr();
-		else {
-			throw new ImpossibleIndexException("right");
-		}
+		else throw new ImpossibleIndexException("right");
 	}
 
 	/**
