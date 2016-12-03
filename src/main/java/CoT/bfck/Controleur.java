@@ -137,7 +137,6 @@ public class Controleur {
      * @throws OutOfCapacityException
      */
     public void execute(ArrayList<Command> commands) throws IOException, ImpossibleIndexException, OutOfCapacityException {
-        int compteur = 0;
         int n = commands.size();
         ExecPointer execPointer = new ExecPointer();
         for (; execPointer.getValue() < n; execPointer.incr()) //Boucle d'execution des commandes, on joue sur j pour gerer les boucles
@@ -157,9 +156,8 @@ public class Controleur {
                         fw.write("Memory SNAPSHOT :\n" + mem.display_String());
                         fw.write("\n---------------------------\n");
                     }
-
-                    commands.get(execPointer.getValue()).execute(mem);
                 }
+                commands.get(execPointer.getValue()).execute(mem);
             }
         }
             mem.close_stream();

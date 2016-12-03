@@ -24,7 +24,6 @@ public class Increment implements Command {
 	 * @throws Exception
 	 */
 	public void execute(Memory m) throws OutOfCapacityException {
-		Metrics.DATA_WRITE++;
 		m.incr();
 	}
 

@@ -41,7 +41,8 @@ public class Memory {
 		if (memory[index.getValue()] + 129 > 255 ) {
 			throw new OutOfCapacityException("incr");
 		}
-			memory[index.getValue()] = (byte) (memory[index.getValue()] + 1);
+		Metrics.DATA_WRITE++;
+        memory[index.getValue()] = (byte) (memory[index.getValue()] + 1);
 	}
 
 	/**
@@ -53,7 +54,7 @@ public class Memory {
 			throw new OutOfCapacityException("decr");
 		}
 		memory[index.getValue()] = (byte) (memory[index.getValue()] - 1);
-
+        Metrics.DATA_WRITE++;
 	}
 
 	/**
@@ -83,13 +84,15 @@ public class Memory {
 	 * If a file is given in.bf argument, print the actual value in.bf it. If not, print it in.bf the terminal.
 	 */
 	public void out(){
-		io_stream.out( (byte) (memory[index.getValue()]-128));
+        Metrics.DATA_READ++;
+        io_stream.out( (byte) (memory[index.getValue()]-128));
 	}
 
 	/**
 	 * If a file is given in argument, read the actual value in.bf it and put it in.bf the actual memory[index]. If not, read it in.bf the terminal.
 	 */
 	public void in(){
+        Metrics.DATA_WRITE++;
         memory[index.getValue()] = io_stream.in();
 	}
 
@@ -120,14 +123,14 @@ public class Memory {
 	 * Do nothing, the controleur handle jump & back
 	 */
 	public void back() {
-
+        Metrics.DATA_READ++;
 	}
 
 	/**
 	 * Do nothing, the controleur handle jump & back
 	 */
 	public void jump() {
-
+        Metrics.DATA_READ++;
 	}
 
 	/**
