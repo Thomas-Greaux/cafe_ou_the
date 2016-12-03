@@ -43,10 +43,13 @@ public class Reader {
 	public ArrayList<Command> read(String line) throws NotACommandException{
 		ArrayList<Command> list = new ArrayList<Command>();
 		for(int i=0;i<line.length();i++){
+			//Si on rencontre un '/', la suite est une macro on la cree
 			if(line.charAt(i) == '/'){
 				createMacro(line.substring(1));
 				break;
 			}
+
+			//Si on rencontre un '#' ce qui suit est un commentaire, on l'ignore
 			if(line.charAt(i)=='#' || line.charAt(i)=='\n'){
 				break;
 			}else if(isChar(line) || isHexaColor(line)){

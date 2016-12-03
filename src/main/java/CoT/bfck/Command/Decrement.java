@@ -24,7 +24,7 @@ public class Decrement implements Command {
 	 * @throws OutOfCapacityException
 	 */
 	public void execute(Memory m) throws OutOfCapacityException{
-		Metrics.DATA_READ++;
+		Metrics.DATA_WRITE++;
 		m.decr();
 	}
 
