@@ -12,12 +12,12 @@ public class MemPointer {
 
     public void incr(){
         value++;
-        Metrics.EXEC_MOVE++;
+        Metrics.DATA_MOVE++;
     }
 
     public void decr(){
         value--;
-        Metrics.EXEC_MOVE++;
+        Metrics.DATA_MOVE++;
     }
 
     public int getValue(){
