@@ -17,16 +17,17 @@ public class Macro implements Command {
 
     private String name;
     private ArrayList<Command> cmd = new ArrayList<Command>();
-    private int nbExeTemp = 1;
     private int[] param = {1,0};
+    private int[] paramEx = {1,0};
 
     public Macro(String s, Macro m){
         name = s;
         cmd = m.getCommand();
-        nbExeTemp = m.getNbExeTemp();
         for(int i = 0 ; i < 2 ; i++) {
             param[i] = m.getParam(i);
+            paramEx[i] = param[i];
         }
+
     }
 
     public Macro(String s[],ArrayList<Command> c){
@@ -35,10 +36,11 @@ public class Macro implements Command {
         if(s.length > 2){
             for(int i = 1 ; i < s.length -1 ; i ++){
                 param[i-1] = Integer.parseInt(s[i]);
+                paramEx[i-1] = param[i-1];
             }
         }
         if(param[1] > c.size()) {
-            System.out.println("Argument num�ro 2 invalide");
+            System.out.println("Argument numéro 2 invalide");
             System.exit(1);
         }
     }
@@ -51,25 +53,29 @@ public class Macro implements Command {
         cmd.add(c);
     }
 
-    public void setNbExe(int n){nbExeTemp = n;}
-
     public ArrayList<Command> getCommand(){
         return cmd;
     }
 
+    public void setParamEx(String[] tab){
+        for(int i = 1 ; i < tab.length ; i ++){
+            paramEx[i-1] = Integer.parseInt(tab[i]);
+        }
+    }
+
      public void execute(Memory m) throws ImpossibleIndexException, OutOfCapacityException {
         int compteur = 0;
-        for(int j = 0 ; j < nbExeTemp ; j ++) {
-            for (int i = 0; i < param[0]; i++) {
-                for (Command c : cmd) {
-                    if(compteur == param[1])
-                        c.execute(m);
-                    else compteur ++;
-                }
-                compteur = 0;
+         for (int i = 0; i < paramEx[0]; i++) {
+            for (Command c : cmd) {
+                if(compteur == paramEx[1])
+                    c.execute(m);
+                else compteur ++;
             }
-        }
-        nbExeTemp = 1;
+            compteur = 0;
+            }
+         for(int i = 0 ; i < 2 ; i++) {
+             paramEx[i] = param[i];
+         }
     }
 
     public ArrayList<String> getProperties() {
@@ -89,10 +95,6 @@ public class Macro implements Command {
     }
 
     public String toString(){return "Macro";}
-
-    public int getNbExeTemp(){
-        return nbExeTemp;
-    }
 
     public int getParam(int i){
         return param[i];
