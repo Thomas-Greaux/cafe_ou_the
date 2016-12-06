@@ -83,12 +83,23 @@ public class Macro implements Command {
     }
 
     public String getNameShort() {
-        return "";
+        String res = "";
+        int compteur = 0;
+        for (int i = 0; i < paramEx[0]; i++) {
+            for (Command c : cmd) {
+                if(compteur == paramEx[1])
+                    res += c.getNameShort();
+                else compteur ++;
+            }
+            compteur = 0;
+        }
+        for(int i = 0 ; i < 2 ; i++) {
+            paramEx[i] = param[i];
+        }
+        return res;
     }
 
-    public Color getRGBColor() {
-        return null;
-    }
+    public Color getRGBColor() {return null;}
 
     public String getName() {
         return name;
@@ -99,5 +110,6 @@ public class Macro implements Command {
     public int getParam(int i){
         return param[i];
     }
+
 
 }
