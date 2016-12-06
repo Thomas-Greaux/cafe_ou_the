@@ -5,12 +5,12 @@ package CoT.bfck;
  * @author cafe_ou_the
  */
 public class Metrics {
-    public static long PROG_SIZE = 0;
-    public static long EXEC_TIME = 0;
-    public static long EXEC_MOVE = 0;
-    public static long DATA_MOVE = 0;
-    public static long DATA_WRITE = 0;
-    public static long DATA_READ = 0;
+    static long PROG_SIZE = 0;
+    static long EXEC_TIME = 0;
+    static long EXEC_MOVE = 0;
+    static long DATA_MOVE = 0;
+    static long DATA_WRITE = 0;
+    static long DATA_READ = 0;
 
 
     public static void display() {
