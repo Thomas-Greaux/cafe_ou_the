@@ -20,6 +20,11 @@ public class Macro implements Command {
     private int[] param = {1,0};
     private int[] paramEx = {1,0};
 
+    /**
+     * Constructor supporting the creation of macros of macros.
+     * @param s
+     * @param m
+     */
     public Macro(String s, Macro m){
         name = s;
         cmd = m.getCommand();
@@ -30,6 +35,11 @@ public class Macro implements Command {
 
     }
 
+    /**
+     * Constructor used in the CommandFactory to create Macro objects.
+     * @param s
+     * @param c
+     */
     public Macro(String s[],ArrayList<Command> c){
         name = s[0];
         cmd = c;
@@ -53,6 +63,7 @@ public class Macro implements Command {
         cmd.add(c);
     }
 
+    //  accessor dor command
     public ArrayList<Command> getCommand(){
         return cmd;
     }
