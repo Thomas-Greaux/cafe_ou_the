@@ -20,11 +20,6 @@ public class Macro implements Command {
     private int[] param = {1,0};
     private int[] paramEx = {1,0};
 
-    /**
-     * Constructor supporting the creation of macros of macros.
-     * @param s
-     * @param m
-     */
     public Macro(String s, Macro m){
         name = s;
         cmd = m.getCommand();
@@ -35,19 +30,20 @@ public class Macro implements Command {
 
     }
 
-    /**
-     * Constructor used in the CommandFactory to create Macro objects.
-     * @param s
-     * @param c
-     */
     public Macro(String s[],ArrayList<Command> c){
         name = s[0];
         cmd = c;
-        if(s.length > 2){
-            for(int i = 1 ; i < s.length -1 ; i ++){
-                param[i-1] = Integer.parseInt(s[i]);
-                paramEx[i-1] = param[i-1];
+        try {
+            if (s.length > 2) {
+                for (int i = 1; i < s.length - 1; i++) {
+                    param[i - 1] = Integer.parseInt(s[i]);
+                    paramEx[i - 1] = param[i - 1];
+                }
             }
+        }
+        catch (Exception e){
+            System.out.println("Macro incorrecte");
+            System.exit(3);
         }
         if(param[1] > c.size()) {
             System.out.println("Argument numéro 2 invalide");
@@ -63,14 +59,13 @@ public class Macro implements Command {
         cmd.add(c);
     }
 
-    //  accessor dor command
     public ArrayList<Command> getCommand(){
         return cmd;
     }
 
     public void setParamEx(String[] tab){
         for(int i = 1 ; i < tab.length ; i ++){
-            paramEx[i-1] = Integer.parseInt(tab[i]);
+            this.paramEx[i-1] = Integer.parseInt(tab[i]);
         }
     }
 
@@ -104,9 +99,6 @@ public class Macro implements Command {
             }
             compteur = 0;
         }
-        for(int i = 0 ; i < 2 ; i++) {
-            paramEx[i] = param[i];
-        }
         return res;
     }
 
@@ -116,10 +108,14 @@ public class Macro implements Command {
         return name;
     }
 
-    public String toString(){return "Macro";}
+    public String toString(){return "Macro" + getParamEx(1);}
 
     public int getParam(int i){
         return param[i];
+    }
+
+    public int getParamEx(int i){
+        return paramEx[i];
     }
 
 
