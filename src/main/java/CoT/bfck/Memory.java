@@ -52,7 +52,6 @@ public class Memory {
 			throw new OutOfCapacityException("decr");
 		}
 		memory[index] = (byte) (memory[index] - 1);
-
 	}
 
 	/**
@@ -156,6 +155,10 @@ public class Memory {
 	public int getValue(){
         Metrics.DATA_READ++;
 		return memory[index]+128;
+	}
+
+	public int getIndex(){
+		return this.index;
 	}
 
 	/**

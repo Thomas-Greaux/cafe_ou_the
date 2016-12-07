@@ -30,6 +30,7 @@ public class Controleur {
     private FileWriter fw;
     private int c = 0;
     private JumpTable jumpTable;
+    private String fileWithoutExtension;
 
     // OPTIONS
     private int option_p;
@@ -41,7 +42,6 @@ public class Controleur {
     private int option_trace = -1;
     private int option_metrics = -1;
     private int option_interpret = 0;
-
 
     /**
      * Normal constructor for the Controleur
@@ -101,8 +101,9 @@ public class Controleur {
         if (option_trace != -1) {
             String[] f = file.split("/");
             String myFile = f[f.length - 1];
-            myFile = myFile.split("\\.")[0];
-            fw = new FileWriter(new File("files/Output/" + myFile + ".log"));
+            fileWithoutExtension = myFile.split("\\.")[0];
+            fw = new FileWriter(new File("files/Output/" + fileWithoutExtension + ".log"));//On reset le fichier
+            fw.close();
         }
 
         if (option_in != -1) mem.setIn(in);
@@ -149,20 +150,24 @@ public class Controleur {
                     j = jumpTable.getComp(j);
                 } else {
                     if (option_trace != -1) {
+                        fw = new FileWriter(new File("files/Output/" + fileWithoutExtension + ".log"), true);
                         c++;
                         fw.write("Step n°" + c + "\n");
                         fw.write("Next command : " + commands.get(j).getName() + "\n");
-                        fw.write("Data pointer value : " + mem.getValue() + "\n");
+                        fw.write("Data pointer value : " + mem.getIndex() + "\n");
                         fw.write("Memory SNAPSHOT :\n" + mem.display_String());
                         fw.write("\n---------------------------\n");
+                        closeWritter();
                     }
-
                     commands.get(j).execute(mem);
                 }
             }
         }
-            mem.close_stream();
-            if (option_trace != -1)
-                fw.close();
+        mem.close_stream();
+    }
+
+
+    public void closeWritter() throws IOException {
+        fw.close();
     }
 }

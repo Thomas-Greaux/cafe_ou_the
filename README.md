@@ -15,9 +15,9 @@ dépot de l'équipe café ou thé
 <h3>Taches :</h3>
 <ul>
 <li> Slice 12 : utilisation de métrics &#x2714</li>
-<li> Slice 13 : Option --trace pour obtenir la trace du code exécuté </li>
+<li> Slice 13 : Option --trace pour obtenir la trace du code exécuté &#x2714</li>
 <li> Slice 14 : Support des commentaires et de l'indentation &#x2714</li>
-<li> Slice 15 : Création de macros </li>
+<li> Slice 15 : Création de macros &#x2714</li>
 </ul>
 
 <h2>Semaine 46</h2>
