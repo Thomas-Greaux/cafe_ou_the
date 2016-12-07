@@ -24,7 +24,6 @@ public class Right implements Command {
 	 * @throws ImpossibleIndexException
 	 */
 	public void execute(Memory m) throws ImpossibleIndexException {
-		Metrics.DATA_READ++;
 		m.right();
 	}
 

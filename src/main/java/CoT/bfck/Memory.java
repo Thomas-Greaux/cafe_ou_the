@@ -16,10 +16,10 @@ public class Memory {
 
 	// the table of cells
 	private byte[] memory;
-	// the current index (= position in.bf the table)
-	private int index;
 
 	private IOStream io_stream = new IOStream();
+
+	private MemPointer index;
 
 	/**
 	 * Create the memory : initializing the table and index
@@ -29,7 +29,8 @@ public class Memory {
 		for (int i = 0; i < 30000; i++) {
 			memory[i] = -128;
 		}
-		index = 0;
+
+		index = new MemPointer();
 	}
 
 	/**
@@ -37,10 +38,10 @@ public class Memory {
 	 * @throws OutOfCapacityException
 	 */
 	public void incr() throws OutOfCapacityException {
-		if (memory[index] + 129 > 255 ) {
-			throw new OutOfCapacityException("incr");
-		}
-			memory[index] = (byte) (memory[index] + 1);
+		if (memory[index.getValue()] + 129 > 255 )
+		    throw new OutOfCapacityException("incr");
+		Metrics.DATA_WRITE++;
+        memory[index.getValue()]++;
 	}
 
 	/**
@@ -48,10 +49,10 @@ public class Memory {
 	 * @throws OutOfCapacityException
 	 */
 	public void decr() throws OutOfCapacityException {
-		if (memory[index] + 127 < 0) {
+		if (memory[index.getValue()] + 127 < 0)
 			throw new OutOfCapacityException("decr");
-		}
-		memory[index] = (byte) (memory[index] - 1);
+		memory[index.getValue()]--;
+        Metrics.DATA_WRITE++;
 	}
 
 	/**
@@ -59,11 +60,8 @@ public class Memory {
 	 * @throws ImpossibleIndexException
 	 */
 	public void right() throws ImpossibleIndexException {
-		if (this.index < 30000)
-			this.index++;
-		else {
-			throw new ImpossibleIndexException("right");
-		}
+		if (index.getValue() < 30000) index.incr();
+		else throw new ImpossibleIndexException("right");
 	}
 
 	/**
@@ -71,8 +69,7 @@ public class Memory {
 	 * @throws ImpossibleIndexException
 	 */
 	public void left() throws ImpossibleIndexException {
-		if (this.index > 0 )
-			this.index--;
+		if (index.getValue() > 0 ) index.decr();
 		else {
 			throw new ImpossibleIndexException("left");
 		}
@@ -83,14 +80,16 @@ public class Memory {
 	 * If a file is given in.bf argument, print the actual value in.bf it. If not, print it in.bf the terminal.
 	 */
 	public void out(){
-		io_stream.out( (byte) (memory[index]-128));
+        Metrics.DATA_READ++;
+        io_stream.out( (byte) (memory[index.getValue()]-128));
 	}
 
 	/**
 	 * If a file is given in argument, read the actual value in.bf it and put it in.bf the actual memory[index]. If not, read it in.bf the terminal.
 	 */
 	public void in(){
-        memory[index] = io_stream.in();
+        Metrics.DATA_WRITE++;
+        memory[index.getValue()] = io_stream.in();
 	}
 
 	/**
@@ -120,14 +119,14 @@ public class Memory {
 	 * Do nothing, the controleur handle jump & back
 	 */
 	public void back() {
-
+        Metrics.DATA_READ++;
 	}
 
 	/**
 	 * Do nothing, the controleur handle jump & back
 	 */
 	public void jump() {
-
+        Metrics.DATA_READ++;
 	}
 
 	/**
@@ -154,11 +153,11 @@ public class Memory {
 	 */
 	public int getValue(){
         Metrics.DATA_READ++;
-		return memory[index]+128;
+		return memory[index.getValue()]+128;
 	}
 
 	public int getIndex(){
-		return this.index;
+		return this.index.getValue();
 	}
 
 	/**

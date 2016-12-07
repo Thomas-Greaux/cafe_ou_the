@@ -43,10 +43,13 @@ public class Reader {
 	public ArrayList<Command> read(String line) throws NotACommandException{
 		ArrayList<Command> list = new ArrayList<Command>();
 		for(int i=0;i<line.length();i++){
+			//Si on rencontre un '/', la suite est une macro on la cree
 			if(line.charAt(i) == '/'){
 				createMacro(line.substring(1));
 				break;
 			}
+
+			//Si on rencontre un '#' ce qui suit est un commentaire, on l'ignore
 			if(line.charAt(i)=='#' || line.charAt(i)=='\n'){
 				break;
 			}else if(isChar(line) || isHexaColor(line)){
@@ -61,8 +64,12 @@ public class Reader {
 			}else{
 				String []s = line.split(" ");
 				if(isMacro(s[0])){
-					if(s.length == 2) {
-						cf.getMacro(s[0]).setNbExe(Integer.parseInt(s[1]));
+					if(s.length > 3) {
+						System.out.println("Too much args for the macro");
+						System.exit(4);
+					}
+					if(s.length >= 2) {
+						cf.getMacro(s[0]).setParamEx(s);
 					}
 					list.add(cf.getCommand(s[0]));
 					break;
@@ -120,7 +127,6 @@ public class Reader {
 	/**
 	 *
 	 * @param line
-	 * @param i
 	 * @throws NotACommandException
 	 */
 	public void createMacro(String line) throws NotACommandException{

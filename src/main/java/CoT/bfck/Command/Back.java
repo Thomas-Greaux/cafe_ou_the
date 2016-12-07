@@ -22,7 +22,6 @@ public class Back implements Command {
 	 * @param m memory
 	 */
 	public void execute(Memory m) {
-		Metrics.DATA_READ++;
 		m.back();
 	}
 

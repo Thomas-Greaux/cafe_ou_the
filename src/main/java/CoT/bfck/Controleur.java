@@ -138,29 +138,29 @@ public class Controleur {
      * @throws OutOfCapacityException
      */
     public void execute(ArrayList<Command> commands) throws IOException, ImpossibleIndexException, OutOfCapacityException {
-        int compteur = 0;
         int n = commands.size();
-        for (int j = 0; j < n; j++, Metrics.EXEC_MOVE++) //Boucle d'execution des commandes, on joue sur j pour gerer les boucles
+        ExecPointer execPointer = new ExecPointer();
+        for (; execPointer.getValue() < n; execPointer.incr()) //Boucle d'execution des commandes, on joue sur j pour gerer les boucles
         {
-            if (commands.get(j) != null) {
-                if (commands.get(j).getNameShort().equals("[") && mem.getValue() == 0) {
-                    j = jumpTable.getComp(j);
+            if (commands.get(execPointer.getValue()) != null) {
+                if (commands.get(execPointer.getValue()).getNameShort().equals("[") && mem.getValue() == 0) {
+                    execPointer.setValue(jumpTable.getComp(execPointer.getValue()));
                 }
-                else if (commands.get(j).getNameShort().equals("]") && mem.getValue() != 0) {
-                    j = jumpTable.getComp(j);
+                else if (commands.get(execPointer.getValue()).getNameShort().equals("]") && mem.getValue() != 0) {
+                    execPointer.setValue(jumpTable.getComp(execPointer.getValue()));
                 } else {
                     if (option_trace != -1) {
                         fw = new FileWriter(new File("files/Output/" + fileWithoutExtension + ".log"), true);
                         c++;
                         fw.write("Step n°" + c + "\n");
-                        fw.write("Next command : " + commands.get(j).getName() + "\n");
-                        fw.write("Data pointer value : " + mem.getIndex() + "\n");
+                        fw.write("Next command : " + commands.get(execPointer.getValue()).getName() + "\n");
+                        fw.write("Data pointer value : " + mem.getIndex() + "\n");;
                         fw.write("Memory SNAPSHOT :\n" + mem.display_String());
                         fw.write("\n---------------------------\n");
                         closeWritter();
                     }
-                    commands.get(j).execute(mem);
                 }
+                commands.get(execPointer.getValue()).execute(mem);
             }
         }
         mem.close_stream();
