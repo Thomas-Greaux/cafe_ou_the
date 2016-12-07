@@ -3,14 +3,21 @@ dépot de l'équipe café ou thé
 
 <h1>Brainfuck</h1>
 
+<h2>Semaine 49</h2>
+<h3>Taches : </h3>
+<ul>
+<li> <b><big>Fin de la rédaction du rapport n°3 </big></b></li>
+<li> Réfléchir Niveau 4</li>
+<li> Se répartir les taches pour le niveau 4 + do it</li>
+<li>  </li>
+</ul>
 <h2>Semaine 48</h2>
 <h3>Taches :</h3>
 <ul>
-<li> Slice 16 : Paramétrage des macros </li>
-<li> Slice 17 : Optimisation des boucles </li>
+<li> Slice 16 : Paramétrage des macros &#x2714</li>
+<li> Slice 17 : Optimisation des boucles &#x2714</li>
 <li> Fin de la rédaction du rapport n°3 </li>
 </ul>
-
 <h2>Semaine 47</h2>
 <h3>Taches :</h3>
 <ul>
