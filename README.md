@@ -1,8 +1,7 @@
 # cafe_ou_the
-dépot de l'équipe café ou thé
-Développement d'un interpréteur Brainfuck en Java
+Développement d'un interpréteur Brainfuck en Java, utilisant Maven.
 
-<h1>Brainfuck</h1>
+<h1>Log</h1>
 
 <h2>Semaine 49</h2>
 <h3>Taches : </h3>
