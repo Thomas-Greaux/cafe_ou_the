@@ -1,4 +1,4 @@
-package CoT.bfck;
+package CoT.bfck.Factory;
 
 import CoT.bfck.Command.*;
 import CoT.bfck.Exception.NotACommandException;

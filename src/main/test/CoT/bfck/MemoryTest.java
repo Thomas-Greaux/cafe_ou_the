@@ -4,6 +4,7 @@ import CoT.bfck.Command.Command;
 import CoT.bfck.Exception.ImpossibleIndexException;
 import CoT.bfck.Exception.NotACommandException;
 import CoT.bfck.Exception.OutOfCapacityException;
+import CoT.bfck.Factory.CommandFactory;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -11,8 +12,6 @@ import org.junit.rules.ExpectedException;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
-import static org.junit.Assert.*;
 
 /**
  * @author cafe_ou_the
@@ -40,7 +39,7 @@ public class MemoryTest {
     public void incr() throws NotACommandException, ImpossibleIndexException, OutOfCapacityException, IOException {
 
         thrown.expect(NotACommandException.class);
-        thrown.expectMessage("Out of capacity (in the method )");
+        thrown.expectMessage("Out of capacity (in the method incr)");
 
         for(int i=0;i<256;i++)
             commandes.add(cf.getCommand("+"));

@@ -94,8 +94,8 @@ public class Controleur {
             String rewrite = OpOption.rewrite(commands);
             new CreateImage().create_Image(rewrite);
         }
-        if (option_rewrite != -1) OpOption.print(commands);
-
+        if (option_rewrite != -1)
+            OpOption.print(commands);
         if (option_check != -1) OpOption.check(commands);
 
         if (option_trace != -1) {

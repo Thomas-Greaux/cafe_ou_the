@@ -1,6 +1,6 @@
 package CoT.bfck.Reader;
 
-import CoT.bfck.Colors;
+import CoT.bfck.Factory.Colors;
 import CoT.bfck.Command.Command;
 import CoT.bfck.Exception.NotACommandException;
 

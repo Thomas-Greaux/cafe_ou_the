@@ -18,7 +18,10 @@ public class OpOption {
     public static String rewrite(ArrayList<Command> commands) {
         StringBuilder res = new StringBuilder();
         for (Command command : commands) {
-            if (command != null) res.append(command.getNameShort());
+            if (command != null) {
+                res.append(command.getNameShort());
+            }
+
         }
         return res.toString();
     }

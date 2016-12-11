@@ -2,6 +2,7 @@ package CoT.bfck;
 
 import CoT.bfck.Command.Command;
 import CoT.bfck.Exception.NotACommandException;
+import CoT.bfck.Factory.CommandFactory;
 import org.junit.Before;
 import org.junit.Test;
 

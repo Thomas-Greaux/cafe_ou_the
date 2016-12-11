@@ -1,13 +1,10 @@
 package CoT.bfck.Macro;
 
-import CoT.bfck.Command.Command;
-import CoT.bfck.CommandFactory;
+import CoT.bfck.Factory.CommandFactory;
 import CoT.bfck.Exception.NotACommandException;
 import CoT.bfck.Memory;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 

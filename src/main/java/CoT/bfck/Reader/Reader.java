@@ -1,13 +1,12 @@
 package CoT.bfck.Reader;
 
 import CoT.bfck.Command.Command;
-import CoT.bfck.CommandFactory;
+import CoT.bfck.Factory.CommandFactory;
 import CoT.bfck.Exception.NotACommandException;
-import CoT.bfck.Macro.Macro;
 
 import java.util.ArrayList;
 
-import static CoT.bfck.Reader.Commentary.delCom;
+import CoT.bfck.Reader.Formatting;
 
 /**
  * This class read the instructions given by the ReadFile and ReadImage.
@@ -16,9 +15,11 @@ import static CoT.bfck.Reader.Commentary.delCom;
 public class Reader {
 
 	private CommandFactory cf;
+	private Formatting f;
 
 	public Reader() {
 		cf = new CommandFactory();
+		f = new Formatting();
 	}
 
 	/**
@@ -45,25 +46,15 @@ public class Reader {
 	 */
 	public ArrayList<Command> read(String line) throws NotACommandException{
 		ArrayList<Command> list = new ArrayList<Command>();
-		line = delCom(line);
+		line = f.deleteSyntaxAndComments(line);
 		for(int i=0;i<line.length();i++){
 			//Si on rencontre un '/', la suite est une macro on la cree
 			if(line.charAt(i) == '/'){
 				createMacro(line.substring(1));
 				break;
-			}
-			//Si on rencontre un '#' ce qui suit est un commentaire, on l'ignore
-			if(line.charAt(i)=='\n'){
-				break;
 			}else if(isChar(line) || isHexaColor(line)){
-				if(!line.equals("000000")){
-					list.add((cf.getCommand(line)));
-					break;
-				}else{
-					break;
-				}
-			}else if(line.charAt(i) == ' ' || line.charAt(i) == '\t'){ //TODO Empty body ?
-
+				list.add((cf.getCommand(line)));
+				break;
 			}else{
 				String []s = line.split(" ");
 				if(isMacro(s[0])){

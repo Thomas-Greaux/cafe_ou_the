@@ -16,3 +16,5 @@
 --------.                 #'d'    = 100 (108 moins 8)
 >+.                       #'!'    = 33  (32  plus  1)
 >.                        #nouvelle ligne = 10
+#petit test :)
+\t\n
