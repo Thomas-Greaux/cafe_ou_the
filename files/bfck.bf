@@ -1,4 +1,2 @@
-/WESH 1 2 +++++
-WESH 20
->
-WESH 40
+/WESH +++++
+WESH 1 3

@@ -55,6 +55,8 @@ public class Reader {
 			}else if(isChar(line) || isHexaColor(line)){
 				list.add((cf.getCommand(line)));
 				break;
+			}else if(line.charAt(i) == ' ' ){
+				//DO nothing : commentary
 			}else{
 				String []s = line.split(" ");
 				if(isMacro(s[0])){

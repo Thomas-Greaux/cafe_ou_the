@@ -1,12 +1,16 @@
 package CoT.bfck.Reader;
 
+import CoT.bfck.Factory.CommandFactory;
+
 /**
  * Created by user on 07/12/2016.
  */
 public class Formatting {
+    private CommandFactory cf;
+
 
     public Formatting(){
-
+        cf = new CommandFactory();
     }
 
     /**
@@ -27,10 +31,11 @@ public class Formatting {
      */
     private String delSyntax(String s){
         String returned = "";
+
         for(int i=0;i<s.length();i++) {
-            if (s.charAt(i) == ' ') {
+            /*if (s.charAt(i) == ' ') {
                 //DO NOTHING : SYNTAX
-            } else if (s.charAt(i) == '\\') {
+            } else */if (s.charAt(i) == '\\') {
                 if (s.charAt(i + 1) == 't') {
                     i++;
                     //DO NOTHING : SYNTAX
@@ -43,6 +48,7 @@ public class Formatting {
             }
 
         }
+
         return returned;
     }
 
@@ -58,7 +64,6 @@ public class Formatting {
             return s;
         }
     }
-
     /**
      * Delete everything that does't need to be deleted in order to run the execution.
      * @param s contains the line
