@@ -33,8 +33,8 @@ public class ReadFile extends Reader {
 
 			String line;
 			while ((line = br.readLine()) != null) {
-				commands.addAll(read(line));
-			}
+                commands.addAll(read(line));
+            }
 			br.close();
 		}	
 		catch (FileNotFoundException e){

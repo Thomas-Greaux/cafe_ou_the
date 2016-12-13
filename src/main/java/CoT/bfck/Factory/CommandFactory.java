@@ -92,14 +92,16 @@ public class CommandFactory {
 
 	public boolean isMacro(String n ){
 		for(Macro s : m){
-			if(s.getName().equals(n)) return true;
+			if(s.getName().equals(n))
+				return true;
 		}
 		return false;
 	}
 
 	public Macro getMacro(String n){
 		for(Macro s : m){
-			if(s.getName().equals(n)) return s;
+			if(s.getName().equals(n))
+				return s;
 		}
 		return null;
 	}

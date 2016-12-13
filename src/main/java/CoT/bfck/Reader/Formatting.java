@@ -3,14 +3,14 @@ package CoT.bfck.Reader;
 import CoT.bfck.Factory.CommandFactory;
 
 /**
- * Created by user on 07/12/2016.
+ * This class is used to erase syntax settings. For now, it
+ *
+ * @author cafe_ou_the
  */
 public class Formatting {
-    private CommandFactory cf;
-
 
     public Formatting(){
-        cf = new CommandFactory();
+
     }
 
     /**
