@@ -2,7 +2,7 @@ package CoT.bfck.Macro;
 
 import CoT.bfck.Factory.CommandFactory;
 import CoT.bfck.Exception.NotACommandException;
-import CoT.bfck.Memory;
+import CoT.bfck.Memory.Memory;
 import org.junit.Before;
 import org.junit.Test;
 

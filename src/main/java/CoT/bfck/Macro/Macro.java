@@ -1,13 +1,11 @@
 package CoT.bfck.Macro;
 
 import CoT.bfck.Command.Command;
-import CoT.bfck.Command.Out;
 import CoT.bfck.Exception.ImpossibleIndexException;
 import CoT.bfck.Exception.OutOfCapacityException;
-import CoT.bfck.Memory;
+import CoT.bfck.Memory.Memory;
 
 import java.awt.*;
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**

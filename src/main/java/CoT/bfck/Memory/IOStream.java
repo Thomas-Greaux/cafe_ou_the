@@ -1,4 +1,4 @@
-package CoT.bfck;
+package CoT.bfck.Memory;
 
 import CoT.bfck.Exception.FileDoesntExists;
 

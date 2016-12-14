@@ -1,8 +1,7 @@
 package CoT.bfck.Command;
 
 import CoT.bfck.Exception.OutOfCapacityException;
-import CoT.bfck.Memory;
-import CoT.bfck.Metrics;
+import CoT.bfck.Memory.Memory;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -13,10 +12,10 @@ import java.util.ArrayList;
  */
 public class Increment implements Command {
 
-	protected Color colorRGB = new Color(255, 255, 255);
-	protected String colorHexa = new String("ffffff");
-	protected String name = new String("INCR");
-	protected String nameShort = new String("+");
+	private Color colorRGB = new Color(255, 255, 255);
+	private String colorHexa = new String("ffffff");
+	private String name = new String("INCR");
+	private String nameShort = new String("+");
 
 	/**
 	 * Exécution of the command

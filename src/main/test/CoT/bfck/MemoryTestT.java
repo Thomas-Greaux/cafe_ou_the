@@ -1,10 +1,8 @@
 package CoT.bfck;
 
-import org.junit.After;
+import CoT.bfck.Memory.Memory;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by cafe_ou_the on 24/11/16.

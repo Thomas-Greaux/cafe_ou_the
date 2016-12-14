@@ -1,8 +1,7 @@
 package CoT.bfck.Command;
 
 import CoT.bfck.Exception.ImpossibleIndexException;
-import CoT.bfck.Memory;
-import CoT.bfck.Metrics;
+import CoT.bfck.Memory.Memory;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -14,10 +13,10 @@ import java.util.ArrayList;
 public class Left implements Command {
 
 
-	public Color colorRGB = new Color(148, 0, 211);
-	public String colorHexa = new String("9400d3");
-	public String name = new String("LEFT");
-	public String nameShort = new String("<");
+	private Color colorRGB = new Color(148, 0, 211);
+	private String colorHexa = new String("9400d3");
+	private String name = new String("LEFT");
+	private String nameShort = new String("<");
 
 	/**
 	 * Exécution of the command

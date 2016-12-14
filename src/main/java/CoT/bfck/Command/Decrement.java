@@ -1,8 +1,7 @@
 package CoT.bfck.Command;
 
 import CoT.bfck.Exception.OutOfCapacityException;
-import CoT.bfck.Memory;
-import CoT.bfck.Metrics;
+import CoT.bfck.Memory.Memory;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -13,10 +12,10 @@ import java.util.ArrayList;
  */
 public class Decrement implements Command {
 
-	public Color colorRGB = new Color(75, 0, 130);
-	public String colorHexa = new String("4b0082");
-	public String name = new String("DECR");
-	public String nameShort = new String("-");
+	private Color colorRGB = new Color(75, 0, 130);
+	private String colorHexa = new String("4b0082");
+	private String name = new String("DECR");
+	private String nameShort = new String("-");
 
 	/**
 	 * Exécution of the command

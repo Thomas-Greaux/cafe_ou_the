@@ -1,4 +1,4 @@
-package CoT.bfck.Reader;
+package CoT.bfck.Options;
 
 import CoT.bfck.Factory.Colors;
 import CoT.bfck.Exception.NotACommandException;

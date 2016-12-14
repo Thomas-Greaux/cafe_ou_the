@@ -2,7 +2,7 @@ package CoT.bfck.Command;
 
 import CoT.bfck.Exception.ImpossibleIndexException;
 import CoT.bfck.Exception.OutOfCapacityException;
-import CoT.bfck.Memory;
+import CoT.bfck.Memory.Memory;
 
 import java.awt.Color;
 import java.util.ArrayList;

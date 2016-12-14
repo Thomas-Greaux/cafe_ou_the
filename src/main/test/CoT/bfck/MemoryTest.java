@@ -5,6 +5,7 @@ import CoT.bfck.Exception.ImpossibleIndexException;
 import CoT.bfck.Exception.NotACommandException;
 import CoT.bfck.Exception.OutOfCapacityException;
 import CoT.bfck.Factory.CommandFactory;
+import CoT.bfck.Memory.Memory;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

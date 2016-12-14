@@ -1,23 +1,23 @@
-package CoT.bfck;
+package CoT.bfck.Memory;
 
 /**
  * Created by Thoma on 12/3/2016.
  */
-public class ExecPointer {
+public class MemPointer {
     private int value;
 
-    public ExecPointer(){
+    public MemPointer(){
         value = 0;
     }
 
     public void incr(){
         value++;
-        Metrics.EXEC_MOVE++;
+        Metrics.DATA_MOVE++;
     }
 
-    public void setValue(int i){
-        value = i;
-        Metrics.EXEC_MOVE++;
+    public void decr(){
+        value--;
+        Metrics.DATA_MOVE++;
     }
 
     public int getValue(){

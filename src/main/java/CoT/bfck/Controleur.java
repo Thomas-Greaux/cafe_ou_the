@@ -5,7 +5,11 @@ import CoT.bfck.Exception.FileDoesntExists;
 import CoT.bfck.Exception.ImpossibleIndexException;
 import CoT.bfck.Exception.NotACommandException;
 import CoT.bfck.Exception.OutOfCapacityException;
-import CoT.bfck.Reader.CreateImage;
+import CoT.bfck.Memory.ExecPointer;
+import CoT.bfck.Memory.Memory;
+import CoT.bfck.Memory.Metrics;
+import CoT.bfck.Options.CreateImage;
+import CoT.bfck.Options.OpOption;
 import CoT.bfck.Reader.ReadFile;
 import CoT.bfck.Reader.ReadImage;
 
@@ -113,7 +117,7 @@ public class Controleur {
         if (option_interpret == 0) {
             OpOption.check(commands); //On check toujours le programme
 
-            Metrics.PROG_SIZE = commands.size();
+            Metrics.setProgSize(commands.size());
 
             jumpTable = new JumpTable(commands); //Table contenant les liaison entre jump et back
 
@@ -123,7 +127,7 @@ public class Controleur {
             execute(commands);
             long finish = System.currentTimeMillis();
 
-            Metrics.EXEC_TIME = finish - start;
+            Metrics.setExecTime(finish - start);
 
             mem.display();
             if (option_metrics == -1) Metrics.display(); //On n'affiche pas les metrics seulement si l'option est entree

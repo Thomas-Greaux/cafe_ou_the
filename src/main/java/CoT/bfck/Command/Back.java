@@ -1,7 +1,6 @@
 package CoT.bfck.Command;
 
-import CoT.bfck.Memory;
-import CoT.bfck.Metrics;
+import CoT.bfck.Memory.Memory;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -12,10 +11,10 @@ import java.util.ArrayList;
  */
 public class Back implements Command {
 
-	public Color colorRGB = new Color(255, 0, 0);
-	public String colorHexa = new String("ff0000");
-	public String name = new String("BACK");
-  	public String nameShort = new String("]");
+	private Color colorRGB = new Color(255, 0, 0);
+	private String colorHexa = new String("ff0000");
+	private String name = new String("BACK");
+	private String nameShort = new String("]");
 
 	/**
 	 * Exécution of the command

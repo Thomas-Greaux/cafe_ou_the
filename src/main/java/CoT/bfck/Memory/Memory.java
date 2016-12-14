@@ -1,11 +1,11 @@
-package CoT.bfck;
+package CoT.bfck.Memory;
 
 import CoT.bfck.Exception.FileDoesntExists;
 import CoT.bfck.Exception.ImpossibleIndexException;
 import CoT.bfck.Exception.OutOfCapacityException;
 
 import java.io.*;
-import java.util.Scanner;
+
 /**
  * The class Memory contain every implemented operations (INCR, DECR, RIGHT,
  * LEFT) and has the role to make the instructions do their job.

@@ -1,4 +1,4 @@
-package CoT.bfck;
+package CoT.bfck.Memory;
 
 /**
  * Class used to print the different metrics.
@@ -12,6 +12,14 @@ public class Metrics {
     static long DATA_WRITE = 0;
     static long DATA_READ = 0;
 
+
+    public static void setProgSize(long l){
+        PROG_SIZE = l;
+    }
+
+    public static void setExecTime(long l){
+        EXEC_TIME = l;
+    }
 
     public static void display() {
         System.out.println("\nMetrics:");
