@@ -1,1 +1,18 @@
 Ecrire ici les différentes questions à poser à la séance suivante :
+
+Slice 18 :
+En gros on créé une macro, qui va contenir des instructions et à chaque appel vers ces instructions on exécute au lieu de remplacer dans le texte.
+Changer le fonctionnement de notre code : on exécute tout d'un coup mais faut-il faire ligne par ligne (pas compliqué à implémenter).
+On garde les macros ==> plus vraiment d'utilité si moins optimisé ?
+
+Slice 19
+On gère mêmes args que pour nos macros par exemple ?
+
+Slice 20 :
+Syntaxe particulière ou libre ?
+==> comme une macro : la fonction retourne ce qu'elle doit retourner, et après on exécute le tout ?
+Utilisé pour récupérer une valeur ? Exécuter directement des instructions ?
+
+Slice 21 :
+On choisi un langage en particulier ? Même fonctionnement que le translate, ou on exécute le code et récupére à la fin le code ?
+Langages : trouver un moyen de couvrir les langages les plus courants / seulement un langage ?
