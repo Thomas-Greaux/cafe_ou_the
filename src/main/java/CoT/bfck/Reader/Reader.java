@@ -66,16 +66,16 @@ public class Reader {
 						System.exit(4);
 					}
 					else if(s.length == 1){
-						list.add(cf.getMacro(s[0]));
+						list.addAll(cf.getMacro(s[0]).getInstru());
 						return list;
 					}
 					else if (s.length == 2){
-						list.add(new Macro(s[0],s[1],Integer.toString(cf.getMacro(s[0]).getParam(1)),cf.getMacro(s[0]).getCommand()));
+						list.addAll(new Macro(s[0],s[1],Integer.toString(cf.getMacro(s[0]).getParam(1)),cf.getMacro(s[0]).getCommand()).getInstru());
 						return list;
 					}
 					else {
 						Macro A = new Macro(s[0],s[1],s[2],cf.getMacro(s[0]).getCommand());
-						list.add(A);
+						list.addAll(A.getInstru());
 						return list;
 						}
 					}

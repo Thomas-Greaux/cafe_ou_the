@@ -79,9 +79,22 @@ public class CommandFactory {
 	}
 
 	public void createMacro(String[] s, ArrayList<Command> cmd) {
-		Macro A = new Macro(s,cmd);
+		Macro A = null;
+		if(s.length == 2) {
+			A = new Macro(s[0], cmd);
+		}
+		if(s.length == 3){
+			A = new Macro(s[0],s[1],cmd);
+		}
+		if(s.length == 4){
+			A = new Macro(s[0],s[1],s[2],cmd);
+		}
 		if(!isMacro(s[0]))
 			m.add(A);
+		else {
+			System.out.println("Macro déjà existante");
+			System.exit(1);
+		}
 	}
 
 	public void createMacro(String s, String macro){

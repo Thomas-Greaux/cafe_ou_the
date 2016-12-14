@@ -24,7 +24,15 @@ public class Macro implements Command {
             param[i] = m.getParam(i);
         }
     }
-
+    public Macro(String nom, String para1,ArrayList<Command> c ){
+        name = nom;
+        param[0] = Integer.parseInt(para1);
+        cmd = c;
+    }
+    public Macro(String nom,ArrayList<Command> c ){
+        name = nom;
+        cmd = c;
+    }
     public Macro(String s, String para1, String para2,ArrayList<Command> c){
         name = s;
         cmd = c;
@@ -66,16 +74,21 @@ public class Macro implements Command {
         return cmd;
     }
 
-     public void execute(Memory m) throws ImpossibleIndexException, OutOfCapacityException {
+    public ArrayList<Command> getInstru(){
+        ArrayList<Command> instru = new ArrayList<Command>();
         int compteur = 0;
-         for (int i = 0; i < param[0]; i++) {
+        for (int i = 0; i < param[0]; i++) {
             for (Command c : cmd) {
                 if(compteur == param[1])
-                    c.execute(m);
+                    instru.add(c);
                 else compteur ++;
             }
             compteur = 0;
-            }
+        }
+        return instru;
+    }
+
+     public void execute(Memory m) throws ImpossibleIndexException, OutOfCapacityException {
     }
 
     public ArrayList<String> getProperties() {
