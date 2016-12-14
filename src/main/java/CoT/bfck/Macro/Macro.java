@@ -16,26 +16,31 @@ public class Macro implements Command {
     private String name;
     private ArrayList<Command> cmd = new ArrayList<Command>();
     private int[] param = {1,0};
-    private int[] paramEx = {1,0};
 
     public Macro(String s, Macro m){
         name = s;
         cmd = m.getCommand();
         for(int i = 0 ; i < 2 ; i++) {
             param[i] = m.getParam(i);
-            paramEx[i] = param[i];
         }
-
     }
 
+    public Macro(String s, String para1, String para2,ArrayList<Command> c){
+        name = s;
+        cmd = c;
+        param[0] = Integer.parseInt(para1);
+        param[1] = Integer.parseInt(para2);
+    }
     public Macro(String s[],ArrayList<Command> c){
         name = s[0];
         cmd = c;
         try {
-            if (s.length > 2) {
+            if(s.length == 2){
+                param[0] = Integer.parseInt(s[1]);
+            }
+            else if (s.length > 2) {
                 for (int i = 1; i < s.length - 1; i++) {
                     param[i - 1] = Integer.parseInt(s[i]);
-                    paramEx[i - 1] = param[i - 1];
                 }
             }
         }
@@ -61,25 +66,16 @@ public class Macro implements Command {
         return cmd;
     }
 
-    public void setParamEx(String[] tab){
-        for(int i = 1 ; i < tab.length ; i ++){
-            this.paramEx[i-1] = Integer.parseInt(tab[i]);
-        }
-    }
-
      public void execute(Memory m) throws ImpossibleIndexException, OutOfCapacityException {
         int compteur = 0;
-         for (int i = 0; i < paramEx[0]; i++) {
+         for (int i = 0; i < param[0]; i++) {
             for (Command c : cmd) {
-                if(compteur == paramEx[1])
+                if(compteur == param[1])
                     c.execute(m);
                 else compteur ++;
             }
             compteur = 0;
             }
-         for(int i = 0 ; i < 2 ; i++) {
-             paramEx[i] = param[i];
-         }
     }
 
     public ArrayList<String> getProperties() {
@@ -89,9 +85,9 @@ public class Macro implements Command {
     public String getNameShort() {
         String res = "";
         int compteur = 0;
-        for (int i = 0; i < paramEx[0]; i++) {
+        for (int i = 0; i < param[0]; i++) {
             for (Command c : cmd) {
-                if(compteur == paramEx[1])
+                if(compteur == param[1])
                     res += c.getNameShort();
                 else compteur ++;
             }
@@ -106,15 +102,8 @@ public class Macro implements Command {
         return name;
     }
 
-    public String toString(){return "Macro" + getParamEx(1);}
-
     public int getParam(int i){
         return param[i];
     }
-
-    public int getParamEx(int i){
-        return paramEx[i];
-    }
-
 
 }

@@ -6,6 +6,7 @@ import CoT.bfck.Exception.NotACommandException;
 
 import java.util.ArrayList;
 
+import CoT.bfck.Macro.Macro;
 import CoT.bfck.Reader.Formatting;
 
 /**
@@ -64,14 +65,22 @@ public class Reader {
 						System.out.println("Too much args for the macro");
 						System.exit(4);
 					}
-					else{
-						cf.getMacro(s[0]).setParamEx(s);
+					else if(s.length == 1){
 						list.add(cf.getMacro(s[0]));
 						return list;
 					}
-				}
-				else {
-					list.add((cf.getCommand(Character.toString(line.charAt(i)))));
+					else if (s.length == 2){
+						list.add(new Macro(s[0],s[1],Integer.toString(cf.getMacro(s[0]).getParam(1)),cf.getMacro(s[0]).getCommand()));
+						return list;
+					}
+					else {
+						Macro A = new Macro(s[0],s[1],s[2],cf.getMacro(s[0]).getCommand());
+						list.add(A);
+						return list;
+						}
+					}
+					else {
+						list.add((cf.getCommand(Character.toString(line.charAt(i)))));
 				}
 			}
 		}
