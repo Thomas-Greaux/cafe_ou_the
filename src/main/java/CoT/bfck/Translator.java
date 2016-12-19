@@ -26,6 +26,11 @@ public class Translator {
         }
     }
 
+    /**
+     * Translate brainfuck code to Java code
+     * @param commands to translate
+     */
+
     public void translate(ArrayList<Command> commands){
         pw.println("public class Main{");
         pw.println("\tpublic static void main(String[] args){");
@@ -33,7 +38,29 @@ public class Translator {
         pw.println("\t\tfor(int i = 0; i<30000; i++){");
         pw.println("\t\t\tmemory[i] = 0;");
         pw.println("\t\t}");
+        for(Command cmd : commands){
+            for(int i = 0; i < 20; i++){
+
+            }
+        }
         pw.println("\t}");
         pw.println("}");
+    }
+
+    /**
+     * Translate a single instruction
+     * @param cmd the brainfuck instruction
+     * @return the translated instruction in Java
+     */
+    public String translate_instruction(Command cmd){
+        String instruct = cmd.getNameShort();
+        if(instruct.equals("+")) return "memory[i]++;";
+        if(instruct.equals("-")) return "memory[i]--;";
+        if(instruct.equals(">")) return "i++;";
+        if(instruct.equals("-")) return "i--;";
+        else{
+            System.exit(7);
+            return "";
+        }
     }
 }
