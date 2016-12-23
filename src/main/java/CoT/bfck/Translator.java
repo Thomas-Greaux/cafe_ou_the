@@ -1,11 +1,12 @@
 package CoT.bfck;
 
 import CoT.bfck.Command.*;
+import CoT.bfck.Exception.NotACommandException;
+import CoT.bfck.Factory.CommandFactory;
+import CoT.bfck.Macro.Macro;
 import com.sun.org.apache.xpath.internal.SourceTree;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.ArrayList;
 
 /**
@@ -16,6 +17,7 @@ public class Translator {
 
     private static final String default_path = "D:/\"Polytech Nice\"/Projet/bfck_renew/bfck/files/Output/traduction.txt";
     private PrintWriter pw;
+    private int ind = 0; //keep track of the indentation
 
     public Translator(String path){
         if(path == null) pw = new PrintWriter(System.out);
@@ -59,11 +61,12 @@ public class Translator {
     public void write_main(ArrayList<Command> commands){
         pw.println();
         pw.println("\tpublic static void main(String[] args){");
-        pw.println("\tMain m = new Main();");
+        pw.println("\t\tMain m = new Main();");
         for(Command command : commands){
-            pw.println("\t\t" + translate_instruction(command));
+            indentation();
+            pw.println("\t" + translate_instruction(command));
         }
-        pw.println("\tm.display();");
+        pw.println("\t\tm.display();");
         pw.println("\t}");
         pw.println();
     }
@@ -91,12 +94,14 @@ public class Translator {
      */
     public String translate_instruction(Command cmd){
         String instruct = cmd.getNameShort();
-        if(instruct.equals("+")) return "m.memory[m.i]++;";
-        if(instruct.equals("-")) return "m.memory[m.i]--;";
-        if(instruct.equals(">")) return "m.i++;";
-        if(instruct.equals("<")) return "m.i--;";
-        if(instruct.equals("[")) return "while(m.memory[m.i])\t{";
-        if(instruct.equals("]")) return "\t}";
+        if(instruct.equals("+")) return "\tm.memory[m.i]++;";
+        if(instruct.equals("-")) return "\tm.memory[m.i]--;";
+        if(instruct.equals(">")) return "\tm.i++;";
+        if(instruct.equals("<")) return "\tm.i--;";
+        if(instruct.equals("[")) {ind++; return "\twhile(m.memory[m.i] != 0){";}
+        if(instruct.equals("]")) {ind--; return "}";}
+        if(instruct.equals(".")) return "\tSystem.out.print((char) m.memory[m.i]);";
+        if(instruct.equals(",")) return "\tA implementer;";
         else{
             System.out.println("Pas une instruction: " + instruct);
             System.exit(7);
@@ -118,19 +123,47 @@ public class Translator {
     }
 
     /**
+     * this method handles the indentation
+     */
+    public void indentation(){for(int k = 0; k<ind; k++) pw.print("\t");}
+
+    //TODO: supprimer, ce n'est la qu'a but de faire des essais -----------------------
+    /**
+     * Temporaire, pour des essais
+     * @param prog
+     * @return
+     * @throws NotACommandException
+     * @throws IOException
+     */
+    public ArrayList<Command> readFile(String prog) throws NotACommandException, IOException {
+        ArrayList<Command> commands = new ArrayList<Command>();
+        commands.addAll(read(prog));
+        return commands;
+    }
+
+    public ArrayList<Command> read(String line) throws NotACommandException{
+        ArrayList<Command> list = new ArrayList<Command>();
+        CommandFactory cf = new CommandFactory();
+        String tmp;
+        for(int i=0;i<line.length();i++){
+            list.add(cf.getCommand(line.substring(i, i+1)));
+        }
+        return list;
+    }
+
+    //TODO -----------------------------------------------------------------------------
+
+    /**
      * Classe d'essai
      * @param args les arguments du programme
      */
     public static void main (String[] args){
-        ArrayList<Command> commands = new ArrayList<Command>();
-        commands.add(new Increment());
-        commands.add(new Increment());
-        commands.add(new Increment());
-        commands.add(new Increment());
-        commands.add(new Right());
-        commands.add(new Right());
-        commands.add(new Increment());
         Translator t = new Translator(null);
+        ArrayList<Command> commands = new ArrayList<Command>();
+        try {
+            commands = t.readFile("++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>.");
+        } catch (Exception e){}
+
         t.translate(commands);
     }
 
