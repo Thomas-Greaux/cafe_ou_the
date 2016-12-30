@@ -38,6 +38,7 @@ public class Translator {
      */
 
     public void translate(ArrayList<Command> commands){
+        pw.println("import java.util.Scanner;\n");
         pw.println("public class Main{");
         write_initialization();
         write_constructor();
@@ -49,8 +50,8 @@ public class Translator {
 
     public void write_initialization(){
         pw.println();
-        pw.println("public int i;");
-        pw.println("public int[] memory;");
+        pw.println("private int i;");
+        pw.println("private int[] memory;");
         pw.println();
     }
 
@@ -62,6 +63,7 @@ public class Translator {
         pw.println();
         pw.println("\tpublic static void main(String[] args){");
         pw.println("\t\tMain m = new Main();");
+        pw.println("\t\tScanner sc = new Scanner(System.in);");
         for(Command command : commands){
             indentation();
             pw.println("\t" + translate_instruction(command));
@@ -101,7 +103,7 @@ public class Translator {
         if(instruct.equals("[")) {ind++; return "\twhile(m.memory[m.i] != 0){";}
         if(instruct.equals("]")) {ind--; return "}";}
         if(instruct.equals(".")) return "\tSystem.out.print((char) m.memory[m.i]);";
-        if(instruct.equals(",")) return "\tA implementer;";
+        if(instruct.equals(",")) return "\tm.memory[m.i] = sc.nextInt();";
         else{
             System.out.println("Pas une instruction: " + instruct);
             System.exit(7);
@@ -115,6 +117,7 @@ public class Translator {
     public void write_display(){
         pw.println();
         pw.println("\tpublic void display(){");
+        pw.println("\tSystem.out.println();");
         pw.println("\tfor(int k = 0; k<30000; k++){");
         pw.println("\t\tif(memory[k] != 0) System.out.println(\"C\" + k + \": \" + memory[k]);");
         pw.println("\t\t}");
@@ -164,7 +167,14 @@ public class Translator {
             commands = t.readFile("++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>.");
         } catch (Exception e){}
 
-        t.translate(commands);
+        try {
+            t.translate(t.readFile(",.")); //Essai de IN OUT
+        } catch (NotACommandException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //t.translate(commands); //Essai de Hello World!
     }
 
 }
