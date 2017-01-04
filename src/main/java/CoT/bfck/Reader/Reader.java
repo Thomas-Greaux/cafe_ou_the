@@ -1,6 +1,7 @@
 package CoT.bfck.Reader;
 
 import CoT.bfck.Command.Command;
+import CoT.bfck.Command.Procedure;
 import CoT.bfck.Factory.CommandFactory;
 import CoT.bfck.Exception.NotACommandException;
 
@@ -48,9 +49,15 @@ public class Reader {
 	public ArrayList<Command> read(String line) throws NotACommandException{
 		ArrayList<Command> list = new ArrayList<Command>();
 		line = f.deleteSyntaxAndComments(line);
+		String []s = line.split(" ");
 		for(int i=0;i<line.length();i++){
+			//Si on rencontre un 'void', la suite est une procedure on la cree
+			if(s[0].equals("void")){
+				cf.createProc(s[1],s[2],read(s[3]));
+				break;
+			}
 			//Si on rencontre un '/', la suite est une macro on la cree
-			if(line.charAt(i) == '/'){
+			else if(line.charAt(i) == '/'){
 				createMacro(line.substring(1));
 				break;
 			}else if(isChar(line) || isHexaColor(line)){
@@ -59,7 +66,6 @@ public class Reader {
 			}else if(line.charAt(i) == ' ' ){
 				//DO nothing : commentary
 			}else{
-				String []s = line.split(" ");
 				if(isMacro(s[0])){
 					if(s.length > 3) {
 						System.out.println("Too much args for the macro");
@@ -78,9 +84,19 @@ public class Reader {
 						list.addAll(A.getInstru());
 						return list;
 						}
+				}
+				if(isProc(s[0])){
+					if(s.length == 1) {
+						list.add(cf.getProc(s[0]));
+						return list;
 					}
-					else {
-						list.add((cf.getCommand(Character.toString(line.charAt(i)))));
+					if(s.length == 2) {
+						list.add(new Procedure(s[0],Integer.parseInt(s[1]),cf.getProc(s[0]).getCommand()));
+						return list;
+					}
+				}
+				else {
+					list.add((cf.getCommand(Character.toString(line.charAt(i)))));
 				}
 			}
 		}
@@ -94,6 +110,15 @@ public class Reader {
 	 */
 	public boolean isMacro(String line){
 		return cf.isMacro(line);
+	}
+
+	/**
+	 * Verify if a line is a Procedure
+	 * @param line The curent line
+	 * @return true if the line is a Procedure, false otherwise
+	 */
+	public boolean isProc(String line){
+		return cf.isProc(line);
 	}
 
 	/**
