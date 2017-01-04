@@ -23,4 +23,5 @@ public class MemPointer {
     public int getValue(){
         return value;
     }
+    public void setValue(int n) {value = n;}
 }

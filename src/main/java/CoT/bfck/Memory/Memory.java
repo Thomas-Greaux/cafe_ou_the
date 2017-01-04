@@ -156,6 +156,10 @@ public class Memory {
 		return memory[index.getValue()]+128;
 	}
 
+	public void setMemPoint(int n){
+		index.setValue(n);
+	}
+
 	public int getIndex(){
 		return this.index.getValue();
 	}
