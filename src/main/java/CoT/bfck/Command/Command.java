@@ -12,7 +12,6 @@ import java.util.ArrayList;
  * @author cafe_ou_the
  */
 public interface Command {
-
 	void execute(Memory m) throws OutOfCapacityException, ImpossibleIndexException;
 	ArrayList<String> getProperties();
 	String getNameShort();

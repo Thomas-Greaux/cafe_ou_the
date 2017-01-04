@@ -61,4 +61,12 @@ public class Decrement implements Command {
 	public Color getRGBColor(){
 		return this.colorRGB;
 	}
+
+	/**
+	 * Acessor of the hexa color
+	 * @return hexa color
+	 */
+	public String getColorHexa(){
+		return this.colorHexa;
+	}
 }
