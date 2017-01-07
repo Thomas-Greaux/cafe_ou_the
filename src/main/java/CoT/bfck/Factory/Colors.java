@@ -21,8 +21,6 @@ public class Colors {
 	 */
 	public Color returnColor(String hexa) throws NotACommandException{
         if (cf.getCommand(hexa) == null)  return new Color(0, 0, 0);
-		if(cf.getCommand(hexa).getRGBColor().equals(null))
-			return new Color(0, 0, 0);
 		else {
 			return cf.getCommand(hexa).getRGBColor();
 		}
