@@ -3,8 +3,6 @@ package CoT.bfck;
 import CoT.bfck.Command.*;
 import CoT.bfck.Exception.NotACommandException;
 import CoT.bfck.Factory.CommandFactory;
-import CoT.bfck.Macro.Macro;
-import com.sun.org.apache.xpath.internal.SourceTree;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -60,13 +58,28 @@ public class Translator {
      * @param commands to execute
      */
     public void write_main(ArrayList<Command> commands){
+        Command command;
+
         pw.println();
         pw.println("\tpublic static void main(String[] args){");
         pw.println("\t\tMain m = new Main();");
         pw.println("\t\tScanner sc = new Scanner(System.in);");
-        for(Command command : commands){
+        for(int i = 0; i<commands.size() ;i++){
+            command = commands.get(i);
             indentation();
-            pw.println("\t" + translate_instruction(command));
+
+            if(stackable(command)) {
+                int j;
+                for (j = i + 1; commands.get(j) == command; j++) {
+
+                }
+                pw.println("\t" + write_instructions(command, j-i));
+                i = j-1;
+            }
+
+            else{
+                pw.println("\t" + write_instruction(command));
+            }
         }
         pw.println("\t\tm.display();");
         pw.println("\t}");
@@ -94,7 +107,7 @@ public class Translator {
      * @param cmd the brainfuck instruction
      * @return the translated instruction in Java
      */
-    public String translate_instruction(Command cmd){
+    private String write_instruction(Command cmd){
         String instruct = cmd.getNameShort();
         if(instruct.equals("+")) return "\tm.memory[m.i]++;";
         if(instruct.equals("-")) return "\tm.memory[m.i]--;";
@@ -109,6 +122,34 @@ public class Translator {
             System.exit(7);
             return "";
         }
+    }
+
+    /**
+     * Non-naive way of printing some instructions
+     * @param command to print
+     * @param n number of command
+     * @return the string to print
+     */
+    private String write_instructions(Command command, int n){
+        String instruct = command.getNameShort();
+        if(instruct.equals("+")) return "\tm.memory[m.i] += " + n + ";";
+        if(instruct.equals("-")) return "\tm.memory[m.i] -= " + n + ";";
+        if(instruct.equals(">")) return "\tm.i += " + n + ";";
+        if(instruct.equals("<")) return "\tm.i -= " + n + ";";
+        else{
+            System.out.println("Non stackable instruction: " + instruct);
+            System.exit(7);
+            return "";
+        }
+    }
+
+    /**
+     * @param command to evaluate
+     * @return whether the command can be translated in a non-naive way
+     */
+    private boolean stackable(Command command){
+        String instruct = command.getNameShort();
+        return instruct.equals("+") || instruct.equals("-") || instruct.equals("<") || instruct.equals(">");
     }
 
     /**
@@ -167,14 +208,7 @@ public class Translator {
             commands = t.readFile("++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>.");
         } catch (Exception e){}
 
-        try {
-            t.translate(t.readFile(",.")); //Essai de IN OUT
-        } catch (NotACommandException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        //t.translate(commands); //Essai de Hello World!
+        t.translate(commands); //Essai de Hello World!
     }
 
 }
