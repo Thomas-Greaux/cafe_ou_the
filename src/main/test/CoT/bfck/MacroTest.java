@@ -1,4 +1,6 @@
-package CoT.bfck.Macro;
+/*
+package CoT.bfck;
+
 
 import CoT.bfck.Factory.CommandFactory;
 import CoT.bfck.Exception.NotACommandException;
@@ -10,7 +12,7 @@ import static org.junit.Assert.assertEquals;
 
 /**
  * Created by user on 30/11/2016.
- */
+ *//*
 public class MacroTest {
 
     private Macro m;
@@ -31,3 +33,4 @@ public class MacroTest {
         assertEquals("INCR",m.getCommand().get(0).getName());
     }
 }
+*/
