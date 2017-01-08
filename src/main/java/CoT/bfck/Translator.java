@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class Translator {
 
-    private static final String default_path = "D:/\"Polytech Nice\"/Projet/bfck_renew/bfck/files/Output/traduction.txt";
+    private static final String default_path = "files/Output/Main.java";
     private PrintWriter pw;
     private int ind = 0; //keep track of the indentation
 
@@ -202,7 +202,7 @@ public class Translator {
      * @param args les arguments du programme
      */
     public static void main (String[] args){
-        Translator t = new Translator(null);
+        Translator t = new Translator(default_path);
         ArrayList<Command> commands = new ArrayList<Command>();
         try {
             commands = t.readFile("++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>.");
