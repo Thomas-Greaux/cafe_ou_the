@@ -22,6 +22,7 @@ public class CommandFactory {
 	private Out out = new Out();
 	private ArrayList<Macro> m = new ArrayList<Macro>();
 	private ArrayList<Procedure> p = new ArrayList<Procedure>();
+	private ArrayList<Function> f = new ArrayList<Function>();
 
 	/**
 	 * Used to make connection between the string given in.bf parameter and
@@ -76,7 +77,11 @@ public class CommandFactory {
 				return procedure;
 			}
 		}
-
+		for(Function function : f){
+			if(function.getName().equals(command)){
+				return function;
+			}
+		}
 
 		if(command.equals("000000")) //Plus de problèmes au niveau de l'indentation et pixels noirs
 			return null;
@@ -125,6 +130,14 @@ public class CommandFactory {
 		return false;
 	}
 
+	public boolean isFunction(String n){
+		for(Function f : f){
+			if(f.getName().equals(n))
+				return true;
+		}
+		return false;
+	}
+
 	public Macro getMacro(String n){
 		for(Macro s : m){
 			if(s.getName().equals(n))
@@ -139,8 +152,22 @@ public class CommandFactory {
 			p.add(A);
 	}
 
+	public void createFunction(String nom, ArrayList<Command> cmd){
+		Function A = new Function(nom, cmd);
+		if(!isProc(nom))
+			f.add(A);
+	}
+
 	public Procedure getProc(String n){
 		for(Procedure s : p){
+			if(s.getName().equals(n))
+				return s;
+		}
+		return null;
+	}
+
+	public Function getFunction(String n){
+		for(Function s : f){
 			if(s.getName().equals(n))
 				return s;
 		}

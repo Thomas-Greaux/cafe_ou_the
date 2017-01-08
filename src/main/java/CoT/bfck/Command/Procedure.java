@@ -25,6 +25,7 @@ public class Procedure implements Command {
         cmd = c;
         caseM = m;
     }
+
     public Procedure(String s, int n, ArrayList<Command> c){
         name = s;
         caseM = n;
@@ -46,7 +47,6 @@ public class Procedure implements Command {
 
     public String getNameShort() {
         String res = "";
-        int compteur = 0;
         for (Command c : cmd) {
             res += c.getNameShort();
         }

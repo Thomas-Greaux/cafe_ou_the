@@ -5,6 +5,7 @@ import CoT.bfck.Exception.ImpossibleIndexException;
 import CoT.bfck.Exception.OutOfCapacityException;
 
 import java.io.*;
+import java.util.ArrayList;
 
 /**
  * The class Memory contain every implemented operations (INCR, DECR, RIGHT,
@@ -115,6 +116,14 @@ public class Memory {
         return result;
     }
 
+    public ArrayList<Integer> displayList(){
+		ArrayList<Integer> map = new ArrayList<Integer>();
+    	for(int i=0;i<30000;i++){
+    		map.add(memory[i]+128);
+		}
+		return map;
+	}
+
 	/**
 	 * Do nothing, the controleur handle jump & back
 	 */
@@ -170,4 +179,12 @@ public class Memory {
 	public void close_stream(){
 		io_stream.close();
     }
+
+	/**
+	 * If a file is given in argument, read the actual value in.bf it and put it in.bf the actual memory[index]. If not, read it in.bf the terminal.
+	 */
+	public void setValue(int value){
+		Metrics.DATA_WRITE++;
+		memory[index.getValue()] = (byte) (value-128);
+	}
 }

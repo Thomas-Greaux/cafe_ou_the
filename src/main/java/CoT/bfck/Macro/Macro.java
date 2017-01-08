@@ -16,7 +16,6 @@ public class Macro implements Command {
     private String name;
     private ArrayList<Command> cmd = new ArrayList<Command>();
     private int[] param = {1,0};
-
     public Macro(String s, Macro m){
         name = s;
         cmd = m.getCommand();
@@ -38,28 +37,6 @@ public class Macro implements Command {
         cmd = c;
         param[0] = Integer.parseInt(para1);
         param[1] = Integer.parseInt(para2);
-    }
-    public Macro(String s[],ArrayList<Command> c){
-        name = s[0];
-        cmd = c;
-        try {
-            if(s.length == 2){
-                param[0] = Integer.parseInt(s[1]);
-            }
-            else if (s.length > 2) {
-                for (int i = 1; i < s.length - 1; i++) {
-                    param[i - 1] = Integer.parseInt(s[i]);
-                }
-            }
-        }
-        catch (Exception e){
-            System.out.println("Macro incorrecte");
-            System.exit(3);
-        }
-        if(param[1] > c.size()) {
-            System.out.println("Argument numéro 2 invalide");
-            System.exit(1);
-        }
     }
 
     public void setName(String n){

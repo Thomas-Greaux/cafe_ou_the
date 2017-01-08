@@ -1,6 +1,7 @@
 package CoT.bfck.Reader;
 
 import CoT.bfck.Command.Command;
+import CoT.bfck.Command.Function;
 import CoT.bfck.Command.Procedure;
 import CoT.bfck.Factory.CommandFactory;
 import CoT.bfck.Exception.NotACommandException;
@@ -8,7 +9,6 @@ import CoT.bfck.Exception.NotACommandException;
 import java.util.ArrayList;
 
 import CoT.bfck.Macro.Macro;
-import CoT.bfck.Reader.Formatting;
 
 /**
  * This class read the instructions given by the ReadFile and ReadImage.
@@ -52,7 +52,12 @@ public class Reader {
 		String []s = line.split(" ");
 		for(int i=0;i<line.length();i++){
 			//Si on rencontre un 'void', la suite est une procedure on la cree
-			if(s[0].equals("void")){
+			if(s[0].equals("function")){
+				cf.createFunction(s[1],read(s[2]));
+				break;
+			}
+			//Si on rencontre un 'void', la suite est une procedure on la cree
+			else if(s[0].equals("void")){
 				cf.createProc(s[1],s[2],read(s[3]));
 				break;
 			}
@@ -95,6 +100,12 @@ public class Reader {
 						return list;
 					}
 				}
+				if(isFunction(s[0])){
+					if(s.length == 2) {
+						list.add(new Function(s[0], cf.getFunction(s[0]).getCommand()));
+						return list;
+					}
+				}
 				else {
 					list.add((cf.getCommand(Character.toString(line.charAt(i)))));
 				}
@@ -119,6 +130,15 @@ public class Reader {
 	 */
 	public boolean isProc(String line){
 		return cf.isProc(line);
+	}
+
+	/**
+	 * Verify if a line is a Function
+	 * @param line The curent line
+	 * @return true if the line is a Procedure, false otherwise
+	 */
+	public boolean isFunction(String line){
+		return cf.isFunction(line);
 	}
 
 	/**
