@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class Translator {
 
-    private static final String default_path = "files/Output/Main.java";
+    public static final String default_path = "files/Output/Main.java";
     private PrintWriter pw;
     private int ind = 0; //keep track of the indentation
 
