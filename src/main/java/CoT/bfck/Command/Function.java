@@ -10,7 +10,7 @@ import java.util.ArrayList;
 /**
  * Created by fabie on 08/01/2017.
  */
-public class Function implements Command, Multiple {
+public class Function implements Command, Method {
 
     private String name;
     private ArrayList<Command> cmd = new ArrayList<Command>();

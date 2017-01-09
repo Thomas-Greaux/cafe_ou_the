@@ -78,11 +78,11 @@ public class Translator {
             command = commands.get(i);
             indentation();
 
-            if (command instanceof Multiple){
-                write_method_main((Multiple) command);
+            if (command instanceof Method){
+                write_method_main((Method) command);
                 if(!methods.contains(command.getName())) {
                     methods.add(command.getName());
-                    write_method_method((Multiple) command);
+                    write_method_method((Method) command);
                 }
             }
 
@@ -169,7 +169,7 @@ public class Translator {
         pw_main.println();
     }
 
-    private void write_method_main(Multiple m){
+    private void write_method_main(Method m){
         if(m instanceof Procedure){
             pw_main.println("\t\t" + m.getName() + "();");
         }
@@ -215,27 +215,27 @@ public class Translator {
         pw_methods.flush();
     }
 
-    private void write_method_method(Multiple multiple){
-        if(multiple instanceof Procedure) write_procedure(multiple);
-        else if(multiple instanceof Function) write_function(multiple);
+    private void write_method_method(Method method){
+        if(method instanceof Procedure) write_procedure(method);
+        else if(method instanceof Function) write_function(method);
         else{
-            System.out.println("Not a method: " + multiple.getName());
+            System.out.println("Not a method: " + method.getName());
             System.exit(7);
         }
     }
 
-    private void write_function(Multiple f){
-        pw_methods.println("\tpublic int " + f.getName() + "(){");
+    private void write_function(Method method){
+        pw_methods.println("\tpublic int " + method.getName() + "(){");
         pw_methods.println("\t\tm.reset();\n");
-        write(f.getCommand(), true);
+        write(method.getCommand(), true);
         pw_methods.println("\t\treturn m.memory[m.i];");
         pw_methods.println("\t}");
     }
 
-    private void write_procedure(Multiple f){
-        pw_methods.println("\tpublic void " + f.getName() + "(){");
+    private void write_procedure(Method method){
+        pw_methods.println("\tpublic void " + method.getName() + "(){");
         pw_methods.println("\n\tm.reset();\n");
-        write(f.getCommand(), true);
+        write(method.getCommand(), true);
         pw_methods.println("\t}");
     }
 
