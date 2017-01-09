@@ -59,7 +59,6 @@ public class Translator {
         pw_main.println("}");
         pw_main.flush();
 
-        write_reset();
         write_method_end();
     }
 
@@ -229,7 +228,7 @@ public class Translator {
 
     private void write_function(Multiple f){
         pw_functions.println("\tpublic int " + f.getName() + "(){");
-        pw_functions.println("\t\treset();\n");
+        pw_functions.println("\t\tm.reset();\n");
         write(f.getCommand(), true);
         pw_functions.println("\t\treturn m.memory[m.i];");
         pw_functions.println("\t}");
@@ -237,18 +236,11 @@ public class Translator {
 
     private void write_procedure(Multiple f){
         pw_functions.println("\tpublic void " + f.getName() + "(){");
-        pw_functions.println("\n\treset();\n");
+        pw_functions.println("\n\tm.reset();\n");
         write(f.getCommand(), true);
         pw_functions.println("\t}");
     }
 
-    private void write_reset(){
-        pw_functions.println("\tpublic void reset(){");
-        pw_functions.println("\t\tfor(int k = 0; k<30000; k++){");
-        pw_functions.println("\t\t\tm.memory[k] = 0;");
-        pw_functions.println("\t\t}");
-        pw_functions.println("\t}");
-    }
 
     //////////////////////////////////////
     // Method used by memory
@@ -259,6 +251,7 @@ public class Translator {
         pw_memory.println("\tpublic int[] memory = new int[30000];");
         pw_memory.println("\tpublic int i = 0;");
         write_display();
+        write_reset();
         pw_memory.println("}");
         pw_memory.flush();
     }
@@ -275,6 +268,14 @@ public class Translator {
         pw_memory.println("\t\t}");
         pw_memory.println("\t}");
         pw_memory.println();
+    }
+
+    private void write_reset(){
+        pw_memory.println("\tpublic void reset(){");
+        pw_memory.println("\t\tfor(int k = 0; k<30000; k++){");
+        pw_memory.println("\t\t\tmemory[k] = 0;");
+        pw_memory.println("\t\t}");
+        pw_memory.println("\t}");
     }
 
 }
