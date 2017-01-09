@@ -1,8 +1,6 @@
 package CoT.bfck;
 
 import CoT.bfck.Command.*;
-import CoT.bfck.Exception.NotACommandException;
-import CoT.bfck.Factory.CommandFactory;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -15,11 +13,11 @@ public class Translator {
 
     public static final String default_path = "files/Output/Java/";
     public static final String name_main = "Main.java";
-    public static final String name_functions = "Functions.java";
+    public static final String name_methods = "Methods.java";
     public static final String name_memory = "Memory.java";
 
     private PrintWriter pw_main;
-    private PrintWriter pw_functions;
+    private PrintWriter pw_methods;
     private PrintWriter pw_memory;
     private int ind = 0; //keep track of the indentation
 
@@ -29,11 +27,11 @@ public class Translator {
         if(path == null) pw_main = new PrintWriter(System.out);
         else{
             File file_main = new File(path + name_main);
-            File file_functions = new File(path + name_functions);
+            File file_functions = new File(path + name_methods);
             File file_memory = new File(path + name_memory);
             try{
                 pw_main = new PrintWriter(file_main);
-                pw_functions = new PrintWriter(file_functions);
+                pw_methods = new PrintWriter(file_functions);
                 pw_memory = new PrintWriter(file_memory);
             } catch(FileNotFoundException fnfe) {
                 System.out.println("Output file for translation not found" + fnfe.toString());
@@ -73,7 +71,7 @@ public class Translator {
     private void write(ArrayList<Command> commands, boolean method){
         Command command;
         PrintWriter pw;
-        if(method) pw = pw_functions;
+        if(method) pw = pw_methods;
         else pw = pw_main;
 
         for(int i = 0; i<commands.size() ;i++){
@@ -176,7 +174,7 @@ public class Translator {
             pw_main.println("\t\t" + m.getName() + "();");
         }
         else if(m instanceof Function){
-            pw_main.println("\t\tm.memory[m.i] = f." + m.getName() + "();");
+            pw_main.println("\t\tm.memory[m.i] = methods." + m.getName() + "();");
         }
         else{
             System.out.println(m.getName() + " is not a method");
@@ -191,7 +189,7 @@ public class Translator {
     public void write_main(ArrayList<Command> commands){
         pw_main.println();
         pw_main.println("\tpublic void main(){");
-        pw_main.println("\t\tFunctions f = new Functions();");
+        pw_main.println("\t\tMethods methods = new Methods();");
         write(commands, false);
         pw_main.println("\t\tScanner sc = new Scanner(System.in);");
         pw_main.println("\t\tm.display();");
@@ -208,37 +206,37 @@ public class Translator {
     //////////////////////////////////////////////
 
     private void write_method_initialization(){
-        pw_functions.println("public class Functions{");
-        pw_functions.println("\tprivate Memory m = new Memory();");
+        pw_methods.println("public class Methods{");
+        pw_methods.println("\tprivate Memory m = new Memory();");
     }
 
     private void write_method_end(){
-        pw_functions.println("}");
-        pw_functions.flush();
+        pw_methods.println("}");
+        pw_methods.flush();
     }
 
     private void write_method_method(Multiple multiple){
         if(multiple instanceof Procedure) write_procedure(multiple);
         else if(multiple instanceof Function) write_function(multiple);
         else{
-            System.out.println("Not a procedure/function: " + multiple.getName());
+            System.out.println("Not a method: " + multiple.getName());
             System.exit(7);
         }
     }
 
     private void write_function(Multiple f){
-        pw_functions.println("\tpublic int " + f.getName() + "(){");
-        pw_functions.println("\t\tm.reset();\n");
+        pw_methods.println("\tpublic int " + f.getName() + "(){");
+        pw_methods.println("\t\tm.reset();\n");
         write(f.getCommand(), true);
-        pw_functions.println("\t\treturn m.memory[m.i];");
-        pw_functions.println("\t}");
+        pw_methods.println("\t\treturn m.memory[m.i];");
+        pw_methods.println("\t}");
     }
 
     private void write_procedure(Multiple f){
-        pw_functions.println("\tpublic void " + f.getName() + "(){");
-        pw_functions.println("\n\tm.reset();\n");
+        pw_methods.println("\tpublic void " + f.getName() + "(){");
+        pw_methods.println("\n\tm.reset();\n");
         write(f.getCommand(), true);
-        pw_functions.println("\t}");
+        pw_methods.println("\t}");
     }
 
 
