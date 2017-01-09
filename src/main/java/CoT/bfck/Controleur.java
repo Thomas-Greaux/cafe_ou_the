@@ -58,7 +58,7 @@ public class Controleur {
             else if (args[i].equals("--rewrite")) {
                 option_rewrite = i;
                 option_interpret = 1;
-            } else if (args[i].equals("--translate")) {
+            } else if (args[i].equals("--translate_main")) {
                 option_translate = i;
                 option_interpret = 1;
             } else if (args[i].equals("--check")) {

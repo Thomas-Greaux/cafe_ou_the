@@ -13,16 +13,28 @@ import java.util.ArrayList;
  */
 public class Translator {
 
-    public static final String default_path = "files/Output/Main.java";
-    private PrintWriter pw;
+    public static final String default_path = "files/Output/Java/";
+    public static final String name_main = "Main.java";
+    public static final String name_functions = "Functions.java";
+    public static final String name_memory = "Memory.java";
+
+    private PrintWriter pw_main;
+    private PrintWriter pw_functions;
+    private PrintWriter pw_memory;
     private int ind = 0; //keep track of the indentation
 
+    private ArrayList<String> methods = new ArrayList<String>(); // list of methods already written
+
     public Translator(String path){
-        if(path == null) pw = new PrintWriter(System.out);
+        if(path == null) pw_main = new PrintWriter(System.out);
         else{
-            File file = new File(path);
+            File file_main = new File(path + name_main);
+            File file_functions = new File(path + name_functions);
+            File file_memory = new File(path + name_memory);
             try{
-                pw = new PrintWriter(file);
+                pw_main = new PrintWriter(file_main);
+                pw_functions = new PrintWriter(file_functions);
+                pw_memory = new PrintWriter(file_memory);
             } catch(FileNotFoundException fnfe) {
                 System.out.println("Output file for translation not found" + fnfe.toString());
                 System.exit(7);
@@ -32,45 +44,54 @@ public class Translator {
 
     /**
      * Translate brainfuck code to Java code
-     * @param commands to translate
+     * @param commands to translate_main
      */
 
     public void translate(ArrayList<Command> commands){
-        pw.println("import java.util.Scanner;\n");
-        pw.println("public class Main{");
+        write_memory();
+
+        write_method_initialization();
+
+        pw_main.println("import java.util.Scanner;\n");
+        pw_main.println("public class Main{");
         write_initialization();
-        write_constructor();
-        write_display();
         write_main(commands);
-        pw.println("}");
-        pw.flush();
+        pw_main.println("}");
+        pw_main.flush();
+
+        write_reset();
+        write_method_end();
     }
 
-    public void write_initialization(){
-        pw.println();
-        pw.println("private int i;");
-        pw.println("private int[] memory;");
-        pw.println();
-    }
+    //////////////////////////////////////
+    // Method used by main and function
+    //////////////////////////////////////
 
     /**
-     * Write the main method
-     * @param commands to execute
+     * write commands, used both in main and functions
+     * @param commands to write
      */
-    public void write_main(ArrayList<Command> commands){
+    private void write(ArrayList<Command> commands, boolean method){
         Command command;
+        PrintWriter pw;
+        if(method) pw = pw_functions;
+        else pw = pw_main;
 
-        pw.println();
-        pw.println("\tpublic static void main(String[] args){");
-        pw.println("\t\tMain m = new Main();");
-        pw.println("\t\tScanner sc = new Scanner(System.in);");
         for(int i = 0; i<commands.size() ;i++){
             command = commands.get(i);
             indentation();
 
-            if(stackable(command)) {
+            if (command instanceof Multiple){
+                write_method_main((Multiple) command);
+                if(!methods.contains(command.getName())) {
+                    methods.add(command.getName());
+                    write_method_method((Multiple) command);
+                }
+            }
+
+            else if(stackable(command)) {
                 int j;
-                for (j = i + 1; commands.get(j) == command; j++) {
+                for (j = i + 1; j < commands.size() && commands.get(j) == command; j++) {
 
                 }
                 pw.println("\t" + write_instructions(command, j-i));
@@ -81,24 +102,6 @@ public class Translator {
                 pw.println("\t" + write_instruction(command));
             }
         }
-        pw.println("\t\tm.display();");
-        pw.println("\t}");
-        pw.println();
-    }
-
-    /**
-     * Write the constructor
-     */
-    public void write_constructor(){
-        pw.println();
-        pw.println("\tpublic Main(){");
-        pw.println("\t\ti = 0;");
-        pw.println("\t\tmemory = new int[30000];");
-        pw.println("\t\tfor(int k = 0; k<30000; k++){");
-        pw.println("\t\t\tmemory[k] = 0;");
-        pw.println("\t\t}");
-        pw.println("\t}");
-        pw.println();
     }
 
 
@@ -113,8 +116,10 @@ public class Translator {
         if(instruct.equals("-")) return "\tm.memory[m.i]--;";
         if(instruct.equals(">")) return "\tm.i++;";
         if(instruct.equals("<")) return "\tm.i--;";
-        if(instruct.equals("[")) {ind++; return "\twhile(m.memory[m.i] != 0){";}
-        if(instruct.equals("]")) {ind--; return "}";}
+        if(instruct.equals("[")) {
+            ind++; return "\twhile(m.memory[m.i] != 0){";}
+        if(instruct.equals("]")) {
+            ind--; return "}";}
         if(instruct.equals(".")) return "\tSystem.out.print((char) m.memory[m.i]);";
         if(instruct.equals(",")) return "\tm.memory[m.i] = sc.nextInt();";
         else{
@@ -153,62 +158,123 @@ public class Translator {
     }
 
     /**
-     * Write the display method
-     */
-    public void write_display(){
-        pw.println();
-        pw.println("\tpublic void display(){");
-        pw.println("\tSystem.out.println();");
-        pw.println("\tfor(int k = 0; k<30000; k++){");
-        pw.println("\t\tif(memory[k] != 0) System.out.println(\"C\" + k + \": \" + memory[k]);");
-        pw.println("\t\t}");
-        pw.println("\t}");
-        pw.println();
-    }
-
-    /**
      * this method handles the indentation
      */
-    public void indentation(){for(int k = 0; k<ind; k++) pw.print("\t");}
+    private void indentation(){for(int k = 0; k< ind; k++) pw_main.print("\t");}
 
-    //TODO: supprimer, ce n'est la qu'a but de faire des essais -----------------------
-    /**
-     * Temporaire, pour des essais
-     * @param prog
-     * @return
-     * @throws NotACommandException
-     * @throws IOException
-     */
-    public ArrayList<Command> readFile(String prog) throws NotACommandException, IOException {
-        ArrayList<Command> commands = new ArrayList<Command>();
-        commands.addAll(read(prog));
-        return commands;
+    //////////////////////////////////////
+    // Methods used by main
+    //////////////////////////////////////
+
+    public void write_initialization(){
+        pw_main.println();
+        pw_main.println("\tprivate Memory m = new Memory();");
+        pw_main.println();
     }
 
-    public ArrayList<Command> read(String line) throws NotACommandException{
-        ArrayList<Command> list = new ArrayList<Command>();
-        CommandFactory cf = new CommandFactory();
-        String tmp;
-        for(int i=0;i<line.length();i++){
-            list.add(cf.getCommand(line.substring(i, i+1)));
+    private void write_method_main(Multiple m){
+        if(m instanceof Procedure){
+            pw_main.println("\t\t" + m.getName() + "();");
         }
-        return list;
+        else if(m instanceof Function){
+            pw_main.println("\t\tm.memory[m.i] = f." + m.getName() + "();");
+        }
+        else{
+            System.out.println(m.getName() + " is not a method");
+            System.exit(7);
+        }
     }
 
-    //TODO -----------------------------------------------------------------------------
+    /**
+     * Write the main method
+     * @param commands to execute
+     */
+    public void write_main(ArrayList<Command> commands){
+        pw_main.println();
+        pw_main.println("\tpublic void main(){");
+        pw_main.println("\t\tFunctions f = new Functions();");
+        write(commands, false);
+        pw_main.println("\t\tScanner sc = new Scanner(System.in);");
+        pw_main.println("\t\tm.display();");
+        pw_main.println("\t}");
+        pw_main.println("\tpublic static void main(String[] args){");
+        pw_main.println("\tMain main = new Main();");
+        pw_main.println("\tmain.main();");
+        pw_main.println("\t}");
+        pw_main.println();
+    }
+
+    //////////////////////////////////////////////
+    // Generation of functions and procedures
+    //////////////////////////////////////////////
+
+    private void write_method_initialization(){
+        pw_functions.println("public class Functions{");
+        pw_functions.println("\tprivate Memory m = new Memory();");
+    }
+
+    private void write_method_end(){
+        pw_functions.println("}");
+        pw_functions.flush();
+    }
+
+    private void write_method_method(Multiple multiple){
+        if(multiple instanceof Procedure) write_procedure(multiple);
+        else if(multiple instanceof Function) write_function(multiple);
+        else{
+            System.out.println("Not a procedure/function: " + multiple.getName());
+            System.exit(7);
+        }
+    }
+
+    private void write_function(Multiple f){
+        pw_functions.println("\tpublic int " + f.getName() + "(){");
+        pw_functions.println("\t\treset();\n");
+        write(f.getCommand(), true);
+        pw_functions.println("\t\treturn m.memory[m.i];");
+        pw_functions.println("\t}");
+    }
+
+    private void write_procedure(Multiple f){
+        pw_functions.println("\tpublic void " + f.getName() + "(){");
+        pw_functions.println("\n\treset();\n");
+        write(f.getCommand(), true);
+        pw_functions.println("\t}");
+    }
+
+    private void write_reset(){
+        pw_functions.println("\tpublic void reset(){");
+        pw_functions.println("\t\tfor(int k = 0; k<30000; k++){");
+        pw_functions.println("\t\t\tm.memory[k] = 0;");
+        pw_functions.println("\t\t}");
+        pw_functions.println("\t}");
+    }
+
+    //////////////////////////////////////
+    // Method used by memory
+    //////////////////////////////////////
+
+    public void write_memory(){
+        pw_memory.println("public class Memory {");
+        pw_memory.println("\tpublic int[] memory = new int[30000];");
+        pw_memory.println("\tpublic int i = 0;");
+        write_display();
+        pw_memory.println("}");
+        pw_memory.flush();
+    }
 
     /**
-     * Classe d'essai
-     * @param args les arguments du programme
+     * Write the display method
      */
-    public static void main (String[] args){
-        Translator t = new Translator(default_path);
-        ArrayList<Command> commands = new ArrayList<Command>();
-        try {
-            commands = t.readFile("++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>.");
-        } catch (Exception e){}
-
-        t.translate(commands); //Essai de Hello World!
+    private void write_display(){
+        pw_memory.println();
+        pw_memory.println("\tpublic void display(){");
+        pw_memory.println("\tSystem.out.println();");
+        pw_memory.println("\tfor(int k = 0; k<30000; k++){");
+        pw_memory.println("\t\tif(memory[k] != 0) System.out.println(\"C\" + k + \": \" + memory[k]);");
+        pw_memory.println("\t\t}");
+        pw_memory.println("\t}");
+        pw_memory.println();
     }
 
 }

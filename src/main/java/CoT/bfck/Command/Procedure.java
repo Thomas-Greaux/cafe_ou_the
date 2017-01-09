@@ -10,7 +10,7 @@ import java.util.ArrayList;
 /**
  * Created by user on 04/01/2017.
  */
-public class Procedure implements Command {
+public class Procedure implements Command, Multiple {
 
     private String name;
     private ArrayList<Command> cmd = new ArrayList<Command>();
