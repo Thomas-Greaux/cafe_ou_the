@@ -45,6 +45,7 @@ public class Controleur {
     private int option_out = -1;
     private int option_trace = -1;
     private int option_metrics = -1;
+    private int option_generation = -1;
     private int option_interpret = 0;
 
     /**
@@ -57,7 +58,7 @@ public class Controleur {
             else if (args[i].equals("--rewrite")) {
                 option_rewrite = i;
                 option_interpret = 1;
-            } else if (args[i].equals("--translate")) {
+            } else if (args[i].equals("--translate_main")) {
                 option_translate = i;
                 option_interpret = 1;
             } else if (args[i].equals("--check")) {
@@ -69,6 +70,9 @@ public class Controleur {
             } else if (args[i].equals("-o")) {
                 option_out = i;
                 out = args[option_out + 1];
+            } else if (args[i].equals("--gen")){
+                option_generation = i;
+                option_interpret = 1;
             } else if (args[i].equals("--trace")) option_trace = i;
             else if (args[i].equals("--moff")) option_metrics = i;
         }
@@ -87,10 +91,10 @@ public class Controleur {
     public void run() throws NotACommandException, IOException, OutOfCapacityException, ImpossibleIndexException, FileDoesntExists {
 
         //On remplie notre liste de commandes
-        if (file_ext.equals(".bf")) {                     //En fonction du type de fichier
+        if (file_ext.equals(".bf")) {                    //En fonction du type de fichier
             commands = new ReadFile().readFile(file);    //
         }                                                //
-        else if (file_ext.equals(".bmp")) {               //
+        else if (file_ext.equals(".bmp")) {              //
             commands = new ReadImage().readImage(file);  //
         }                                                //
 
@@ -98,9 +102,12 @@ public class Controleur {
             String rewrite = OpOption.rewrite(commands);
             new CreateImage().create_Image(rewrite);
         }
-        if (option_rewrite != -1)
-            OpOption.print(commands);
+        if (option_rewrite != -1) OpOption.print(commands);
         if (option_check != -1) OpOption.check(commands);
+        if (option_generation != -1){
+            Translator translator = new Translator(Translator.default_path);
+            translator.translate(commands);
+        }
 
         if (option_trace != -1) {
             String[] f = file.split("/");
