@@ -50,8 +50,11 @@ public class Reader {
 		ArrayList<Command> list = new ArrayList<Command>();
 		line = f.deleteSyntaxAndComments(line);
 		String []s = line.split(" ");
+
 		for(int i=0;i<line.length();i++){
-			//Si on rencontre un 'void', la suite est une procedure on la cree
+			if(onlySpaces(line))
+				break;
+			//Si on rencontre un 'function', la suite est une fonction on la cree
 			if(s[0].equals("function")){
 				cf.createFunction(s[1],read(s[2]));
 				break;
@@ -191,5 +194,14 @@ public class Reader {
 		else {
 			cf.createMacro(s,read(s[s.length-1]));
 		}
+	}
+
+	public boolean onlySpaces(String line){
+		int i = 0, j=0;
+		while (j < line.length()){
+			if(line.charAt(i)==' '){ i++; j++;}
+			else j++;
+		}
+		return i==line.length();
 	}
 }
