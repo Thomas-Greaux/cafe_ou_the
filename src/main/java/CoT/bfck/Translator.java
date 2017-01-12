@@ -49,19 +49,13 @@ public class Translator {
         write_memory();
 
         write_method_initialization();
-
-        pw_main.println("import java.util.Scanner;\n");
-        pw_main.println("public class Main{");
-        write_initialization();
-        write_main(commands);
-        pw_main.println("}");
-        pw_main.flush();
+        write_Main(commands);
 
         write_method_end();
     }
 
     //////////////////////////////////////
-    // Method used by main and function
+    // Method for all files
     //////////////////////////////////////
 
     /**
@@ -160,10 +154,23 @@ public class Translator {
     private void indentation(){for(int k = 0; k< ind; k++) pw_main.print("\t");}
 
     //////////////////////////////////////
-    // Methods used by main
+    // Methods used for Main.java
     //////////////////////////////////////
 
-    public void write_initialization(){
+    /**
+     * Write the Main.java
+     * @param commands commands of the brainfuck program
+     */
+    private void write_Main(ArrayList<Command> commands){
+        pw_main.println("import java.util.Scanner;\n");
+        pw_main.println("public class Main{");
+        write_initialization();
+        write_main(commands);
+        pw_main.println("}");
+        pw_main.flush();
+    }
+
+    private void write_initialization(){
         pw_main.println();
         pw_main.println("\tprivate Memory m = new Memory();");
         pw_main.println();
@@ -182,11 +189,12 @@ public class Translator {
         }
     }
 
+
     /**
      * Write the main method
      * @param commands to execute
      */
-    public void write_main(ArrayList<Command> commands){
+    private void write_main(ArrayList<Command> commands){
         pw_main.println();
         pw_main.println("\tpublic void main(){");
         pw_main.println("\t\tMethods methods = new Methods();");
@@ -202,7 +210,7 @@ public class Translator {
     }
 
     //////////////////////////////////////////////
-    // Generation of functions and procedures
+    // Methods used for Functions.java
     //////////////////////////////////////////////
 
     private void write_method_initialization(){
@@ -241,10 +249,10 @@ public class Translator {
 
 
     //////////////////////////////////////
-    // Method used by memory
+    // Method used for Memory.java
     //////////////////////////////////////
 
-    public void write_memory(){
+    private void write_memory(){
         pw_memory.println("public class Memory {");
         pw_memory.println("\tpublic int[] memory = new int[30000];");
         pw_memory.println("\tpublic int i = 0;");
