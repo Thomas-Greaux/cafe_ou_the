@@ -31,7 +31,7 @@ public class Function implements Command, Method {
 
             for(Command c : cmd){
                 c.execute(m);
-                if(!changes.contains(m.getIndex())){
+                if(!changes.contains(m.getIndex()) && m.getIndex()!=temp){
                     changes.add(m.getIndex());
                 }
             }
