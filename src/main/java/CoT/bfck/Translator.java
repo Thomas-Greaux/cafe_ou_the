@@ -173,6 +173,8 @@ public class Translator {
     private void write_initialization(){
         pw_main.println();
         pw_main.println("\tprivate Memory m = new Memory();");
+        pw_main.println("\tMethods methods = new Methods();");
+        pw_main.println("\tScanner sc = new Scanner(System.in);\n");
         pw_main.println();
     }
 
@@ -197,8 +199,6 @@ public class Translator {
     private void write_main(ArrayList<Command> commands){
         pw_main.println();
         pw_main.println("\tpublic void main(){");
-        pw_main.println("\t\tMethods methods = new Methods();");
-        pw_main.println("\t\tScanner sc = new Scanner(System.in);\n");
         write(commands, false);
         pw_main.println("\n\t\tm.display();");
         pw_main.println("\t}\n");
@@ -214,8 +214,10 @@ public class Translator {
     //////////////////////////////////////////////
 
     private void write_method_initialization(){
+        pw_methods.println("import java.util.Scanner;\n\n");
         pw_methods.println("public class Methods{");
         pw_methods.println("\tprivate Memory m = new Memory();");
+        pw_methods.println("\tScanner sc = new Scanner(System.in);\n");
     }
 
     private void write_method_end(){
