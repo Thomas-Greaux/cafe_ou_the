@@ -71,7 +71,7 @@ public class Reader {
 			}else if(isChar(line) || isHexaColor(line)){
 				list.add((cf.getCommand(line)));
 				break;
-			}else if(line.charAt(i) == ' ' ){
+			}else if(line.charAt(i) == ' ' || line.charAt(i) == '	'){
 				//DO nothing : commentary
 			}else{
 				if(isMacro(s[0])){
@@ -173,6 +173,9 @@ public class Reader {
 			else if (line.codePointAt(i) >= 48 && line.codePointAt(i) <= 57) numbers++;
 			if(line.codePointAt(i) == 32) return false;
 		}
+
+		if(cf.isMacro(line))
+			return false;
 
 		return (numbers + letters == 6);
 	}

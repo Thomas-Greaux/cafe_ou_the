@@ -163,7 +163,7 @@ public class Controleur {
                     if (option_trace != -1) {
                         fw = new FileWriter(new File("files/Output/" + fileWithoutExtension + ".log"), true);
                         c++;
-                        fw.write("Step n°" + c + "\n");
+                        fw.write("Step number : " + c + "\n");
                         fw.write("Next command : " + commands.get(execPointer.getValue()).getName() + "\n");
                         fw.write("Data pointer value : " + mem.getIndex() + "\n");;
                         fw.write("Memory SNAPSHOT :\n" + mem.display_String());

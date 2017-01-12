@@ -190,13 +190,13 @@ public class Translator {
         pw_main.println();
         pw_main.println("\tpublic void main(){");
         pw_main.println("\t\tMethods methods = new Methods();");
+        pw_main.println("\t\tScanner sc = new Scanner(System.in);\n");
         write(commands, false);
-        pw_main.println("\t\tScanner sc = new Scanner(System.in);");
-        pw_main.println("\t\tm.display();");
-        pw_main.println("\t}");
+        pw_main.println("\n\t\tm.display();");
+        pw_main.println("\t}\n");
         pw_main.println("\tpublic static void main(String[] args){");
-        pw_main.println("\tMain main = new Main();");
-        pw_main.println("\tmain.main();");
+        pw_main.println("\t\tMain main = new Main();");
+        pw_main.println("\t\tmain.main();");
         pw_main.println("\t}");
         pw_main.println();
     }
@@ -260,9 +260,9 @@ public class Translator {
     private void write_display(){
         pw_memory.println();
         pw_memory.println("\tpublic void display(){");
-        pw_memory.println("\tSystem.out.println();");
-        pw_memory.println("\tfor(int k = 0; k<30000; k++){");
-        pw_memory.println("\t\tif(memory[k] != 0) System.out.println(\"C\" + k + \": \" + memory[k]);");
+        pw_memory.println("\t\tSystem.out.println();");
+        pw_memory.println("\t\tfor(int k = 0; k<30000; k++){");
+        pw_memory.println("\t\t\tif(memory[k] != 0) System.out.println(\"C\" + k + \": \" + memory[k]);");
         pw_memory.println("\t\t}");
         pw_memory.println("\t}");
         pw_memory.println();
@@ -270,6 +270,7 @@ public class Translator {
 
     private void write_reset(){
         pw_memory.println("\tpublic void reset(){");
+        pw_memory.println("\t\ti = 0;");
         pw_memory.println("\t\tfor(int k = 0; k<30000; k++){");
         pw_memory.println("\t\t\tmemory[k] = 0;");
         pw_memory.println("\t\t}");

@@ -22,7 +22,7 @@ public class Function implements Command, Method {
 
     public void execute(Memory m) throws OutOfCapacityException, ImpossibleIndexException {
         if(isFunctionPossible(m)==-1){
-            System.out.println("Pas assez d'espace mémoire pour effectuer votre fonction : " + name + " .");
+            System.out.println("Not enough memory to run the function : " + name + " .");
             System.exit(1);
         }else{
             int temp = m.getIndex(); //On récupère l'indexe intial
