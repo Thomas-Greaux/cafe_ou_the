@@ -280,7 +280,7 @@ public class Translator {
 
     private void write_reset(){
         pw_memory.println("\tpublic void reset(){");
-        pw_memory.println("\t\ti = 0;");
+        pw_memory.println("\t\ti = 10000;");
         pw_memory.println("\t\tfor(int k = 0; k<30000; k++){");
         pw_memory.println("\t\t\tmemory[k] = 0;");
         pw_memory.println("\t\t}");
