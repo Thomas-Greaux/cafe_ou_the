@@ -63,13 +63,13 @@ public class MemoryTest {
         assertEquals("C0: 30 ", mem.display_String());
     }
 
-    @Test
+    /*@Test
     public void incrOutOfCapacity() throws OutOfCapacityException {
         thrown.expect(OutOfCapacityException.class);
         thrown.expectMessage("Out of capacity (in the method incr).");
         while (true)
             mem.incr();
-    }
+    }*/
 /*
     @Test
     public void incr() throws NotACommandException, ImpossibleIndexException, OutOfCapacityException, IOException {
@@ -83,4 +83,8 @@ public class MemoryTest {
     }
 
 */
+    @Test
+    public void testDisplay(){
+        assertEquals(30000,mem.displayList().size());
+    }
 }
