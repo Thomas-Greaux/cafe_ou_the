@@ -2,7 +2,7 @@
 [                   # Boucle initiale qui affecte des valeurs utiles au tableau
    >+++++++>++++++++++>+++>+<<<<-
 ]
-                    # à la sortie de la boucle le tableau contient:
+					# à la sortie de la boucle le tableau contient:
 >++.                      #'H'    = 72  (70  plus 2)
 >+.                       #'e'    = 101 (100 plus 1)
 +++++++.                  #'l'    = 108 (101 plus 7)

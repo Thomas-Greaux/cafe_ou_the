@@ -1,0 +1,14 @@
+/MACRO_1 +++
+/MACRO_2 3 ++++
+MACRO_1
+>
+MACRO_2
+>
+MACRO_1 5 2
+>
+/MACRO_3 MACRO_1
+MACRO_3
+>
+MACRO_2 5
+>
+MACRO_3 10 2

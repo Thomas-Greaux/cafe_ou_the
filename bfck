@@ -1,0 +1,1 @@
+java -cp bfck.jar CoT.bfck.Main $@
