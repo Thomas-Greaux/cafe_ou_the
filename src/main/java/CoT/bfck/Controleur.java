@@ -58,7 +58,7 @@ public class Controleur {
             else if (args[i].equals("--rewrite")) {
                 option_rewrite = i;
                 option_interpret = 1;
-            } else if (args[i].equals("--translate_main")) {
+            } else if (args[i].equals("--translate")) {
                 option_translate = i;
                 option_interpret = 1;
             } else if (args[i].equals("--check")) {
@@ -89,6 +89,8 @@ public class Controleur {
      * @throws ImpossibleIndexException
      */
     public void run() throws NotACommandException, IOException, OutOfCapacityException, ImpossibleIndexException, FileDoesntExists {
+        if(option_translate==1)
+            System.out.println("lol");
 
         //On remplie notre liste de commandes
         if (file_ext.equals(".bf")) {                    //En fonction du type de fichier
