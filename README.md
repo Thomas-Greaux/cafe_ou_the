@@ -2,16 +2,19 @@
 Développement d'un interpréteur Brainfuck en Java, utilisant Maven.
 Git utilisé lors du début du semestre : https://github.com/FabienTWK/cafe_ou_the
 
-Fonctionnement : 
-	- Utilisation avec console (système unix-like)
-	- Se placer à la racine du projet
-	- ./bcfk COMMANDE
+Fonctionnement : <br/>
+<ul>
+<li> Utilisation avec console (système unix-like) </li>
+<li> Se placer à la racine du projet</li>
+<li> ./bcfk COMMANDE </li>
+</ul>
 
-La génération d'images est faite dans files/Output/image.bmp
-La génération de code est faite dans files/Output/java
-La trace est générée dans files/Output/
-
-<h1>Log</h1>
+Générations de fichiers : <br/>
+<ul>
+<li> La génération d'images est faite dans files/Output/image.bmp </li>
+<li> La génération de code est faite dans files/Output/java </li>
+<li> La trace est générée dans files/Output/ </li>
+</ul>
 
 <h2>Semaine 49</h2>
 <h3>Taches : </h3>
